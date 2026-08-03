@@ -157,4 +157,3 @@ que les catalogues statiques ne la nécessitent.
 
 Ces décisions seront prises à partir de mesures ou d'un besoin du jalon concerné,
 puis enregistrées dans `docs/adr/`.
-

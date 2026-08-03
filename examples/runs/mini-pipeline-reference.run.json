@@ -6,17 +6,17 @@
   "circuit": {
     "id": "mini-pipeline",
     "version": "1.0.0",
-    "sha256": "37b200d9cb21185d53aa9120e3980ebc10dbf9aab4aeb3e5ed605a93c8964979"
+    "sha256": "92737239568331c88f035f210b5d434949969923bbefeb96a55c4b745f54a975"
   },
   "topology": {
     "id": "two-fpga-link",
     "version": "1.0.0",
-    "sha256": "263e6a599259a71165ade8cb70c3e4b299988b6847ac8e67894d4e3db129c62d"
+    "sha256": "50e93f224f69f444ac5c038983b27904659879fba86fe9615f7fa6c9b268f222"
   },
   "partition": {
     "id": "mini-pipeline-split",
     "version": "1.0.0",
-    "sha256": "22b5fed798cb1f0167b2db8ca74e550122fbd0dd98494ee8cc9ca08642bd66ba"
+    "sha256": "82fb7853d83f2a2e2987e36ec6c8169341c35dd6a49a3f7ed05b2d166a15cb32"
   },
   "algorithm": {
     "name": "hand-authored-reference",
@@ -66,4 +66,3 @@
     }
   ]
 }
-

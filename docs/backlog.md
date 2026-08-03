@@ -200,4 +200,3 @@ premiers jalons.
   synthétisés pour des technologies différentes ?
 - Quelle tolérance numérique doit séparer une métrique vérifiée d'une divergence ?
 - Quels identifiants pérennes utiliser avant une éventuelle publication Zenodo ?
-

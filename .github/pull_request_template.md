@@ -23,4 +23,3 @@
 ## Compatibilité et risques
 
 <!-- Signaler migrations, incompatibilités, performances, sécurité ou questions ouvertes. -->
-

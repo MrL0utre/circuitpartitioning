@@ -29,4 +29,3 @@ Les contrats versionnés de `schemas/` constituent l'interface entre elles.
 - Les gros artefacts ne gonflent pas nécessairement l'historique Git.
 - Le déploiement comporte éventuellement plusieurs composants, mais seulement
   lorsque la charge le justifie.
-

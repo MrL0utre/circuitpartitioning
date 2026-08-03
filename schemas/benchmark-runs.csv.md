@@ -50,4 +50,3 @@ JSON utilisent la syntaxe CSV standard pour échapper les guillemets.
 - les références sont regroupées selon `benchmark-run.schema.json` ;
 - les colonnes inconnues sont refusées dans cette version draft afin de détecter
   les fautes de frappe.
-

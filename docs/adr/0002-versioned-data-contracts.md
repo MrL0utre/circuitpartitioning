@@ -28,4 +28,3 @@ premiers imports réels.
   ne change pas nécessairement l'empreinte de l'artefact scientifique.
 - Les valeurs déclarées et recalculées peuvent coexister sans être confondues.
 - Des migrations explicites seront nécessaires lors d'un changement incompatible.
-

@@ -108,4 +108,3 @@ récente.
 | Résultats CSV incomplets | Schéma strict, statut d'exécution et liens vers les artefacts |
 | État de l'art rapidement obsolète | Date de revue, propriétaires éditoriaux et historique Git |
 | Formats prématurément figés | Version `1.0.0-draft.1` pendant le jalon 0, stabilisation par PR |
-

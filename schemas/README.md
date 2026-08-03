@@ -47,4 +47,3 @@ validateur sémantique vérifie notamment :
 Un emplacement est soit un chemin relatif POSIX, soit une URL HTTPS. Les chemins
 absolus, `..` et les URL non chiffrées sont interdits. L'empreinte SHA-256 porte
 sur les octets téléchargés ou lus au chemin indiqué.
-

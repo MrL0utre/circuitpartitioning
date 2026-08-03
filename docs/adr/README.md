@@ -12,4 +12,3 @@ Statuts utilisés : `proposed`, `accepted`, `deprecated`, `superseded`.
 | --- | --- | --- |
 | [0001](0001-separate-content-analysis-and-artifacts.md) | accepted | Séparer contenu, analyse et artefacts |
 | [0002](0002-versioned-data-contracts.md) | accepted | Utiliser des contrats de données versionnés |
-

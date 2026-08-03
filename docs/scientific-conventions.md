@@ -157,4 +157,3 @@ Une métrique publiée est accompagnée de :
 
 Cette information permet de distinguer une évolution du moteur, une évolution de
 la donnée et un changement de définition scientifique.
-

@@ -39,4 +39,3 @@ connectivity-minus-one valent tous deux `2`.
 
 Les empreintes sont vérifiées automatiquement. Toute modification d'un artefact
 référencé nécessite donc de mettre à jour les références qui en dépendent.
-

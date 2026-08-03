@@ -147,4 +147,3 @@ mettre en danger les données ou l'infrastructure.
 - Le jalon 6 dépend des identifiants stables des jalons 3 et 4.
 - Le jalon 8 dépend de validations suffisamment robustes aux données non fiables.
 - Le jalon 9 ne commence qu'après définition d'un modèle de menace et de quotas.
-
