@@ -1,159 +1,166 @@
-# Architecture de référence
+# Reference architecture
 
-## Objectifs architecturaux
+## Architecture goals
 
-L'architecture doit servir trois charges très différentes : des pages
-pédagogiques largement statiques, des recherches dans un catalogue, et des
-analyses de graphes potentiellement volumineux. Ces responsabilités ne doivent
-pas dépendre d'un même processus ni d'un format propre à l'interface.
+The platform must support three very different workloads: mostly static
+educational pages, catalog search, and potentially expensive graph analysis.
+These responsibilities must not depend on one process or a format owned by the
+web interface.
 
 ```text
-Contenu versionné ───────┐
-                        ├──> génération/indexation ──> application web
-Métadonnées validées ───┘               │
-                                        │ requêtes d'analyse
-Artefacts immuables ──> stockage <──── moteur scientifique / workers
-                                        │
-Résultats et partitions validés <────────┘
+Versioned content ───────┐
+                         ├──> build / indexing ──> web application
+Validated metadata ─────┘             │
+                                      │ analysis requests
+Immutable artifacts ──> storage <──── scientific engine / workers
+                                      │
+Validated results and partitions <────┘
 ```
 
-Les JSON Schema de `schemas/` forment le contrat entre ces blocs.
+The JSON Schemas in `schemas/` are the shared contract between these components.
 
-## Composants
+## Components
 
-### 1. Contenu éditorial
+### 1. Editorial content
 
-Les cours, glossaires, notices de l'état de l'art et pages institutionnelles sont
-stockés dans Git, idéalement en MDX à partir du jalon 1. Cette approche permet la
-revue scientifique par pull request, les citations stables et un historique précis.
+Courses, glossaries, state-of-the-art reviews, and institutional pages are stored
+in Git, with MDX as a likely implementation format from Milestone 1. This allows
+scientific review through pull requests, stable citations, and precise history.
 
-Le contenu bibliographique sépare les données structurées (auteurs, DOI, année,
-taxonomie) du commentaire éditorial.
+Bibliographic records separate structured metadata—authors, DOI, year, taxonomy,
+review date—from editorial interpretation. Content organization follows research
+questions and explicit classification criteria rather than the outline of one
+publication.
 
-### 2. Application web
+### 2. Web application
 
-Responsabilités :
+Responsibilities:
 
-- navigation, recherche et internationalisation ;
-- rendu des cours, équations et figures ;
-- consultation des catalogues ;
-- visualisations interactives ;
-- orchestration des demandes d'analyse sans contenir la logique scientifique.
+- navigation, search, and English content delivery;
+- rendering courses, equations, figures, and citations;
+- browsing catalogs;
+- interactive visualizations;
+- requesting analyses without owning scientific computation logic.
 
-Option recommandée pour le jalon 1 : TypeScript avec un framework web hybride
-capable de générer les pages statiques et de rendre les pages de données côté
-serveur. La sélection exacte du framework sera confirmée dans une ADR du jalon 1
-afin de ne pas transformer le jalon 0 en choix technologique irréversible.
+The likely Milestone 1 direction is TypeScript with a hybrid web framework that
+supports static content generation and data-driven server rendering. The exact
+framework is deliberately deferred to a Milestone 1 ADR.
 
-### 3. Moteur scientifique
+### 3. Scientific engine
 
-Bibliothèque et outil en ligne de commande indépendants du web. Il charge les
-artefacts, vérifie les invariants et calcule notamment :
+An independent library and command-line tool loads artifacts, verifies invariants,
+and computes metrics such as:
 
-- ordre topologique des sous-hypergraphes acycliques ;
-- statistiques de sommets et d'hyperarcs ;
-- chemins rouge-rouge et chemin critique ;
-- coupe, frontière et connectivité ;
-- capacité et équilibre ;
-- coût après placement sur une topologie cible.
+- topological orders for acyclic combinational regions;
+- vertex and hyperarc statistics;
+- timing paths and critical paths;
+- cut, boundary, and connectivity metrics;
+- resource capacity and balance;
+- topology-aware placement cost.
 
-Une API réseau n'est ajoutée que lorsqu'un usage l'exige. Les calculs doivent être
-testables localement et réutilisables dans la CI ou dans des workers.
+The engine must support clearly identified model variants. Red-black directed
+hypergraphs are the first implemented model, not an assumption that every future
+dataset must use the same representation.
 
-### 4. Catalogue et index
+A network API is added only when an actual use case requires it. Computations
+remain locally testable and reusable in CI or workers.
 
-Les manifestes JSON validés constituent la source de vérité descriptive. Un index
-de recherche ou une base relationnelle peut être généré à partir d'eux pour le
-site ; cet index est reconstructible et ne devient pas une seconde source de
-vérité.
+### 4. Catalog and index
 
-### 5. Stockage des artefacts
+Validated JSON manifests are the descriptive source of truth. A search index or
+relational database may be generated from them for the site, but remains
+reconstructible and never becomes an independent scientific authority.
 
-Les petits exemples restent dans Git. Les netlists, hypergraphes et partitions
-volumineux sont placés dans un stockage d'objets ou un dépôt scientifique. Chaque
-référence contient une URL, une empreinte SHA-256, une taille et un type de média.
+### 5. Artifact storage
 
-Les chemins relatifs sont autorisés pour les artefacts distribués avec le dépôt.
-Une URL n'implique jamais que le projet a le droit de la republier.
+Small teaching examples remain in Git. Large netlists, hypergraphs, and partitions
+are stored in object storage or a scientific repository. Every reference records
+a URL or relative path, SHA-256 fingerprint, byte size, media type, and license
+status.
 
-### 6. Pipeline d'ingestion
+A URL does not imply that the project has permission to redistribute its target.
 
-Le pipeline futur suit des étapes explicites :
+### 6. Ingestion pipeline
 
-1. réception et contrôle antivirus hors du moteur d'analyse ;
-2. validation du manifeste et de la licence ;
-3. vérification des empreintes ;
-4. parsing dans un environnement limité ;
-5. validation des invariants scientifiques ;
-6. calcul des statistiques avec version du moteur ;
-7. publication atomique du manifeste et des artefacts.
+The future ingestion pipeline follows explicit steps:
 
-## Flux de données
+1. receive the submission and scan it outside the analysis engine;
+2. validate manifests and licensing information;
+3. verify fingerprints;
+4. parse within configured resource limits;
+5. validate scientific invariants;
+6. compute statistics with an identified engine version;
+7. publish manifests and artifacts atomically.
 
-### Consultation
+## Data flows
 
-Le navigateur reçoit des métadonnées compactes. Il ne télécharge le graphe ou un
-sous-graphe qu'à la demande. Les statistiques coûteuses sont pré-calculées et
-marquées avec la version du moteur qui les a produites.
+### Catalog browsing
 
-### Analyse d'une partition
+The browser receives compact metadata. It downloads a complete graph or selected
+subgraph only when required. Expensive statistics are precomputed and labeled
+with the engine version that produced them.
 
-Le moteur charge le circuit, la topologie et l'affectation de sommets. Il vérifie
-l'exhaustivité, l'unicité, les capacités, puis recalcule les métriques. Une valeur
-soumise est conservée comme valeur déclarée ; elle n'est publiée comme vérifiée
-qu'après comparaison avec la valeur calculée.
+### Partition analysis
 
-### Import de benchmark CSV
+The engine loads a circuit, target topology, and vertex assignment. It verifies
+coverage, uniqueness, and capacity before recomputing metrics. A submitted value
+is retained as declared; it is published as verified only after independent
+recomputation.
 
-Le CSV décrit une exécution par ligne. Les champs complexes utilisent un JSON
-canonique encodé dans une cellule. L'import produit des objets `benchmark-run`
-validés ; le CSV n'est pas utilisé directement comme base de données du site.
+### Benchmark CSV import
 
-## Exigences non fonctionnelles
+One CSV row describes one run. Complex fields use canonical JSON encoded in a
+cell. Import converts rows into validated `benchmark-run` objects; the CSV is not
+used directly as the website database.
+
+## Non-functional requirements
 
 ### Performance
 
-- aucune vue ne suppose que le graphe complet tient en mémoire dans le navigateur ;
-- les tableaux sont paginés et filtrés côté serveur ou sur un index compact ;
-- les analyses longues sont asynchrones et annulables ;
-- les résultats dérivés sont mis en cache par empreinte des entrées et version du moteur.
+- No view assumes that the full graph fits in browser memory.
+- Tables use pagination and server-side or compact-index filtering.
+- Long analyses are asynchronous and cancellable.
+- Derived results are cached by input fingerprints and engine version.
 
-### Sécurité
+### Security
 
-- aucun fichier soumis n'est interprété comme du code ;
-- les parseurs imposent tailles, nombres d'éléments et durées maximales ;
-- les exécutions futures sont isolées, sans réseau par défaut et avec quotas ;
-- les contenus éditoriaux n'autorisent pas du HTML arbitraire non assaini.
+- Submitted files are never interpreted as code.
+- Parsers enforce size, element count, memory, and time limits.
+- Future executions are isolated, network-disabled by default, and quota-bound.
+- Editorial content does not allow unsanitized arbitrary HTML.
 
-### Reproductibilité
+### Reproducibility
 
-- versions et empreintes sont obligatoires dans les références scientifiques ;
-- les horodatages utilisent UTC et RFC 3339 ;
-- les nombres tabulaires utilisent le point comme séparateur décimal ;
-- les paramètres d'algorithme sont conservés sous forme structurée.
+- Scientific references include versions and fingerprints.
+- Timestamps use UTC and RFC 3339.
+- Tabular numbers use a dot as decimal separator.
+- Algorithm parameters remain structured data.
+- Source selection and benchmark inclusion criteria are recorded.
 
-### Accessibilité et pérennité
+### Accessibility and longevity
 
-- WCAG 2.2 AA est la cible de l'interface ;
-- les graphiques possèdent une alternative tabulaire ou textuelle ;
-- les URL publiques importantes sont stables ;
-- les artefacts essentiels peuvent être exportés hors de l'application.
+- WCAG 2.2 AA is the interface target.
+- Charts provide tabular or textual alternatives.
+- Important public URLs remain stable.
+- Essential artifacts can be exported independently of the application.
 
-## Déploiement cible
+## Initial deployment direction
 
-Le premier déploiement peut réunir application et index sur une plateforme web
-gérée, avec stockage externe pour les artefacts. Le moteur lourd évoluera vers des
-workers séparés. Ce découpage évite de déployer une infrastructure de calcul avant
-que les catalogues statiques ne la nécessitent.
+The first deployment may colocate the web application and generated index on a
+managed web platform, with external storage for large artifacts. Heavy analysis
+can later move to separate workers. This avoids deploying compute infrastructure
+before static catalogs require it.
 
-## Décisions différées
+## Deferred decisions
 
-- framework web et hébergeur exacts ;
-- langage d'implémentation du moteur scientifique ;
-- base de données ou moteur de recherche ;
-- fournisseur de stockage d'objets ;
-- protocole d'authentification des contributeurs ;
-- infrastructure d'exécution de RaiSin et des partitionneurs externes.
+- exact web framework and hosting provider;
+- scientific engine implementation language;
+- database or search engine;
+- object storage provider;
+- contributor authentication mechanism;
+- execution infrastructure for external partitioning tools;
+- representation and interoperability policy for models beyond red-black
+  hypergraphs.
 
-Ces décisions seront prises à partir de mesures ou d'un besoin du jalon concerné,
-puis enregistrées dans `docs/adr/`.
+Each decision is made from measurements or a milestone-specific requirement and
+recorded in `docs/adr/`.

@@ -1,149 +1,176 @@
-# Feuille de route
+# Roadmap
 
-La durée est indicative et suppose une petite équipe. Chaque jalon se termine par
-une pull request revue et une démonstration de ses critères de sortie.
+Durations are indicative for a small team. Each milestone ends with a reviewed
+pull request and a demonstration of its exit criteria.
 
-## Jalon 0 - Foundations
+## Milestone 0 — Foundations
 
-**But :** rendre le projet et ses données non ambigus avant le développement web.
+**Goal:** make the project and its scientific data unambiguous before web
+development.
 
-Livrables :
+Deliverables:
 
-- charte, publics, périmètre et critères de réussite ;
-- architecture de référence et journal ADR ;
-- conventions scientifiques versionnées ;
-- contrats de circuit, topologie, partition et exécution ;
-- exemples minimaux et validation automatisée ;
-- gouvernance des contributions et backlog des jalons suivants.
+- project charter, audiences, scope, and success criteria;
+- reference architecture and ADR log;
+- versioned scientific convention profile;
+- contracts for circuits, topologies, partitions, and runs;
+- minimal examples and automated validation;
+- contribution governance and prioritized backlog;
+- English-language and editorial-neutrality policies.
 
-Critère de sortie : tous les exemples passent les validations et une revue peut
-répondre précisément à « quelle donnée fait autorité ? » pour chaque objet.
+Exit criterion: all examples pass validation, each data object has an explicit
+source of truth, and no single publication is treated as the project-wide
+authority.
 
-## Jalon 1 - Socle web
+## Milestone 1 — Web foundation
 
-**But :** fournir un site navigable et déployable.
+**Goal:** deliver a navigable and deployable website.
 
-- framework, design system, navigation et internationalisation ;
-- rendu Markdown/MDX, formules et références ;
-- recherche initiale ;
-- accessibilité, tests et prévisualisation des pull requests.
+- framework, design system, navigation, and English content architecture;
+- Markdown/MDX, mathematics, figures, and reference rendering;
+- initial search;
+- accessibility, tests, and pull request previews.
 
-Critère de sortie : accueil et pages documentaires sont utilisables en français
-et en anglais sur mobile et ordinateur.
+Exit criterion: the home page and documentation pages work on mobile and desktop,
+and the content contribution workflow is documented.
 
-## Jalon 2 - Cours interactif
+## Milestone 2 — Interactive course
 
-**But :** conduire un nouveau lecteur jusqu'à la formulation du problème.
+**Goal:** guide a new reader from fundamentals to multiple circuit partitioning
+problem formulations.
 
-- graphes et hypergraphes ;
-- modèle rouge-noir et chemins rouge-rouge ;
-- partitions, coupe, capacité et topologie ;
-- schéma multiniveau ;
-- petits exercices et visualisations manipulables.
+- graphs, hypergraphs, netlists, and synchronous circuits;
+- timing, critical paths, and resource constraints;
+- partition, placement, mapping, cut, and topology objectives;
+- multilevel schemes and representative algorithm families;
+- exercises and interactive visualizations;
+- explicit comparison of modeling choices, including the red-black profile.
 
-Critère de sortie : le lecteur peut expliquer pourquoi minimiser uniquement la
-coupe peut dégrader la fréquence du prototype.
+Exit criterion: readers can explain why a minimum-cut solution may be poor for a
+timing objective and can distinguish major circuit representation choices.
 
-## Jalon 3 - Catalogue de circuits
+## Milestone 3 — Circuit catalog
 
-**But :** publier légalement une première famille de circuits analysables.
+**Goal:** publish the first legally distributable circuit families with
+independent analysis.
 
-- parseur du format rouge-noir ;
-- moteur de statistiques et chemin critique ;
-- catalogue filtrable et pages de détail ;
-- téléchargements, licences, citations et empreintes ;
-- stratégie de visualisation agrégée pour les grandes instances.
+- parsers for the initial red-black format and selected community formats;
+- structural statistics and critical-path engine;
+- filterable catalog and circuit detail pages;
+- downloads, licenses, citations, and fingerprints;
+- aggregated visualization strategy for large instances;
+- evaluation and stabilization of the draft contracts against real data.
 
-Critère de sortie : au moins un petit et un grand circuit sont ingérés par le même
-pipeline et leurs statistiques sont reproductibles.
+Exit criterion: at least one small and one large circuit use the same ingestion
+pipeline, and datasets from more than one source are represented or formally
+assessed for inclusion.
 
-## Jalon 4 - Partitions et topologies
+## Milestone 4 — Partitions and topologies
 
-**But :** analyser et comparer des partitions valides.
+**Goal:** analyze and compare valid partitions across target platforms.
 
-- catalogue de topologies ;
-- validation des affectations et capacités ;
-- calcul de la coupe, connectivité, frontière et chemin critique partitionné ;
-- vues avant/après et comparaison de deux partitions.
+- topology catalog;
+- assignment and capacity validation;
+- cut, connectivity, boundary, timing, and placement metrics;
+- before/after views and side-by-side partition comparison;
+- support for clearly identified metric profiles.
 
-Critère de sortie : toutes les métriques d'une partition publiée sont recalculées
-depuis ses artefacts.
+Exit criterion: every metric of a published partition is recomputed from its
+artifacts and labeled with its convention profile.
 
-## Jalon 5 - Explorateur visuel
+## Milestone 5 — Visual explorer
 
-**But :** inspecter un circuit ou une partition sans supposer un graphe petit.
+**Goal:** inspect circuits and partitions without assuming small graphs.
 
-- coloration rouge-noir, par partie et par criticalité ;
-- chemin critique et hyperarcs coupés ;
-- sous-graphes centrés sur une sélection ;
-- agrégation, niveaux de détail et calcul hors du thread d'interface.
+- coloring by model role, part, resource, and criticality;
+- critical paths and cut hyperarcs;
+- selection-centered subgraphs;
+- aggregation, levels of detail, and background computation;
+- accessible summaries for every visual view.
 
-Critère de sortie : l'explorateur reste réactif sur les tailles représentatives du
-catalogue grâce aux vues agrégées.
+Exit criterion: representative catalog sizes remain usable through aggregated
+views and bounded queries.
 
-## Jalon 6 - Benchmark CSV
+## Milestone 6 — Benchmark dashboard
 
-**But :** comparer des exécutions multiobjectifs reproductibles.
+**Goal:** compare reproducible multi-objective runs.
 
-- import strict du format CSV ;
-- tables, filtres, distributions et intervalles ;
-- fronts de Pareto chemin critique / coupe / temps ;
-- liens de chaque ligne vers ses artefacts ;
-- export de la sélection courante.
+- strict CSV import;
+- tables, filters, distributions, and uncertainty summaries;
+- Pareto fronts for timing, cut, balance, memory, and runtime;
+- links from every run to its artifacts and environment;
+- export of the current selection;
+- comparability warnings when conventions differ.
 
-Critère de sortie : une figure affichée peut être reproduite depuis un export et
-les artefacts référencés.
+Exit criterion: a displayed figure can be reproduced from an export and the
+referenced artifacts.
 
-## Jalon 7 - État de l'art vivant
+## Milestone 7 — Living state of the art
 
-**But :** structurer et maintenir la littérature au-delà de la thèse de 2024.
+**Goal:** maintain a balanced literature map that extends beyond the project's
+initial sources.
 
-- taxonomie des objectifs, modèles et phases algorithmiques ;
-- fiches d'outils et de publications ;
-- matrice comparative ;
-- export BibTeX ;
-- processus semestriel de revue.
+- taxonomy of models, objectives, constraints, and algorithmic phases;
+- publication and tool records;
+- comparison matrices and BibTeX export;
+- explicit search scope and inclusion criteria;
+- review dates and maintenance ownership;
+- periodic review involving diverse sources and, where possible, affiliations.
 
-Critère de sortie : chaque entrée indique source primaire, date de vérification,
-disponibilité du code et reproductibilité.
+Exit criterion: each entry identifies its primary source, last review date, model,
+objectives, available code, datasets, and reproducibility status.
 
-## Jalon 8 - Contributions communautaires
+## Milestone 8 — Community contributions
 
-**But :** intégrer une contribution externe auditable.
+**Goal:** integrate external contributions through an auditable process.
 
-- modèles de soumission ;
-- contrôle des licences et de la provenance ;
-- validation automatique et recalcul des métriques ;
-- fiches de reproductibilité et versions citables.
+- submission templates;
+- license and provenance review;
+- automated validation and independent metric recomputation;
+- reproducibility records and citable releases;
+- editorial conflict-of-interest and dispute handling.
 
-Critère de sortie : une contribution externe complète est intégrée sans opération
-manuelle non documentée.
+Exit criterion: one complete external contribution is integrated without an
+undocumented manual step.
 
-## Jalon 9 - Laboratoire en ligne
+## Milestone 9 — Online laboratory
 
-**But :** exécuter des analyses et partitionneurs autorisés sur des instances
-contrôlées.
+**Goal:** execute approved analyses and partitioners on bounded instances.
 
-- file de travaux, quotas et isolation ;
-- sélection du circuit, de la topologie et de l'algorithme ;
-- progression, résultats et téléchargement ;
-- intégration initiale de RaiSin ou d'un moteur de référence.
+- job queue, quotas, and isolation;
+- circuit, topology, objective, and algorithm selection;
+- progress, results, and artifact download;
+- initial integrations chosen from multiple relevant tools when licensing and
+  interfaces allow;
+- reproducible execution records.
 
-Critère de sortie : une exécution en ligne produit une fiche reproductible sans
-mettre en danger les données ou l'infrastructure.
+Exit criterion: an online run produces a reproducible record without risking
+project data or infrastructure.
 
-## Versions publiques proposées
+## Proposed public releases
 
-| Version | Jalons | Promesse |
+| Version | Milestones | Promise |
 | --- | --- | --- |
-| `0.1` | 0 à 2 | Comprendre le problème |
-| `0.5` | 3 à 7 | Explorer et comparer les données scientifiques |
-| `1.0` | 8 à 9 | Contribuer et reproduire des expériences |
+| `0.1` | 0–2 | Learn and understand the problem space |
+| `0.5` | 3–7 | Explore datasets, literature, and results |
+| `1.0` | 8–9 | Contribute and reproduce experiments |
 
-## Dépendances critiques
+## Critical dependencies
 
-- Le jalon 3 dépend de la stabilisation du format de circuit au jalon 0.
-- Le jalon 4 dépend du moteur du jalon 3 et des topologies du jalon 0.
-- Le jalon 6 dépend des identifiants stables des jalons 3 et 4.
-- Le jalon 8 dépend de validations suffisamment robustes aux données non fiables.
-- Le jalon 9 ne commence qu'après définition d'un modèle de menace et de quotas.
+- Milestone 3 depends on draft circuit contracts from Milestone 0.
+- Milestone 4 depends on the Milestone 3 engine and topology contracts.
+- Milestone 6 depends on stable identities from Milestones 3 and 4.
+- Milestone 7 begins with a literature review protocol before comparative claims
+  are presented publicly.
+- Milestone 8 requires validation robust enough for untrusted data.
+- Milestone 9 starts only after threat modeling and quota design.
+
+## Cross-cutting governance checkpoints
+
+At the end of each milestone, reviewers verify:
+
+- all canonical project text is in English;
+- citations and dataset sources are correctly scoped;
+- no single approach is implicitly framed as the field-wide baseline;
+- comparisons expose assumptions and convention compatibility;
+- new architecture decisions are recorded in ADRs.

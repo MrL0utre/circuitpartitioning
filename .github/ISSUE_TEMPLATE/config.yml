@@ -1,5 +1,5 @@
 blank_issues_enabled: true
 contact_links:
-  - name: Question scientifique générale
+  - name: General scientific question
     url: https://github.com/MrL0utre/circuitpartitioning/discussions
-    about: Utiliser les discussions pour une question qui n'est pas encore une tâche définie.
+    about: Use discussions for a question that is not yet a well-defined task.

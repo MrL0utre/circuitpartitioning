@@ -1,73 +1,94 @@
-# Contribuer
+# Contributing
 
-Le projet accepte les contributions documentaires, scientifiques et logicielles.
-Pendant le jalon 0, les contrats sont encore en version draft : les retours sur
-leur capacité à décrire des jeux de données réels sont particulièrement utiles.
+Circuit Partitioning welcomes documentation, scientific data, analysis, and
+software contributions. During Milestone 0, data contracts are still drafts;
+feedback based on real datasets is especially valuable.
 
-## Workflow Git
+## Project language
 
-1. partir de `main` à jour ;
-2. créer une branche descriptive, par exemple `dev/milestone-1-web-foundation` ;
-3. limiter chaque commit à une intention cohérente ;
-4. exécuter les validations locales ;
-5. ouvrir une pull request expliquant le contexte et les décisions ;
-6. attendre la revue avant fusion dans `main`.
+Write source files, documentation, commit messages, issues, pull requests, data
+descriptions, and user-facing text in English. Identifiers, schema fields, and
+APIs also use English. A future translation layer must preserve English as the
+canonical source unless a later governance decision changes this rule.
 
-Les changements directs sur `main` sont déconseillés. Les changements de schéma
-ou de convention scientifique doivent décrire leur compatibilité et fournir ou
-mettre à jour les exemples concernés.
+## Editorial neutrality
 
-## Style des commits
+Contributions must not present one publication, thesis, tool, laboratory,
+institution, or algorithm as the default authority for the entire field.
 
-Le projet utilise des messages courts inspirés de Conventional Commits :
+When reviewing research, contributors should:
+
+- cite primary sources for substantive claims;
+- distinguish established results from interpretation;
+- state model assumptions, objectives, datasets, and limitations;
+- include relevant competing approaches when making comparisons;
+- disclose affiliations or conflicts that could affect editorial judgment;
+- avoid rankings that collapse multi-objective results without justification.
+
+The project may use individual publications as implementation starting points,
+but this must not determine the long-term taxonomy or benchmark narrative.
+
+## Git workflow
+
+1. Start from an up-to-date `main` branch.
+2. Create a descriptive branch, for example `dev/milestone-1-web-foundation`.
+3. Keep each commit focused on one coherent intention.
+4. Run the local validation suite.
+5. Open a pull request that explains context, decisions, and trade-offs.
+6. Wait for review before merging into `main`.
+
+Direct changes to `main` are discouraged. Changes to schemas or scientific
+conventions must explain compatibility and update the affected examples.
+
+## Commit style
+
+Use short messages inspired by Conventional Commits:
 
 ```text
-docs: establish scientific conventions
+docs: establish editorial neutrality policy
 feat(data): add partition manifest schema
 fix(validation): reject duplicate vertex assignments
 ```
 
-Un commit ne doit pas mélanger une refonte de format avec une modification
-éditoriale sans rapport.
+Do not mix an unrelated editorial change with a data format redesign.
 
-## Pull request
+## Pull requests
 
-La description précise au minimum :
+Every pull request should describe:
 
-- le besoin traité ;
-- les fichiers ou contrats concernés ;
-- les validations effectuées ;
-- les effets sur la reproductibilité et la compatibilité ;
-- les questions restant à arbitrer.
+- the need being addressed;
+- the contracts or components affected;
+- the validation performed;
+- reproducibility and compatibility effects;
+- unresolved questions and relevant trade-offs.
 
-## Contribution de données
+## Data contributions
 
-Ne pas ajouter un circuit ou un autre artefact tiers avant d'avoir documenté :
+Do not add a third-party circuit or artifact until the following are documented:
 
-- sa source primaire et sa citation ;
-- sa licence ;
-- son droit de redistribution ;
-- les transformations appliquées ;
-- son empreinte SHA-256 ;
-- le logiciel et la commande ayant produit les données dérivées.
+- primary source and citation;
+- license and redistribution rights;
+- transformations applied;
+- SHA-256 content fingerprint;
+- software version and command used to produce derived data.
 
-Les données personnelles, confidentielles ou couvertes par un accord de
-non-divulgation ne sont pas acceptées.
+Personal, confidential, export-controlled, or non-disclosable data is not
+accepted.
 
-## Changer une convention scientifique
+## Changing a scientific convention
 
-Une modification de formule ou de sémantique doit :
+A change to a formula or scientific meaning must:
 
-1. citer la motivation scientifique ;
-2. identifier les métriques affectées ;
-3. indiquer si les résultats existants doivent être recalculés ;
-4. mettre à jour la version des conventions ;
-5. ajouter une ADR si la décision est structurante ;
-6. ajouter un cas de test qui distingue l'ancienne et la nouvelle définition.
+1. cite the scientific motivation;
+2. identify affected metrics;
+3. state whether existing results require recomputation;
+4. update the convention version;
+5. add an ADR when the decision is structural;
+6. include a test case that distinguishes the old and new definitions.
 
-## Validation locale
+## Local validation
 
-Créer un environnement Python, installer les dépendances et exécuter :
+Create a Python environment, install the dependencies, and run:
 
 ```text
 python -m pip install --requirement requirements-dev.txt
@@ -76,6 +97,6 @@ python -m unittest discover -s tests
 git diff --check
 ```
 
-Le validateur contrôle les schémas, exemples, empreintes, références et métriques
-scientifiques. À terme, une contribution devra également exécuter les tests du
-moteur concerné et vérifier les liens documentaires.
+The validator checks schemas, examples, fingerprints, cross-references, and
+scientific metrics. Component-specific test suites and documentation link checks
+will be added as the repository grows.

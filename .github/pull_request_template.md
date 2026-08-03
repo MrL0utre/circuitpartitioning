@@ -1,25 +1,27 @@
-## Objectif
+## Goal
 
-<!-- Quel besoin cette pull request traite-t-elle ? -->
+<!-- What need does this pull request address? -->
 
-## Changements
+## Changes
 
-<!-- Décrire les changements observables et les décisions prises. -->
+<!-- Describe observable changes and important decisions. -->
 
 ## Validation
 
 - [ ] `python scripts/validate_data.py`
 - [ ] `python -m unittest discover -s tests`
 - [ ] `git diff --check`
-- [ ] Les tests spécifiques au composant modifié passent
+- [ ] Component-specific tests pass
 
-## Impact scientifique et données
+## Scientific and data impact
 
-- [ ] Aucun contrat ni résultat scientifique n'est modifié
-- [ ] Les changements de contrat sont versionnés et les exemples sont migrés
-- [ ] Les métriques affectées et besoins de recalcul sont documentés
-- [ ] Provenance, licence et droit de redistribution ont été vérifiés
+- [ ] No scientific contract or result changes
+- [ ] Contract changes are versioned and examples are migrated
+- [ ] Affected metrics and recomputation needs are documented
+- [ ] Provenance, license, and redistribution rights are verified
+- [ ] Comparative claims state scope and relevant alternatives
+- [ ] Potential editorial conflicts or affiliations are disclosed where relevant
 
-## Compatibilité et risques
+## Compatibility and risks
 
-<!-- Signaler migrations, incompatibilités, performances, sécurité ou questions ouvertes. -->
+<!-- Describe migrations, incompatibilities, performance, security, or open questions. -->

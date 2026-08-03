@@ -1,52 +1,55 @@
-# Format CSV des exécutions de benchmark
+# Benchmark run CSV format
 
-Version : `1.0.0-draft.1`.
+Version: `1.0.0-draft.1`.
 
-Le fichier est encodé en UTF-8, séparé par des virgules et contient exactement
-une ligne d'en-tête. Chaque ligne décrit une exécution indépendante. Les champs
-JSON utilisent la syntaxe CSV standard pour échapper les guillemets.
+The file uses UTF-8, comma delimiters, and exactly one header row. Each data row
+describes one independent run. JSON cells use standard CSV quote escaping.
 
-## Colonnes
+## Columns
 
-| Colonne | Type | Requis | Description |
+| Column | Type | Required | Description |
 | --- | --- | --- | --- |
-| `run_id` | resource-id | oui | Identifiant unique de l'exécution |
-| `circuit_id` | resource-id | oui | Identifiant du circuit |
-| `circuit_version` | semver | oui | Version du manifeste du circuit |
-| `circuit_sha256` | sha256 | oui | Empreinte de l'artefact d'hypergraphe |
-| `topology_id` | resource-id | oui | Identifiant de la topologie |
-| `topology_version` | semver | oui | Version du manifeste de topologie |
-| `topology_sha256` | sha256 | oui | Empreinte du manifeste de topologie |
-| `algorithm` | texte non vide | oui | Nom de l'algorithme |
-| `algorithm_version` | texte non vide | oui | Version exacte ou commit de l'algorithme |
-| `parameters` | objet JSON | oui | Paramètres structurés, `{}` si aucun |
-| `seed` | entier >= 0 | non | Graine lorsque l'algorithme est aléatoire |
-| `status` | enum | oui | `succeeded`, `failed`, `timeout`, `out-of-memory` ou `cancelled` |
-| `started_at` | RFC 3339 | oui | Début de l'exécution en UTC |
-| `duration_ms` | nombre >= 0 | succès | Durée murale |
-| `memory_peak_mb` | nombre >= 0 | non | Pic mémoire observé |
-| `critical_path` | nombre >= 0 | non | Chemin critique non partitionné |
-| `partitioned_critical_path` | nombre >= 0 | succès | Chemin critique après placement |
-| `cut_size` | nombre >= 0 | succès | `f_c` |
-| `connectivity_minus_one` | nombre >= 0 | succès | `f_lambda` |
-| `partition_id` | resource-id | succès | Partition produite |
-| `partition_version` | semver | succès | Version de son manifeste |
-| `partition_sha256` | sha256 | succès | Empreinte de son manifeste |
-| `error_message` | texte | échec | Diagnostic synthétique |
+| `run_id` | resource-id | yes | Unique run identifier |
+| `circuit_id` | resource-id | yes | Circuit identifier |
+| `circuit_version` | semver | yes | Circuit manifest version |
+| `circuit_sha256` | sha256 | yes | Primary circuit artifact fingerprint |
+| `topology_id` | resource-id | yes | Topology identifier |
+| `topology_version` | semver | yes | Topology manifest version |
+| `topology_sha256` | sha256 | yes | Topology manifest fingerprint |
+| `algorithm` | non-empty text | yes | Algorithm name |
+| `algorithm_version` | non-empty text | yes | Exact version or commit |
+| `parameters` | JSON object | yes | Structured parameters, `{}` when empty |
+| `seed` | integer >= 0 | no | Seed for randomized algorithms |
+| `status` | enum | yes | `succeeded`, `failed`, `timeout`, `out-of-memory`, or `cancelled` |
+| `started_at` | RFC 3339 | yes | Run start time in UTC |
+| `duration_ms` | number >= 0 | success | Wall-clock duration |
+| `memory_peak_mb` | number >= 0 | no | Observed peak memory |
+| `critical_path` | number >= 0 | no | Unpartitioned critical path under the declared profile |
+| `partitioned_critical_path` | number >= 0 | success | Critical path after placement |
+| `cut_size` | number >= 0 | success | `f_c` under the declared profile |
+| `connectivity_minus_one` | number >= 0 | success | `f_lambda` under the declared profile |
+| `partition_id` | resource-id | success | Produced partition |
+| `partition_version` | semver | success | Partition manifest version |
+| `partition_sha256` | sha256 | success | Partition manifest fingerprint |
+| `error_message` | text | failure | Short diagnostic |
 
-`succès` signifie que la colonne est requise lorsque `status = succeeded`.
-`échec` signifie qu'elle est requise pour `failed`, `timeout` et `out-of-memory`.
+`success` means required when `status = succeeded`. `failure` means required for
+`failed`, `timeout`, and `out-of-memory`.
 
-## Normalisation
+## Normalization
 
-À l'import :
+During import:
 
-- les chaînes vides deviennent des valeurs absentes, jamais zéro ;
-- `parameters` est parsé comme un objet JSON ;
-- les nombres sont lus sans unité depuis les colonnes ; l'unité temporelle est
-  celle du circuit et doit correspondre à la topologie ;
-- les quatre colonnes de métriques deviennent des métriques `declared` sous les
-  conventions `1.0.0-draft.1` ;
-- les références sont regroupées selon `benchmark-run.schema.json` ;
-- les colonnes inconnues sont refusées dans cette version draft afin de détecter
-  les fautes de frappe.
+- empty strings become missing values, never zero;
+- `parameters` is parsed as a JSON object;
+- numbers are read without unit suffixes; timing units come from the circuit and
+  must match the topology;
+- the four metric columns become `declared` metrics under the explicitly recorded
+  convention profile;
+- references are grouped according to `benchmark-run.schema.json`;
+- unknown columns are rejected in this draft version to detect typographical
+  errors.
+
+The current CSV projection assumes the initial metric profile. Before importing
+runs from another model, the format must gain an explicit profile field or use a
+separate compatible exchange definition.

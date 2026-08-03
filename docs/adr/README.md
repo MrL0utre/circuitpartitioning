@@ -1,14 +1,15 @@
 # Architecture Decision Records
 
-Les ADR conservent le contexte et les conséquences des décisions structurantes.
-Une décision acceptée n'est pas réécrite pour masquer son historique : une
-nouvelle ADR la remplace et référence l'ancienne.
+ADRs preserve the context and consequences of structural decisions. An accepted
+decision is not rewritten to hide its history: a new ADR supersedes it and
+references the earlier record.
 
-Statuts utilisés : `proposed`, `accepted`, `deprecated`, `superseded`.
+Statuses: `proposed`, `accepted`, `deprecated`, `superseded`.
 
 ## Index
 
-| ADR | Statut | Décision |
+| ADR | Status | Decision |
 | --- | --- | --- |
-| [0001](0001-separate-content-analysis-and-artifacts.md) | accepted | Séparer contenu, analyse et artefacts |
-| [0002](0002-versioned-data-contracts.md) | accepted | Utiliser des contrats de données versionnés |
+| [0001](0001-separate-content-analysis-and-artifacts.md) | accepted | Separate content, analysis, and artifacts |
+| [0002](0002-versioned-data-contracts.md) | accepted | Use versioned data contracts |
+| [0003](0003-english-and-editorial-neutrality.md) | accepted | Use English and enforce editorial neutrality |

@@ -1,110 +1,136 @@
-# Charte du projet
+# Project charter
 
 ## Mission
 
-Circuit Partitioning doit devenir une référence web ouverte permettant de
-comprendre, d'étudier et de comparer les méthodes de partitionnement de circuits
-pour plateformes multi-FPGA, avec une attention particulière portée à la
-dégradation du chemin critique et à la topologie cible.
+Circuit Partitioning aims to become an open, community-oriented reference for
+learning about, evaluating, and advancing circuit partitioning methods. The
+initial application domain is rapid prototyping on multi-FPGA platforms, while
+the taxonomy and architecture must remain broad enough to represent related
+placement, mapping, and partitioning formulations.
 
-Le portail réunit quatre usages aujourd'hui souvent séparés : apprentissage,
-veille bibliographique, exploration de jeux de données et comparaison
-reproductible d'algorithmes.
+The portal brings together four activities that are commonly fragmented across
+papers, repositories, and institutional websites: education, literature review,
+dataset exploration, and reproducible algorithm comparison.
 
-## Publics
+## Audiences
 
-### Étudiants et nouveaux lecteurs
+### Students and new readers
 
-Ils doivent pouvoir progresser depuis les graphes et hypergraphes jusqu'à la
-formulation complète du problème, avec des exemples manipulables et sans devoir
-connaître au préalable les outils de CAO électronique.
+They should be able to progress from graphs and hypergraphs to complete circuit
+partitioning formulations through manipulable examples, without prior expertise
+in electronic design automation.
 
-### Chercheurs
+### Researchers
 
-Ils doivent pouvoir identifier les hypothèses et fonctions objectif d'un travail,
-trouver des instances adaptées, vérifier une partition et comparer plusieurs
-méthodes sur un protocole commun.
+They should be able to identify a study's assumptions and objective functions,
+find suitable instances, verify a partition, and compare methods under a shared
+experimental protocol.
 
-### Développeurs d'algorithmes
+### Algorithm and tool developers
 
-Ils doivent disposer de formats stables, d'exemples minimaux, d'un validateur et
-d'une procédure documentée pour publier des résultats reproductibles.
+They should have stable formats, minimal examples, validators, and a documented
+process for publishing reproducible results.
 
-## Périmètre fonctionnel
+### Dataset maintainers and experimentalists
 
-Le projet couvre à terme :
+They should be able to publish provenance, licensing, transformations, metrics,
+and downloadable artifacts without losing the relationship to original sources.
 
-- un cours progressif sur les graphes, hypergraphes, circuits synchrones,
-  hypergraphes rouge-noir, partitions et schémas multiniveaux ;
-- un état de l'art structuré, daté et citable ;
-- un catalogue de circuits avec métadonnées, téléchargement et analyses ;
-- un catalogue de partitions avec métriques recalculées ;
-- un tableau de bord de benchmarks alimenté par CSV ;
-- un explorateur visuel adapté aux petites et grandes instances ;
-- une procédure de contribution et de reproduction des expériences ;
-- à terme, l'exécution isolée d'analyses ou d'algorithmes autorisés.
+## Functional scope
 
-## Hors périmètre initial
+The long-term project scope includes:
 
-Le jalon 0 exclut explicitement :
+- a progressive course on graphs, hypergraphs, synchronous circuits, timing,
+  partitions, placement, and multilevel methods;
+- a structured, dated, and citable state of the art;
+- a circuit catalog with metadata, downloads, and independent analyses;
+- a partition catalog with recomputed metrics;
+- a benchmark dashboard driven by validated tabular data;
+- a visual explorer suitable for both small and large instances;
+- contribution and experiment reproduction workflows;
+- eventually, isolated execution of approved analysis and partitioning tools.
 
-- le développement de l'interface web ;
-- l'hébergement et l'exécution de code utilisateur ;
-- la redistribution de benchmarks dont la licence n'a pas été vérifiée ;
-- la promesse d'une synchronisation automatique de toute la littérature ;
-- la définition d'un classement scalaire universel entre algorithmes
-  multiobjectifs.
+Red-black hypergraphs are an important initial model, but the portal must be able
+to document and compare other graph, hypergraph, netlist, and timing models.
 
-## Langues
+## Initial exclusions
 
-L'interface et le contenu pédagogique visent le français et l'anglais. Les
-identifiants, noms de champs et API sont en anglais. Les termes scientifiques
-doivent être accompagnés de leur équivalent lors de leur première apparition.
-Une page non encore traduite peut être publiée si sa langue est clairement
-indiquée ; une traduction obsolète ne doit jamais masquer une version source plus
-récente.
+Milestone 0 explicitly excludes:
 
-## Principes éditoriaux et scientifiques
+- implementation of the web interface;
+- hosting or execution of user-supplied code;
+- redistribution of benchmarks whose licenses have not been reviewed;
+- claims of automatically covering the entire literature;
+- a universal scalar ranking for multi-objective algorithms;
+- treating one dissertation or software package as the definitive scope of the
+  research field.
 
-- Une affirmation bibliographique importante référence une source primaire.
-- Une fiche d'état de l'art indique sa date de dernière vérification.
-- Une donnée dérivée est distinguée d'une donnée fournie par son auteur.
-- Une métrique calculée précise sa version de définition et son unité.
-- Une expérience conserve algorithme, version, paramètres, graine et environnement.
-- Un artefact redistribué indique sa licence et son origine.
-- Les résultats multiobjectifs sont présentés avec leurs compromis, notamment via
-  des fronts de Pareto, et non par un score arbitraire implicite.
+## Project language
 
-## Critères de réussite
+English is the canonical language for the interface, educational content,
+documentation, schemas, data descriptions, and community workflows. Translation
+support is out of scope for the initial milestones. If translations are added
+later, they must identify their source revision and may not silently override a
+newer English source.
 
-### Fin du jalon 0
+## Editorial and scientific principles
 
-- un circuit, une topologie, une partition et une exécution de benchmark peuvent
-  être décrits sans ambiguïté ;
-- des exemples minimaux passent les validations structurelles et sémantiques ;
-- les choix d'architecture et les questions encore ouvertes sont visibles ;
-- le périmètre de chaque jalon suivant possède des critères de sortie.
+- Important literature claims cite primary sources.
+- State-of-the-art entries show their last review date.
+- Derived data is distinguished from author-provided data.
+- Computed metrics identify their convention version and unit.
+- Experiments retain algorithm, version, parameters, seed, and environment.
+- Redistributed artifacts identify their license and origin.
+- Multi-objective results expose trade-offs rather than hiding them in an
+  arbitrary score.
+- Reviews cover relevant competing approaches and state selection criteria.
+- Contributor affiliations and potential conflicts can be disclosed.
 
-### Première version publique utile
+## Neutrality policy
 
-- un lecteur termine un parcours pédagogique introductif ;
-- au moins une famille de circuits est publiée légalement ;
-- les statistiques principales sont recalculées par le moteur ;
-- les artefacts publiés sont téléchargeables et citables.
+The project is not an advocacy site for a particular method. Editorial structure
+is based on research questions and explicit taxonomies, not on the chapter order
+of a source document or the architecture of one tool.
 
-### Version communautaire
+An individual publication may supply an initial definition, dataset, or example.
+That role must be labeled locally and must not elevate the publication to a
+project-wide authority. Comparative pages should represent models and methods on
+their own terms before discussing benchmark outcomes.
 
-- une contribution externe peut être validée et intégrée ;
-- une expérience publiée peut être reproduite à partir de sa fiche ;
-- les modifications de contrats de données suivent une politique de version claire.
+## Success criteria
 
-## Risques principaux
+### End of Milestone 0
 
-| Risque | Réponse prévue |
+- A circuit, topology, partition, and benchmark run can be described without
+  ambiguity.
+- Minimal examples pass structural and semantic validation.
+- Architecture choices and open questions are visible.
+- Every later milestone has explicit exit criteria.
+- Project language and editorial neutrality are documented and reviewable.
+
+### First useful public release
+
+- A reader can complete an introductory learning path.
+- At least one legally redistributable circuit family is published.
+- Core statistics are independently recomputed by the engine.
+- Published artifacts are downloadable and citable.
+- The literature section includes sources from multiple authors and institutions.
+
+### Community release
+
+- An external contribution can be validated and integrated.
+- A published experiment can be reproduced from its record.
+- Data contract changes follow a visible versioning policy.
+- Editorial reviews have documented scope and maintenance ownership.
+
+## Principal risks
+
+| Risk | Planned response |
 | --- | --- |
-| Licences hétérogènes des circuits | Registre de provenance et blocage de redistribution par défaut |
-| Graphes trop grands pour le navigateur | Agrégation, sous-graphes, calcul hors thread et pré-calculs |
-| Définitions de métriques divergentes | Versionner les conventions et recalculer côté moteur |
-| Résultats CSV incomplets | Schéma strict, statut d'exécution et liens vers les artefacts |
-| État de l'art rapidement obsolète | Date de revue, propriétaires éditoriaux et historique Git |
-| Formats prématurément figés | Version `1.0.0-draft.1` pendant le jalon 0, stabilisation par PR |
+| Heterogeneous circuit licenses | Provenance registry and redistribution denied by default |
+| Graphs too large for browsers | Aggregation, subgraphs, background computation, and precomputation |
+| Divergent metric definitions | Version conventions and recompute metrics independently |
+| Incomplete benchmark rows | Strict schemas, run status, and artifact references |
+| Rapidly outdated state of the art | Review dates, maintainers, and Git history |
+| Prematurely frozen formats | Keep `1.0.0-draft.1` until real imports are evaluated |
+| Perceived institutional or methodological bias | Neutral taxonomy, transparent selection criteria, and diverse review |

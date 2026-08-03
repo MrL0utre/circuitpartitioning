@@ -1,159 +1,184 @@
-# Conventions scientifiques
+# Scientific conventions
 
-Ce document fixe la sémantique initiale utilisée par les contrats de données. Il
-s'appuie sur les chapitres 1 et 3 de la thèse fondatrice. Toute modification qui
-change le résultat d'une métrique nécessite une nouvelle version des conventions.
+This document fixes the semantics of the first data contract profile. Version
+`1.0.0-draft.1` covers timing-aware partitioning of directed red-black
+hypergraphs on a target topology.
 
-Version des conventions : `1.0.0-draft.1`.
+This is one model profile within the broader circuit partitioning field. Future
+profiles may represent different netlist abstractions, timing models, replication
+rules, placement objectives, or partitioning constraints. A new profile must state
+how its metrics relate—or do not relate—to those defined here.
 
-## Hypergraphe orienté rouge-noir
+Any change that alters a metric result requires a new convention version.
 
-Un circuit est représenté par un hypergraphe orienté `H = (V, A)` :
+## Directed red-black hypergraph profile
 
-- `V = V_R ∪ V_B` est l'ensemble des sommets ;
-- `V_R` contient les sommets rouges, typiquement registres et ports d'E/S ;
-- `V_B` contient les sommets noirs, typiquement cellules combinatoires ;
-- chaque hyperarc possède une source et au moins un puits dans le contrat canonique.
+A circuit is represented by a directed hypergraph `H = (V, A)`:
 
-Les ensembles rouge et noir sont disjoints. Tout sommet possède un identifiant
-unique dans le circuit.
+- `V = V_R ∪ V_B` is the vertex set;
+- `V_R` contains red vertices, typically registers and I/O ports;
+- `V_B` contains black vertices, typically combinational cells;
+- each canonical hyperarc has one source and at least one sink.
 
-Un bloc combinatoire compris entre des sommets rouges est un hypergraphe orienté
-acyclique. Par conséquent, tout cycle du circuit complet doit contenir au moins un
-sommet rouge. Cette propriété permet de calculer le chemin critique par
-propagation topologique bloc par bloc.
+The red and black sets are disjoint. Every vertex has a circuit-wide unique
+identifier.
 
-## Chemins rouge-rouge
+A combinational region between red vertices is a directed acyclic hypergraph.
+Consequently, every cycle in the complete circuit contains at least one red
+vertex. This property allows critical paths to be computed by topological
+propagation over combinational regions.
 
-Seuls les chemins combinatoires commençant et finissant par un sommet rouge sont
-pris en compte pour la fréquence du circuit. Les sommets internes d'un tel chemin
-sont noirs. Un sommet rouge rencontré interrompt donc le chemin courant et sert
-de source à un nouveau bloc.
+The initial profile and examples draw on the red-black formulation described in
+Julien Rodriguez's 2024 dissertation. The project treats this formulation as an
+explicitly identified model source, not as a universal definition of circuit
+partitioning.
 
-Le coût non partitionné d'un chemin `p` est :
+## Red-to-red paths
 
-```text
-d(p) = somme des délais des sommets de p
-     + somme des délais intrinsèques des connexions traversées
-```
+Only combinational paths that start and end at red vertices are considered for
+the timing metric in this profile. Internal path vertices are black. Encountering
+another red vertex ends the current path and starts a new combinational region.
 
-Le délai intrinsèque des connexions vaut zéro lorsqu'il n'est pas fourni. Les
-délais sont des nombres réels finis et positifs ou nuls, exprimés dans l'unité
-déclarée par le circuit.
-
-Le chemin critique non partitionné est :
+The unpartitioned cost of a path `p` is:
 
 ```text
-d_max(H) = max { d(p) | p est un chemin rouge-rouge de H }
+d(p) = sum of vertex delays along p
+     + sum of intrinsic connection delays traversed by p
 ```
 
-La criticalité d'un sommet est la longueur maximale d'un chemin rouge-rouge qui
-le traverse selon la méthode de calcul déclarée. Une criticalité importée est une
-donnée déclarée ; le moteur peut publier séparément une valeur recalculée.
+An unspecified intrinsic connection delay is zero. Delays are finite,
+non-negative real numbers expressed in the unit declared by the circuit.
+
+The unpartitioned critical path is:
+
+```text
+d_max(H) = max { d(p) | p is a red-to-red path in H }
+```
+
+In this profile, vertex criticality is the maximum cost of a red-to-red path that
+passes through the vertex under the declared computation method. Imported
+criticality is a declared value; an engine may publish a separate independently
+computed value.
 
 ## Partition
 
-Une `k`-partition est une affectation totale des sommets à `k` parties telle que :
+A `k`-way partition is a total assignment of vertices to `k` parts such that:
 
-- chaque sommet appartient à exactement une partie ;
-- chaque partie référencée existe dans la topologie cible ;
-- pour chaque dimension de ressource, la somme des poids ne dépasse pas la
-  capacité de la partie, sauf si la partition est explicitement publiée avec le
-  statut `infeasible`.
+- every vertex belongs to exactly one part;
+- every referenced part exists in the target topology;
+- for every resource dimension, the sum of vertex weights does not exceed the
+  part capacity unless the partition is explicitly marked `infeasible`.
 
-La réplication de sommets n'appartient pas au contrat de partition `1.x`. Elle
-pourra être introduite dans une version majeure distincte.
+Vertex replication is not part of the `1.x` partition contract. A future profile
+that supports replication requires distinct semantics and a major contract
+revision or separate schema.
 
-## Connectivité et coupe
+## Connectivity and cut
 
-Pour une partition `Π`, la connectivité `lambda_Π(a)` d'un hyperarc est le nombre
-de parties distinctes contenant sa source ou ses puits.
+For a partition `Π`, hyperarc connectivity `lambda_Π(a)` is the number of distinct
+parts containing its source or sinks.
 
-Un hyperarc est coupé si `lambda_Π(a) > 1`. L'ensemble des hyperarcs coupés est
-la coupe `omega(Π)`. La frontière contient tous les sommets appartenant à au
-moins un hyperarc coupé.
+A hyperarc is cut when `lambda_Π(a) > 1`. The set of cut hyperarcs is the cut
+`omega(Π)`. The partition boundary contains every vertex incident to at least one
+cut hyperarc.
 
-La taille pondérée de coupe est :
-
-```text
-f_c(Π) = somme de weight(a) pour les hyperarcs coupés
-```
-
-Le poids par défaut d'un hyperarc vaut `1`. Le coût connectivity-minus-one est :
+The weighted cut size is:
 
 ```text
-f_lambda(Π) = somme de (lambda_Π(a) - 1) pour tous les hyperarcs
+f_c(Π) = sum of weight(a) for every cut hyperarc a
 ```
 
-Une variante pondérée doit porter un autre identifiant de métrique et documenter
-sa formule ; elle ne peut pas être publiée sous `connectivity_minus_one`.
-
-## Coût dépendant de la topologie
-
-Une topologie associe une partie à chaque FPGA logique et fournit une matrice de
-coûts `D`. `D(i, i) = 0`. Les coûts peuvent être asymétriques si la topologie le
-déclare.
-
-Le coût d'un chemin après partitionnement est :
+The default hyperarc weight is `1`. The connectivity-minus-one cost is:
 
 ```text
-d_Π(p) = d(p) + somme de D(part(u), part(v))
+f_lambda(Π) = sum of (lambda_Π(a) - 1) for every hyperarc a
 ```
 
-La somme porte sur chaque relation source-puits de l'hyperarc suivie par le
-chemin. Le chemin critique partitionné, objectif principal de la thèse, est :
+A weighted variant must use another metric identifier and document its formula;
+it cannot be published as `connectivity-minus-one`.
+
+## Topology-aware timing cost
+
+A topology associates each logical part with a target device and provides a cost
+matrix `D`. `D(i, i) = 0`. Costs may be asymmetric when the topology declares
+that property.
+
+The post-partition cost of a path is:
 
 ```text
-f_p(H, Π, D) = max { d_Π(p) | p est un chemin rouge-rouge de H }
+d_Π(p) = d(p) + sum of D(part(u), part(v))
 ```
 
-Dans les manifestes, `critical_path` désigne `d_max(H)` sans coût inter-parties et
-`partitioned_critical_path` désigne `f_p`. La dégradation absolue et relative est
-calculée à partir de ces deux valeurs ; elle n'est pas une entrée faisant autorité.
+The sum covers each source-to-sink relation followed by the path. The partitioned
+critical path for this profile is:
 
-## Capacités et équilibre
+```text
+f_p(H, Π, D) = max { d_Π(p) | p is a red-to-red path in H }
+```
 
-Les ressources sont des dimensions nommées, par exemple `logic`, `registers`,
-`dsp` ou `bram`. Chaque sommet porte un poids positif ou nul par dimension. Une
-dimension omise par un sommet vaut zéro ; une dimension utilisée par un sommet
-doit exister dans les capacités de toutes les parties.
+In manifests, `critical-path` denotes `d_max(H)` without inter-part cost and
+`partitioned-critical-path` denotes `f_p`. Absolute and relative degradation are
+derived from these values and are not authoritative inputs.
 
-Le portail expose au minimum, pour chaque dimension :
+Other timing-driven partitioning formulations may use different penalties,
+multiplexing models, path sets, or placement integration. They must receive
+distinct metric identifiers when results are not directly comparable.
 
-- charge absolue par partie ;
-- taux d'utilisation `load / capacity` ;
-- maximum des taux d'utilisation ;
-- faisabilité.
+## Capacity and balance
 
-Il n'existe pas de définition universelle de l'imbalance multi-contraintes. Toute
-valeur d'équilibre publiée indique donc son `metric_id` et sa version. La première
-implémentation retiendra une définition dans une ADR du moteur.
+Resources are named dimensions such as `logic`, `registers`, `dsp`, or `bram`.
+Every vertex has a non-negative weight per used dimension. A missing vertex
+dimension means zero; every used dimension must exist in all target part
+capacities.
 
-## Unités et précision
+The portal exposes at least, for every dimension:
 
-- Les unités temporelles autorisées par le contrat initial sont `ps`, `ns` et `us`.
-- Tous les délais d'un même circuit et de sa topologie sont exprimés dans la même unité.
-- Aucune conversion implicite n'est réalisée pendant la validation.
-- Les calculs utilisent au minimum la précision IEEE 754 double.
-- La comparaison de valeurs recalculées utilise une tolérance documentée par le moteur.
-- Les valeurs `NaN`, infinies et négatives sont interdites.
+- absolute load per part;
+- utilization ratio `load / capacity`;
+- maximum utilization ratio;
+- feasibility.
 
-## Jeux de données initiaux envisagés
+There is no single universal definition of multi-constraint imbalance. Every
+published balance value therefore identifies its `metric_id` and version. The
+first engine implementation will select and document a definition in a dedicated
+ADR.
 
-Les familles mentionnées dans la thèse sont ITC99, Titan, Chipyard et des circuits
-d'inférence neuronale. Leur présence dans la thèse ne suffit pas à autoriser leur
-redistribution. Chaque import attend une revue de licence, une citation, une
-version de transformation et l'empreinte des données sources.
+## Units and numerical precision
 
-## Traçabilité des métriques
+- Initial timing units are `ps`, `ns`, and `us`.
+- A circuit and its target topology use the same timing unit.
+- Validation performs no implicit unit conversion.
+- Computation uses at least IEEE 754 double precision.
+- Recomputed value comparisons use an engine-documented tolerance.
+- `NaN`, infinite, and negative metric inputs are forbidden.
 
-Une métrique publiée est accompagnée de :
+## Initial datasets under consideration
 
-- son identifiant stable ;
-- la version des conventions ;
-- la version du moteur ;
-- les empreintes du circuit, de la topologie et de la partition ;
-- la date du calcul.
+Candidate families include ITC99, Titan, Chipyard-generated circuits, neural
+network accelerators, and other datasets used by the circuit partitioning
+community. Inclusion in a publication or dissertation does not itself grant
+redistribution rights. Every import requires a license review, primary citation,
+transformation version, and source-data fingerprint.
 
-Cette information permet de distinguer une évolution du moteur, une évolution de
-la donnée et un changement de définition scientifique.
+Dataset selection must not be limited to the instances used by the first model
+source. Later literature review should identify additional public benchmarks and
+document differences in synthesis technology, resource models, and objectives.
+
+## Metric traceability
+
+Every published metric is accompanied by:
+
+- stable metric identifier;
+- convention profile and version;
+- engine name and version;
+- circuit, topology, and partition fingerprints;
+- computation timestamp.
+
+This separates engine evolution, data changes, and scientific definition changes.
+
+## Comparability rule
+
+Two values may be compared directly only when their metric identifier,
+convention profile, units, and relevant model assumptions match. The interface
+must warn users when a chart combines results that require normalization or are
+only qualitatively comparable.

@@ -1,202 +1,232 @@
-# Backlog de développement
+# Development backlog
 
-Ce backlog transforme la feuille de route en lots indépendants et vérifiables. Il
-ne remplace pas les issues : il fournit leur découpage initial et leurs critères
-d'acceptation. Les priorités sont `P0` (bloquant), `P1` (important) et `P2`
-(amélioration).
+This backlog turns the roadmap into independently verifiable work packages. It
+does not replace GitHub issues; it provides their initial decomposition and
+acceptance criteria. Priorities are `P0` (blocking), `P1` (important), and `P2`
+(enhancement).
 
-## Jalon 0 - Foundations
+## Milestone 0 — Foundations
 
-| ID | Priorité | Lot | État |
+| ID | Priority | Work package | Status |
 | --- | --- | --- | --- |
-| FND-001 | P0 | Charte, publics et périmètre | terminé |
-| FND-002 | P0 | Architecture et décisions structurantes | terminé |
-| FND-003 | P0 | Conventions scientifiques | terminé |
-| FND-004 | P0 | Schémas circuit, topologie, partition et exécution | terminé |
-| FND-005 | P0 | Exemple de référence et métriques vérifiables | terminé |
-| FND-006 | P0 | Validation sémantique et CI | terminé |
-| FND-007 | P1 | Workflow de contribution et modèles GitHub | terminé |
+| FND-001 | P0 | Charter, audiences, and scope | complete |
+| FND-002 | P0 | Architecture and structural decisions | complete |
+| FND-003 | P0 | Scientific convention profile | complete |
+| FND-004 | P0 | Circuit, topology, partition, and run schemas | complete |
+| FND-005 | P0 | Hand-verifiable reference example | complete |
+| FND-006 | P0 | Semantic validation and CI | complete |
+| FND-007 | P1 | Contribution workflow and GitHub templates | complete |
+| FND-008 | P0 | English and editorial-neutrality policy | complete |
 
-La stabilisation des contrats de `1.0.0-draft.1` vers `1.0.0` reste conditionnée
-par l'import d'au moins un circuit réel. Elle appartient donc au jalon 3.
+Promotion from `1.0.0-draft.1` to `1.0.0` remains conditional on real circuit
+imports and belongs to Milestone 3.
 
-## Jalon 1 - Socle web
+## Milestone 1 — Web foundation
 
-### WEB-001 - Choisir le socle applicatif
+### WEB-001 — Select the application foundation
 
-- Priorité : P0
-- Dépendances : FND-002
-- Livrable : ADR comparant les options sur rendu MDX, i18n, déploiement, recherche
-  et visualisation.
-- Acceptation : la décision comporte un prototype de page avec formule et contenu
-  bilingue ; les alternatives et coûts de migration sont documentés.
+- Priority: P0
+- Dependencies: FND-002
+- Deliverable: ADR comparing candidates for MDX, English content, deployment,
+  search, and visualization.
+- Acceptance: a prototype page renders equations, citations, and accessible
+  scientific content; alternatives and migration costs are documented.
 
-### WEB-002 - Initialiser l'application et la qualité
+### WEB-002 — Initialize the application and quality gates
 
-- Priorité : P0
-- Dépendances : WEB-001
-- Livrable : application TypeScript, formatage, lint, tests et build en CI.
-- Acceptation : un clone neuf peut installer, tester et construire le site avec
-  les commandes du README ; la CI bloque une régression.
+- Priority: P0
+- Dependencies: WEB-001
+- Deliverable: TypeScript application, formatting, linting, tests, and CI build.
+- Acceptance: a clean clone can install, test, and build with documented commands;
+  CI blocks regressions.
 
-### WEB-003 - Créer la navigation et le design system
+### WEB-003 — Create navigation and the design system
 
-- Priorité : P0
-- Dépendances : WEB-002
-- Livrable : en-tête, pied de page, navigation principale, typographie, couleurs
-  scientifiques et composants de base.
-- Acceptation : navigation clavier complète, contrastes WCAG 2.2 AA et affichage
-  mobile sans débordement.
+- Priority: P0
+- Dependencies: WEB-002
+- Deliverable: header, footer, main navigation, typography, colors, and base
+  components.
+- Acceptance: complete keyboard navigation, WCAG 2.2 AA contrast, and no mobile
+  overflow.
 
-### WEB-004 - Internationaliser routes et contenu
+### WEB-004 — Establish the English content architecture
 
-- Priorité : P0
-- Dépendances : WEB-002
-- Livrable : routes françaises et anglaises, sélecteur de langue, fallback explicite.
-- Acceptation : aucune langue manquante n'affiche silencieusement un contenu
-  obsolète ; les URL canoniques et alternatives sont exposées.
+- Priority: P0
+- Dependencies: WEB-002
+- Deliverable: content collections, stable routes, metadata, terminology rules,
+  and revision information.
+- Acceptance: every public page has English source content, a stable canonical
+  URL, and an identified owner or maintenance policy.
 
-### WEB-005 - Rendre le contenu scientifique
+### WEB-005 — Render scientific content
 
-- Priorité : P0
-- Dépendances : WEB-002
-- Livrable : MDX contrôlé, formules, figures, pseudo-codes, notes et bibliographie.
-- Acceptation : une page de démonstration reprend correctement `f_c`, `f_lambda`
-  et `f_p`, avec alternative accessible aux figures.
+- Priority: P0
+- Dependencies: WEB-002
+- Deliverable: controlled MDX, equations, figures, pseudocode, notes, and
+  bibliography.
+- Acceptance: a demonstration page correctly presents `f_c`, `f_lambda`, and
+  `f_p`, with accessible alternatives to figures.
 
-### WEB-006 - Ajouter recherche et métadonnées
+### WEB-006 — Add search and scientific metadata
 
-- Priorité : P1
-- Dépendances : WEB-004, WEB-005
-- Livrable : index du contenu, recherche clavier, métadonnées sociales et citations.
-- Acceptation : une recherche retrouve les termes français et anglais ainsi que
-  leurs synonymes définis dans le glossaire.
+- Priority: P1
+- Dependencies: WEB-004, WEB-005
+- Deliverable: content index, keyboard search, synonyms, citation metadata, and
+  social metadata.
+- Acceptance: searches find scientific terms, acronyms, and glossary synonyms.
 
-### WEB-007 - Déployer les aperçus de pull request
+### WEB-007 — Deploy pull request previews
 
-- Priorité : P1
-- Dépendances : WEB-002
-- Livrable : environnement de préproduction et procédure de promotion.
-- Acceptation : chaque PR applicative reçoit une URL éphémère ; aucun secret n'est
-  exposé au code provenant d'une contribution non approuvée.
+- Priority: P1
+- Dependencies: WEB-002
+- Deliverable: preview environment and promotion procedure.
+- Acceptance: each application PR receives an ephemeral URL; secrets are not
+  exposed to untrusted contribution code.
 
-## Jalon 2 - Cours interactif
+## Milestone 2 — Interactive course
 
-| ID | Priorité | Lot | Acceptation synthétique |
+| ID | Priority | Work package | Summary acceptance criterion |
 | --- | --- | --- | --- |
-| EDU-001 | P0 | Plan du cours et objectifs pédagogiques | progression et prérequis revus |
-| EDU-002 | P0 | Graphes et hypergraphes | exemples, définitions et exercices corrigés |
-| EDU-003 | P0 | Circuits et modèle rouge-noir | chemins rouge-rouge manipulables |
-| EDU-004 | P0 | Partitions et métriques | effets d'un déplacement recalculés en direct |
-| EDU-005 | P1 | Topologies multi-FPGA | comparaison de coûts uniformes et non uniformes |
-| EDU-006 | P1 | Schéma multiniveau | contraction, initialisation et raffinement visualisés |
-| EDU-007 | P1 | Glossaire bilingue | termes reliés au contenu et recherchables |
-| EDU-008 | P2 | Auto-évaluation | progression locale sans collecte de données personnelle |
+| EDU-001 | P0 | Curriculum and learning outcomes | reviewed scope and prerequisites |
+| EDU-002 | P0 | Graphs, hypergraphs, and netlists | definitions, examples, and corrected exercises |
+| EDU-003 | P0 | Synchronous circuits and timing | manipulable paths and register boundaries |
+| EDU-004 | P0 | Partitions, placement, and metrics | moves update several objectives live |
+| EDU-005 | P1 | Multi-device target topologies | compare uniform and non-uniform costs |
+| EDU-006 | P1 | Multilevel methods | coarsening, initial partitioning, and refinement visualized |
+| EDU-007 | P0 | Modeling alternatives | compare red-black, graph, hypergraph, and relevant netlist abstractions |
+| EDU-008 | P1 | English glossary | terms connected to content and search |
+| EDU-009 | P2 | Self-assessment | local progress without personal-data collection |
 
-Chaque chapitre doit citer ses sources, annoncer ses objectifs, offrir un exemple
-minimal et être testé auprès d'au moins un lecteur ne travaillant pas déjà sur le
-partitionnement.
+Every chapter cites sources, states learning objectives, includes a minimal
+example, distinguishes model-specific claims, and is tested with at least one
+reader who does not already work on circuit partitioning.
 
-## Jalon 3 - Catalogue et moteur de circuits
+## Milestone 3 — Circuit catalog and engine
 
-### ENG-001 - Définir l'API interne du moteur
+### ENG-001 — Define the engine's internal API
 
-- Priorité : P0
-- Dépendances : FND-003, FND-004
-- Acceptation : chargement et analyse fonctionnent depuis une bibliothèque et une
-  CLI sans dépendre du framework web.
+- Priority: P0
+- Dependencies: FND-003, FND-004
+- Acceptance: loading and analysis work through a library and CLI without a web
+  framework dependency; model profile is explicit.
 
-### ENG-002 - Parser le JSON rouge-noir
+### ENG-002 — Parse canonical red-black JSON
 
-- Priorité : P0
-- Dépendances : ENG-001
-- Acceptation : erreurs localisées, limites configurables et conformité avec les
-  validations du jalon 0.
+- Priority: P0
+- Dependencies: ENG-001
+- Acceptance: localized errors, configurable limits, and consistency with
+  Milestone 0 validation.
 
-### ENG-003 - Parser le format rouge-noir dérivé de `hygr`
+### ENG-003 — Specify and parse a red-black text format
 
-- Priorité : P0
-- Dépendances : ENG-001
-- Acceptation : spécification normative, tests de cas limites et conversion sans
-  perte vers le modèle interne.
+- Priority: P0
+- Dependencies: ENG-001
+- Acceptance: normative specification, edge-case tests, and lossless conversion
+  to the initial internal model.
 
-### ENG-004 - Calculer les statistiques structurelles
+### ENG-004 — Evaluate additional community formats
 
-- Priorité : P0
-- Dépendances : ENG-002
-- Acceptation : comptages, degrés, connectivité et composantes sont comparés à des
-  résultats calculables à la main.
+- Priority: P0
+- Dependencies: ENG-001, SOTA-000
+- Acceptance: document at least two relevant formats, their semantics, license,
+  information loss, and whether adapters or separate profiles are required.
 
-### ENG-005 - Calculer le chemin critique
+### ENG-005 — Compute structural statistics
 
-- Priorité : P0
-- Dépendances : ENG-002
-- Acceptation : implémentation topologique testée sur plusieurs DAH, cycles via
-  sommets rouges, délais de sommets et délais de connexions.
+- Priority: P0
+- Dependencies: ENG-002
+- Acceptance: counts, degrees, connectivity, and components match independently
+  hand-computable results.
 
-### DATA-001 - Auditer les licences des benchmarks
+### ENG-006 — Compute critical paths
 
-- Priorité : P0
-- Dépendances : aucune
-- Acceptation : ITC99, Titan, Chipyard et circuits neuronaux possèdent chacun une
-  décision `redistribuable`, `liens uniquement` ou `non publiable`, avec preuve.
+- Priority: P0
+- Dependencies: ENG-002
+- Acceptance: topological implementation tested on multiple combinational
+  regions, cycles through red vertices, vertex delays, and connection delays.
 
-### DATA-002 - Importer une première famille
+### SOTA-000 — Define literature search and inclusion protocol
 
-- Priorité : P0
-- Dépendances : DATA-001, ENG-003, ENG-004, ENG-005
-- Acceptation : provenance, commande de transformation, empreintes et statistiques
-  sont reproduites sur une machine propre.
+- Priority: P0
+- Dependencies: FND-008
+- Acceptance: databases, queries, date range, inclusion criteria, exclusion
+  reasons, review frequency, and conflict handling are documented before broad
+  state-of-the-art claims are published.
 
-### CAT-001 - Générer l'index du catalogue
+### DATA-001 — Audit benchmark licenses and diversity
 
-- Priorité : P0
-- Dépendances : DATA-002, WEB-002
-- Acceptation : index entièrement reconstructible depuis les manifestes et rejet
-  de toute donnée invalide.
+- Priority: P0
+- Dependencies: SOTA-000
+- Acceptance: candidate families including, but not limited to, ITC99, Titan,
+  Chipyard, and accelerator circuits receive `redistributable`, `link-only`, or
+  `not-publishable` decisions with evidence; coverage gaps are recorded.
 
-### CAT-002 - Créer les pages liste et détail
+### DATA-002 — Import the first dataset family
 
-- Priorité : P0
-- Dépendances : CAT-001, WEB-003
-- Acceptation : filtres partageables par URL, provenance visible, métriques
-  distinguées entre déclarées et vérifiées, téléchargements avec empreinte.
+- Priority: P0
+- Dependencies: DATA-001, ENG-003, ENG-005, ENG-006
+- Acceptance: provenance, transformation command, fingerprints, and statistics
+  reproduce on a clean machine.
 
-### DATA-003 - Stabiliser les contrats `1.0.0`
+### DATA-003 — Import or evaluate a second independent source
 
-- Priorité : P0
-- Dépendances : DATA-002
-- Acceptation : retour d'expérience documenté, ADR de stabilisation, migration des
-  exemples et aucun point bloquant connu sur la première famille réelle.
+- Priority: P0
+- Dependencies: DATA-001, ENG-004
+- Acceptance: a dataset from another publication, group, or model lineage is
+  imported or receives a documented incompatibility and licensing assessment.
 
-## Jalons 4 à 9 - Épics préparatoires
+### CAT-001 — Generate the catalog index
 
-| ID | Jalon | Épic |
+- Priority: P0
+- Dependencies: DATA-002, WEB-002
+- Acceptance: the index is fully reconstructible from manifests and rejects
+  invalid data.
+
+### CAT-002 — Build catalog list and detail pages
+
+- Priority: P0
+- Dependencies: CAT-001, WEB-003
+- Acceptance: URL-shareable filters, visible provenance, declared/verified metric
+  distinction, model labels, and fingerprinted downloads.
+
+### DATA-004 — Stabilize contracts as `1.0.0`
+
+- Priority: P0
+- Dependencies: DATA-002, DATA-003
+- Acceptance: documented feedback, stabilization ADR, migrated examples, and no
+  known blocking issue across evaluated data sources.
+
+## Milestones 4–9 — Preparatory epics
+
+| ID | Milestone | Epic |
 | --- | ---: | --- |
-| PART-001 | 4 | Validation et calcul des métriques de partitions |
-| PART-002 | 4 | Catalogue de topologies et partitions |
-| VIZ-001 | 5 | Prototype de rendu multi-niveaux |
-| VIZ-002 | 5 | Inspection de sous-graphes et chemins critiques |
-| BENCH-001 | 6 | Import transactionnel du CSV |
-| BENCH-002 | 6 | Comparaisons statistiques et fronts de Pareto |
-| SOTA-001 | 7 | Taxonomie et modèle bibliographique |
-| SOTA-002 | 7 | Revue de l'état de l'art postérieure à 2024 |
-| COMM-001 | 8 | Pipeline de soumission et revue de licences |
-| COMM-002 | 8 | Publication de versions citables |
-| LAB-001 | 9 | Modèle de menace et isolation des exécutions |
-| LAB-002 | 9 | File de travaux et intégration d'un partitionneur |
+| PART-001 | 4 | Partition validation and metric computation |
+| PART-002 | 4 | Topology and partition catalogs |
+| VIZ-001 | 5 | Multi-resolution rendering prototype |
+| VIZ-002 | 5 | Subgraph and critical-path inspection |
+| BENCH-001 | 6 | Transactional CSV import |
+| BENCH-002 | 6 | Statistical comparisons and Pareto fronts |
+| SOTA-001 | 7 | Taxonomy and bibliographic model |
+| SOTA-002 | 7 | Systematic update beyond the initial 2024 sources |
+| SOTA-003 | 7 | Editorial review and conflict-of-interest workflow |
+| COMM-001 | 8 | Submission and license-review pipeline |
+| COMM-002 | 8 | Citable data releases |
+| LAB-001 | 9 | Threat model and execution isolation |
+| LAB-002 | 9 | Job queue and multiple tool integrations |
 
-Ces épics seront découpés lorsque leurs dépendances approcheront de la livraison,
-afin de ne pas figer aujourd'hui des détails qui dépendront des mesures des
-premiers jalons.
+These epics are decomposed when their dependencies approach delivery so current
+assumptions do not prematurely freeze later implementation details.
 
-## Questions ouvertes
+## Open questions
 
-- Quelle première famille possède la licence et les sources les plus adaptées à
-  une publication complète ?
-- Le moteur scientifique réutilise-t-il directement RaiSin ou commence-t-il par
-  une implémentation de référence indépendante destinée à la vérification ?
-- Quelles dimensions de ressources communes permettent de comparer des circuits
-  synthétisés pour des technologies différentes ?
-- Quelle tolérance numérique doit séparer une métrique vérifiée d'une divergence ?
-- Quels identifiants pérennes utiliser avant une éventuelle publication Zenodo ?
+- Which first dataset family offers the clearest redistribution rights and source
+  material?
+- Which additional public datasets best reduce bias toward the initial model and
+  source lineage?
+- Should the verification engine reuse an existing tool or begin with an
+  independent reference implementation?
+- Which resource dimensions support meaningful comparisons across synthesis
+  technologies?
+- What numerical tolerance separates a verified metric from a divergence?
+- Which persistent identifiers should be used before a possible Zenodo release?
+- What review structure best supports balanced state-of-the-art maintenance?

@@ -1,30 +1,30 @@
-# ADR 0002 - Contrats de données versionnés
+# ADR 0002 — Versioned data contracts
 
-- Statut : accepted
-- Date : 2026-08-03
+- Status: accepted
+- Date: 2026-08-03
 
-## Contexte
+## Context
 
-Circuits, topologies, partitions et résultats proviennent de sources et d'outils
-différents. Une convention implicite sur l'ordre des sommets, les unités ou la
-fonction objectif rendrait les comparaisons non reproductibles.
+Circuits, topologies, partitions, and results come from different sources and
+tools. Implicit assumptions about vertex order, units, or objective functions
+would make comparisons irreproducible.
 
-## Décision
+## Decision
 
-- Décrire les manifestes en JSON et les valider avec JSON Schema 2020-12.
-- Conserver un format CSV long pour l'échange de nombreuses exécutions.
-- Inclure `schema_version` dans chaque document racine.
-- Identifier les objets par `id`, `version` et empreinte SHA-256 des artefacts.
-- Réserver les changements incompatibles à une nouvelle version majeure.
-- Maintenir des validations sémantiques au-delà de ce que JSON Schema exprime.
+- Describe manifests as JSON validated with JSON Schema 2020-12.
+- Use a long-form CSV format to exchange collections of benchmark runs.
+- Include `schema_version` in each root document.
+- Identify scientific objects by `id`, `version`, and SHA-256 fingerprints.
+- Reserve incompatible changes for new major versions.
+- Maintain semantic validation for constraints that JSON Schema cannot express.
 
-La version du jalon 0 est `1.0.0-draft.1`. Elle devient `1.0.0` après revue des
-premiers imports réels.
+Milestone 0 uses `1.0.0-draft.1`. It becomes `1.0.0` only after evaluation
+against the first real dataset imports.
 
-## Conséquences
+## Consequences
 
-- Les consommateurs doivent refuser une version majeure inconnue.
-- Une simple modification de métadonnées incrémente la version du manifeste mais
-  ne change pas nécessairement l'empreinte de l'artefact scientifique.
-- Les valeurs déclarées et recalculées peuvent coexister sans être confondues.
-- Des migrations explicites seront nécessaires lors d'un changement incompatible.
+- Consumers reject unknown major versions.
+- A metadata-only change can update a manifest without changing the fingerprint
+  of its scientific artifact.
+- Declared and independently verified values can coexist without being confused.
+- Incompatible changes require explicit migration tooling or guidance.

@@ -1,194 +1,207 @@
-# Modèle de données
+# Data model
 
-Ce document décrit les objets échangés entre le catalogue, le moteur scientifique
-et l'application. Les contraintes exécutables se trouvent dans `schemas/`.
+This document describes objects exchanged between the catalog, scientific
+engine, and web application. Executable constraints live in `schemas/`.
 
-## Principes communs
+## Shared principles
 
-### Identité
+### Identity
 
-Chaque ressource scientifique possède :
+Every scientific resource has:
 
-- `id` : identifiant stable, lisible et indépendant du nom de fichier ;
-- `version` : version SemVer du manifeste ;
-- `schema_version` : version du contrat utilisé ;
-- une ou plusieurs empreintes SHA-256 pour les artefacts qui portent les données.
+- `id`: stable identifier independent of filenames;
+- `version`: SemVer version of the manifest;
+- `schema_version`: version of the contract used;
+- one or more SHA-256 fingerprints for artifacts containing scientific data.
 
-Une référence scientifique complète est le triplet `(id, version, sha256)`. `id`
-seul est pratique pour les URL mais insuffisant pour reproduire une expérience.
+A complete scientific reference is the triplet `(id, version, sha256)`. The `id`
+alone is convenient for URLs but insufficient for reproducing an experiment.
 
-Pour éviter les références circulaires, `sha256` désigne l'artefact primaire de
-l'hypergraphe pour un circuit, et le manifeste JSON pour une topologie ou une
-partition. Un hypergraphe embarque seulement l'identité `(id, version)` du
-circuit dont il constitue l'artefact primaire.
+To prevent circular references, `sha256` identifies the primary hypergraph
+artifact for a circuit and the JSON manifest for a topology or partition. A
+hypergraph embeds only the `(id, version)` identity of its circuit.
 
-Les identifiants utilisent les minuscules ASCII, chiffres et tirets. Ils sont
-uniques dans leur type de ressource. Exemples : `itc99-b01`, `cycle-4`,
+Identifiers use lowercase ASCII letters, digits, and hyphens and are unique
+within their resource type. Examples: `itc99-b01`, `cycle-4`,
 `b01-k4-dkfm-seed-42`.
 
-### Version
+### Versioning
 
-La version du manifeste évolue ainsi :
+Manifest versions evolve as follows:
 
-- `major` : changement incompatible du sens ou de la structure publiée ;
-- `minor` : ajout compatible de métadonnées ou d'artefacts ;
-- `patch` : correction qui ne change pas les données scientifiques référencées.
+- `major`: incompatible change to published meaning or structure;
+- `minor`: compatible addition of metadata or artifacts;
+- `patch`: correction that does not change referenced scientific data.
 
-La transformation d'une netlist en hypergraphe possède sa propre version dans la
-provenance. Deux transformations différentes ne doivent pas réutiliser
-silencieusement la même version de circuit.
+A netlist-to-hypergraph transformation carries its own version in provenance.
+Different transformations must not silently reuse the same circuit version.
 
-### Artefact
+### Artifact
 
-Un artefact est un fichier local ou distant contenant une donnée scientifique.
-Il comporte :
+An artifact is a local or remote file containing scientific data. It records:
 
-- un rôle (`red-black-hypergraph`, `partition-assignment`, `source-netlist`, etc.) ;
-- un format et un type de média ;
-- un emplacement relatif ou une URL HTTPS ;
-- une empreinte SHA-256 en hexadécimal minuscule ;
-- une taille en octets ;
-- éventuellement une compression.
+- a role such as `red-black-hypergraph`, `partition-assignment`, or
+  `source-netlist`;
+- format and media type;
+- relative location or HTTPS URL;
+- lowercase hexadecimal SHA-256 fingerprint;
+- byte size;
+- optional compression method.
 
-L'empreinte porte sur les octets effectivement téléchargés. Si un fichier est
-compressé, elle porte donc sur le fichier compressé et non sur son contenu après
-décompression. Un manifeste peut fournir un second artefact pour la forme
-décompressée.
+The fingerprint covers the bytes that are downloaded. For a compressed file it
+therefore covers the compressed representation, not its decompressed contents. A
+manifest may expose another artifact for the decompressed form.
 
-### Provenance et licence
+### Provenance and license
 
-La provenance distingue :
+Provenance distinguishes:
 
-- la source primaire et sa citation ;
-- l'URL de récupération ;
-- la licence déclarée par la source ;
-- le droit de redistribution, représenté explicitement ;
-- la chaîne de transformation ayant produit l'artefact publié.
+- primary source and citation;
+- retrieval URL;
+- license declared by the source;
+- explicit redistribution status;
+- transformation chain that produced the published artifact.
 
-`redistribution = unknown` interdit la copie de l'artefact dans le stockage public
-du projet tant qu'une revue humaine n'a pas tranché.
+`redistribution = unknown` prevents copying an artifact into public project
+storage until human review resolves the status.
+
+Provenance records where a model or artifact comes from without assigning that
+source project-wide editorial authority.
 
 ## Circuit
 
-Le manifeste `circuit` décrit une instance et pointe vers son hypergraphe. Il
-contient :
+A `circuit` manifest describes one instance and references its graph or netlist
+artifact. It includes:
 
-- identité, titre et description ;
-- provenance et licence ;
-- unité temporelle ;
-- dimensions de ressources ;
-- comptages déclarés ;
-- artefacts disponibles ;
-- statistiques déclarées ou vérifiées, avec leur provenance de calcul.
+- identity, title, and description;
+- provenance and license;
+- model profile and timing unit;
+- resource dimensions;
+- declared counts;
+- available artifacts;
+- declared or verified statistics with computation provenance.
 
-L'hypergraphe lui-même est séparé du manifeste pour permettre aux métadonnées de
-rester compactes. Le format JSON canonique `red-black-hypergraph` est prévu pour
-les exemples et les échanges. Les gros jeux de données pourront utiliser le
-format texte rouge-noir dérivé de `hygr`, référencé par le même manifeste.
+The graph is separate from the manifest so metadata stays compact. The canonical
+`red-black-hypergraph` JSON format supports examples and interchange. Large
+datasets may use a documented text representation derived from `hygr` or another
+profile-specific format referenced by the same catalog conventions.
 
-### Sommet
+Future circuit model profiles may add compatible artifact roles or separate
+schemas. The catalog must make the active model explicit rather than inferring it
+from a dataset family.
 
-Un sommet possède un identifiant, une couleur, un délai et un vecteur de poids de
-ressources. `criticality` est facultative car elle peut être recalculée. Un libellé
-humain ou un type de cellule est informatif et ne participe pas aux métriques sans
-convention supplémentaire.
+### Vertex in the red-black profile
 
-### Hyperarc
+A vertex has an identifier, color, delay, and resource-weight vector.
+`criticality` is optional because it can be recomputed. A human label or cell type
+is informative and does not affect metrics without an additional convention.
 
-Un hyperarc canonique possède :
+### Hyperarc in the red-black profile
 
-- un identifiant unique ;
-- exactement une source ;
-- au moins un puits distinct de la source ;
-- un poids de coupe, égal à `1` par défaut ;
-- éventuellement un délai intrinsèque par relation source-puits.
+A canonical hyperarc has:
 
-Le modèle à plusieurs sources n'est pas admis en `1.x`. Un importeur doit le
-normaliser ou refuser l'entrée.
+- unique identifier;
+- exactly one source;
+- at least one sink distinct from the source;
+- cut weight, defaulting to `1`;
+- optional intrinsic delay per source-to-sink relation.
 
-## Topologie
+The `1.x` profile does not support multiple sources. An importer must normalize
+or reject such input and document any transformation.
 
-Une topologie décrit les parties physiques possibles :
+## Topology
 
-- liste ordonnée de FPGA logiques et capacités par ressource ;
-- matrice complète des coûts de communication `D` ;
-- unité temporelle ;
-- caractère symétrique ou asymétrique ;
-- liens physiques facultatifs pour la visualisation et leurs capacités.
+A topology describes the physical parts available to a partition:
 
-La matrice complète fait autorité pour le calcul de `f_p`. Les liens servent à
-expliquer ou reconstruire une topologie, mais le moteur ne doit pas deviner
-implicitement si leur coût représente un lien direct ou un plus court chemin.
+- ordered list of logical devices and resource capacities;
+- complete communication cost matrix `D`;
+- timing unit;
+- symmetric or asymmetric cost semantics;
+- optional physical links and link capacities for visualization.
 
-L'ordre des lignes et colonnes de la matrice est défini par le tableau `part_ids`.
+The complete matrix is authoritative for `f_p`. Links explain or reconstruct a
+platform, but the engine does not guess whether their cost represents a direct
+link or a shortest path.
+
+The `part_ids` array defines matrix row and column order.
 
 ## Partition
 
-Une partition référence exactement un circuit et une topologie par identité,
-version et empreinte. L'affectation est :
+A partition references exactly one circuit and one topology by identity, version,
+and fingerprint. Its assignment is either:
 
-- intégrée sous forme d'une liste `(vertex_id, part_id)` pour les exemples ; ou
-- placée dans un artefact pour les grandes instances.
+- an inline list of `(vertex_id, part_id)` pairs for small examples; or
+- an artifact for large instances.
 
-Les deux formes sont mutuellement exclusives. L'ordre des affectations n'a pas de
-sémantique. La validation sémantique vérifie l'unicité et l'exhaustivité.
+The two forms are mutually exclusive. Assignment order has no meaning. Semantic
+validation checks uniqueness and complete coverage.
 
-Le manifeste peut contenir des métriques déclarées. Elles comprennent toujours
-un `metric_id`, une valeur et un statut `declared` ou `verified`. Seul le moteur
-peut produire le statut `verified` avec sa version et les empreintes d'entrée.
+A manifest may contain declared metrics. Each records a `metric_id`, value, and
+`declared` or `verified` status. Only an identified engine can produce `verified`
+status together with its version and input fingerprints.
 
-## Exécution de benchmark
+## Benchmark run
 
-Une exécution relie :
+A benchmark run connects:
 
-- le circuit, la topologie et éventuellement la partition produite ;
-- un algorithme et sa version ;
-- des paramètres structurés et une graine ;
-- l'environnement logiciel et matériel ;
-- les temps, mémoire, statut et message d'erreur éventuel ;
-- les métriques déclarées ou vérifiées ;
-- les journaux et artefacts de sortie.
+- circuit, topology, and optional produced partition;
+- algorithm and exact version;
+- structured parameters and seed;
+- software and hardware environment;
+- runtime, memory, status, and optional error information;
+- declared or verified metrics;
+- logs and output artifacts.
 
-Une ligne en échec reste une donnée utile : elle possède un `status` non réussi et
-peut omettre partition et métriques indisponibles.
+A failed run remains useful data. It records a non-success status and may omit an
+unavailable partition or metrics.
 
-## CSV de benchmark
+## Benchmark CSV
 
-Le CSV est une représentation plate d'exécutions. Il utilise :
+CSV is a flat exchange form for run collections. It uses:
 
-- UTF-8 ;
-- virgule comme séparateur ;
-- en-tête obligatoire ;
-- point comme séparateur décimal ;
-- chaîne vide pour une valeur absente ;
-- JSON compact pour `parameters` et autres champs structurés ;
-- horodatage UTC RFC 3339.
+- UTF-8 encoding;
+- comma delimiter;
+- mandatory header;
+- dot decimal separator;
+- empty strings for missing values;
+- compact JSON for `parameters` and other structured cells;
+- UTC RFC 3339 timestamps.
 
-Les identifiants et versions restent dans des colonnes séparées afin d'éviter les
-jointures implicites. Après import, chaque ligne est convertie vers le contrat
-`benchmark-run` et validée.
+Identifiers and versions remain in separate columns to avoid implicit joins.
+Import converts each row into a `benchmark-run` object and validates it.
 
-## Relations
+## Relationships
 
 ```text
 Circuit 1 <──── n Partition n ────> 1 Topology
    │                  │
-   │                  └──── produite par ──── BenchmarkRun
-   └─────────────────────────────────────────┘
+   │                  └──── produced by ──── BenchmarkRun
+   └────────────────────────────────────────┘
 ```
 
-Une partition ne contient pas une copie des métadonnées du circuit ou de la
-topologie. Les références complètes empêchent qu'une mise à jour de catalogue ne
-change rétroactivement le sens d'une expérience.
+A partition does not duplicate circuit or topology metadata. Complete references
+prevent catalog updates from retroactively changing experiment meaning.
 
-## Source de vérité
+## Source of truth
 
-| Information | Source faisant autorité |
+| Information | Authoritative source |
 | --- | --- |
-| Métadonnées et provenance | Manifeste versionné |
-| Structure d'un circuit | Artefact d'hypergraphe identifié par SHA-256 |
-| Coûts inter-parties | Matrice de la topologie |
-| Affectation des sommets | Affectation intégrée ou artefact de partition |
-| Résultat soumis | Exécution, statut `declared` |
-| Résultat publié comme vérifié | Sortie du moteur, statut `verified` |
-| Index et pages du site | Données dérivées et reconstructibles |
+| Metadata and provenance | Versioned manifest |
+| Circuit structure | Fingerprinted graph or netlist artifact |
+| Inter-part costs | Topology cost matrix |
+| Vertex assignment | Inline assignment or partition artifact |
+| Submitted result | Run value with `declared` status |
+| Independently checked result | Engine output with `verified` status |
+| Website pages and search index | Reconstructible derived data |
+
+## Model extension policy
+
+A model extension must answer:
+
+- Can existing consumers safely ignore it?
+- Are current metric identifiers still scientifically equivalent?
+- Does it require a new artifact role, profile, schema, or major version?
+- Can old and new results appear in one comparison without qualification?
+
+This policy allows the portal to start with red-black hypergraphs while growing
+to represent other work in the circuit partitioning community.

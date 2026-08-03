@@ -1,34 +1,35 @@
-# Exemples de référence
+# Reference examples
 
-`mini-pipeline` est une instance volontairement petite permettant de vérifier les
-contrats et les formules à la main.
+`mini-pipeline` is an intentionally small synthetic instance used to verify the
+initial red-black profile, data contracts, and formulas by hand. It is a contract
+test, not a representative benchmark or an endorsement of one research method.
 
 ## Circuit
 
-Le circuit contient deux chemins rouge-rouge :
+The circuit contains two red-to-red paths:
 
 ```text
-r-in -> fast -> r-out              coût = 1
-r-in -> slow-a -> slow-b -> r-out  coût = 3
+r-in -> fast -> r-out              cost = 1
+r-in -> slow-a -> slow-b -> r-out  cost = 3
 ```
 
-Le second est donc le chemin critique non partitionné.
+The second path is the unpartitioned critical path.
 
-## Topologie et partition
+## Topology and partition
 
-La topologie comporte deux FPGA. Toute traversée entre eux ajoute `10 ns`.
-L'affectation coupe :
+The topology contains two logical FPGA parts. Every crossing adds `10 ns`. The
+assignment cuts:
 
-- `fast -> r-out` ;
+- `fast -> r-out`;
 - `slow-a -> slow-b`.
 
-Chaque chemin traverse une fois la frontière. Le chemin court coûte alors `11`
-et le chemin critique `13`. La taille de coupe et le coût
-connectivity-minus-one valent tous deux `2`.
+Each timing path crosses the boundary once. The short path therefore costs `11`
+and the critical path costs `13`. Weighted cut size and
+connectivity-minus-one both equal `2`.
 
-## Fichiers
+## Files
 
-| Fichier | Contrat |
+| File | Contract |
 | --- | --- |
 | `circuits/mini-pipeline.circuit.json` | `circuit.schema.json` |
 | `data/mini-pipeline.rbh.json` | `red-black-hypergraph.schema.json` |
@@ -37,5 +38,5 @@ connectivity-minus-one valent tous deux `2`.
 | `runs/mini-pipeline-reference.run.json` | `benchmark-run.schema.json` |
 | `benchmarks/reference-runs.csv` | `benchmark-runs.csv.md` |
 
-Les empreintes sont vérifiées automatiquement. Toute modification d'un artefact
-référencé nécessite donc de mettre à jour les références qui en dépendent.
+Fingerprints are checked automatically. Any change to a referenced artifact must
+update every dependent reference.

@@ -1,31 +1,31 @@
-name: Contribution de données
-description: Proposer un circuit, une topologie, une partition ou des résultats.
+name: Data contribution
+description: Propose a circuit, topology, partition, or benchmark result.
 title: "[Data]: "
 labels: [data]
 body:
   - type: dropdown
     id: data_type
     attributes:
-      label: Type de donnée
+      label: Data type
       options:
         - Circuit
-        - Topologie
+        - Topology
         - Partition
-        - Résultats de benchmark
+        - Benchmark results
     validations:
       required: true
   - type: input
     id: source
     attributes:
-      label: Source primaire
-      placeholder: DOI, dépôt ou URL pérenne
+      label: Primary source
+      placeholder: DOI, repository, or persistent URL
     validations:
       required: true
   - type: input
     id: license
     attributes:
-      label: Licence
-      placeholder: Identifiant SPDX ou lien vers les conditions
+      label: License
+      placeholder: SPDX identifier or link to the license terms
     validations:
       required: true
   - type: dropdown
@@ -33,31 +33,47 @@ body:
     attributes:
       label: Redistribution
       options:
-        - Autorisée explicitement
-        - Interdite, liens uniquement
-        - À vérifier
+        - Explicitly allowed
+        - Prohibited, links only
+        - Requires review
+    validations:
+      required: true
+  - type: input
+    id: model_profile
+    attributes:
+      label: Circuit or metric model
+      description: Identify the graph, hypergraph, netlist, timing, or resource model used.
     validations:
       required: true
   - type: textarea
     id: transformations
     attributes:
       label: Transformations
-      description: Outils, versions, commandes et paramètres utilisés.
+      description: List tools, versions, commands, and parameters used.
     validations:
       required: true
   - type: textarea
     id: artifacts
     attributes:
-      label: Artefacts et empreintes
-      description: Lister les fichiers, tailles et SHA-256 sans joindre de donnée confidentielle.
+      label: Artifacts and fingerprints
+      description: List files, byte sizes, and SHA-256 values without attaching confidential data.
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Research context
+      description: Explain the dataset's intended use, limitations, and related benchmark families.
     validations:
       required: true
   - type: checkboxes
     id: checks
     attributes:
-      label: Vérifications
+      label: Checks
       options:
-        - label: Je confirme que ces données ne sont ni confidentielles ni couvertes par un accord de non-divulgation.
+        - label: I confirm that the data is not confidential and is not covered by a non-disclosure agreement.
           required: true
-        - label: J'ai exécuté le validateur du dépôt sur les manifestes proposés.
+        - label: I ran the repository validator on the proposed manifests.
+          required: true
+        - label: I documented provenance and did not infer redistribution rights from public availability alone.
           required: true
