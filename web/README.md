@@ -7,13 +7,14 @@ keeping scientific computation in a future independent engine.
 ## Stack
 
 - TypeScript, React, and the Next.js application model through Vinext;
-- Vite and the Sites deployment adapter;
+- Vite with a local development and production-preview workflow;
 - controlled MDX with remark-math, rehype-katex, and accessible MathML;
 - a small compile-time content index with a keyboard-accessible client search;
 - CSS design tokens and semantic components without a runtime UI framework.
 
-The framework choice and migration costs are recorded in
-[`docs/adr/0004-vinext-sites-web-foundation.md`](../docs/adr/0004-vinext-sites-web-foundation.md).
+The framework choice and deployment policy are recorded in
+[`ADR 0004`](../docs/adr/0004-vinext-sites-web-foundation.md) and
+[`ADR 0005`](../docs/adr/0005-local-development-and-ovh-deployment.md).
 
 ## Requirements
 
@@ -52,13 +53,14 @@ review, search-index, and scientific-content requirements.
 
 ## Configuration
 
-Set `NEXT_PUBLIC_SITE_URL` to override the canonical deployment origin. Builds
-default to the private Sites origin recorded for Milestone 1. No database,
-authentication secret, or scientific engine is required for this milestone.
+The application defaults to `http://localhost:3000`. Set `NEXT_PUBLIC_SITE_URL`
+only when testing the metadata for another origin. No database, authentication
+secret, or scientific engine is required for this milestone.
 
-Sites resource bindings are declared in `.openai/hosting.json`. The foundation
-uses neither D1 nor R2; later milestones should add a binding only after its data
-flow and source of truth are documented.
+Development and previews remain local. GitHub stores the source and runs CI; it
+does not publish the application. A public deployment may be configured for the
+project owner's OVH account in a later, explicit deployment task once the OVH
+hosting runtime and release process are known.
 
 ## Status language
 

@@ -86,4 +86,7 @@ be considered later, but an English source remains authoritative.
 
 Changes are developed on dedicated branches and reviewed through pull requests
 into `main`. See [CONTRIBUTING.md](CONTRIBUTING.md) for the contribution workflow
-and validation commands.
+and validation commands. The website is run and reviewed on localhost; GitHub is
+used for source control and CI, not public hosting. Public releases are deployed
+only through the project owner's OVH account and through a separately approved
+deployment process.

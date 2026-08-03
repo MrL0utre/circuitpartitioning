@@ -1,6 +1,6 @@
 # ADR 0004 — Vinext and Sites for the web foundation
 
-- Status: accepted
+- Status: superseded by [ADR 0005](0005-local-development-and-ovh-deployment.md)
 - Date: 2026-08-03
 
 ## Context
@@ -80,3 +80,9 @@ document language, navigation, and KaTeX MathML output.
 - Vinext limitations are reviewed before adopting framework-specific server APIs.
 - A future migration must preserve canonical URLs and accessible scientific
   output even if the rendering framework changes.
+
+## Supersession
+
+ADR 0005 retains the Vinext application foundation but supersedes the Sites
+hosting decision. Development is local and any future public deployment is
+controlled through the project owner's OVH account.

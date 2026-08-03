@@ -42,10 +42,10 @@ Responsibilities:
 - interactive visualizations;
 - requesting analyses without owning scientific computation logic.
 
-The Milestone 1 application uses TypeScript, React, and Vinext with Sites hosting.
-It supports static-first editorial pages, controlled MDX, and explicit client
-boundaries for search and future visualizations. ADR 0004 records the comparison,
-migration costs, and framework boundaries.
+The Milestone 1 application uses TypeScript, React, and Vinext with a localhost
+development workflow. It supports static-first editorial pages, controlled MDX,
+and explicit client boundaries for search and future visualizations. ADR 0004
+records the framework comparison and ADR 0005 records the deployment boundary.
 
 ### 3. Scientific engine
 
@@ -147,9 +147,12 @@ used directly as the website database.
 
 ## Initial deployment direction
 
-The web application and generated search index are deployed through Sites. Large
-artifacts remain external, and future scientific analysis runs in separate
-workers. This avoids deploying compute infrastructure before catalogs require it.
+Milestone development and review remain local. GitHub is limited to source
+control, pull requests, and CI; no GitHub Pages or other GitHub-hosted website is
+configured. Codex Sites is not a deployment target. A public release will be made
+only through the project owner's OVH account after its runtime, secrets, domain,
+and rollback procedure are documented and explicitly approved. Large artifacts
+remain external, and future scientific analysis runs in separate workers.
 
 ## Deferred decisions
 

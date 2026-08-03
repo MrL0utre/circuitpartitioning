@@ -5,6 +5,7 @@ on:
     paths:
       - "web/**"
       - "docs/adr/0004-vinext-sites-web-foundation.md"
+      - "docs/adr/0005-local-development-and-ovh-deployment.md"
       - "docs/web-content.md"
       - ".github/workflows/validate-web.yml"
   push:
@@ -12,6 +13,7 @@ on:
     paths:
       - "web/**"
       - "docs/adr/0004-vinext-sites-web-foundation.md"
+      - "docs/adr/0005-local-development-and-ovh-deployment.md"
       - "docs/web-content.md"
       - ".github/workflows/validate-web.yml"
 
