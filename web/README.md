@@ -52,9 +52,9 @@ review, search-index, and scientific-content requirements.
 
 ## Configuration
 
-Set `NEXT_PUBLIC_SITE_URL` to the canonical deployment origin when building for a
-host. Local builds default to `http://localhost:3000`. No database, authentication
-secret, or scientific engine is required for Milestone 1.
+Set `NEXT_PUBLIC_SITE_URL` to override the canonical deployment origin. Builds
+default to the private Sites origin recorded for Milestone 1. No database,
+authentication secret, or scientific engine is required for this milestone.
 
 Sites resource bindings are declared in `.openai/hosting.json`. The foundation
 uses neither D1 nor R2; later milestones should add a binding only after its data
