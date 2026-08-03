@@ -42,9 +42,10 @@ Responsibilities:
 - interactive visualizations;
 - requesting analyses without owning scientific computation logic.
 
-The likely Milestone 1 direction is TypeScript with a hybrid web framework that
-supports static content generation and data-driven server rendering. The exact
-framework is deliberately deferred to a Milestone 1 ADR.
+The Milestone 1 application uses TypeScript, React, and Vinext with Sites hosting.
+It supports static-first editorial pages, controlled MDX, and explicit client
+boundaries for search and future visualizations. ADR 0004 records the comparison,
+migration costs, and framework boundaries.
 
 ### 3. Scientific engine
 
@@ -146,14 +147,12 @@ used directly as the website database.
 
 ## Initial deployment direction
 
-The first deployment may colocate the web application and generated index on a
-managed web platform, with external storage for large artifacts. Heavy analysis
-can later move to separate workers. This avoids deploying compute infrastructure
-before static catalogs require it.
+The web application and generated search index are deployed through Sites. Large
+artifacts remain external, and future scientific analysis runs in separate
+workers. This avoids deploying compute infrastructure before catalogs require it.
 
 ## Deferred decisions
 
-- exact web framework and hosting provider;
 - scientific engine implementation language;
 - database or search engine;
 - object storage provider;

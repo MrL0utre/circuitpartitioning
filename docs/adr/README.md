@@ -13,3 +13,4 @@ Statuses: `proposed`, `accepted`, `deprecated`, `superseded`.
 | [0001](0001-separate-content-analysis-and-artifacts.md) | accepted | Separate content, analysis, and artifacts |
 | [0002](0002-versioned-data-contracts.md) | accepted | Use versioned data contracts |
 | [0003](0003-english-and-editorial-neutrality.md) | accepted | Use English and enforce editorial neutrality |
+| [0004](0004-vinext-sites-web-foundation.md) | accepted | Use Vinext and Sites for the web foundation |
