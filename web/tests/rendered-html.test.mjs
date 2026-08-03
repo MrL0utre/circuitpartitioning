@@ -50,6 +50,18 @@ test("foundation lesson includes accessible mathematical output", async () => {
   assert.match(html, /f_/i);
   assert.match(html, /Model boundary/i);
   assert.match(html, /References and scope/i);
+  assert.match(html, /always starts at a red source boundary/i);
+  assert.match(html, /data-path-boundary="source"/i);
+  assert.match(html, /data-path-boundary="sink"/i);
+});
+
+test("reference circuit exposes only red-to-red timing paths", async () => {
+  const response = await render("/circuits");
+  const html = await response.text();
+  assert.match(html, /two red-to-red paths/i);
+  assert.match(html, /source register/i);
+  assert.match(html, /sink register/i);
+  assert.match(html, /critical path · 3 ns/i);
 });
 
 test("navigation exposes every stable top-level route", async () => {

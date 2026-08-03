@@ -13,6 +13,8 @@
   --blue: #a9c7ff;
   --line: #cfc8bb;
   --white: #fffdf8;
+  --diagram-red: #d20d24;
+  --diagram-black: #171717;
   --font-sans:
     Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI",
     sans-serif;
@@ -390,29 +392,29 @@ kbd {
 .circuit-map {
   margin: 0;
   border: 1px solid var(--ink);
-  background: var(--navy);
-  color: white;
-  box-shadow: 18px 18px 0 var(--mint);
+  background: var(--white);
+  color: var(--ink);
+  box-shadow: 18px 18px 0 var(--paper-deep);
 }
 .map-toolbar {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   padding: 1.1rem 1.2rem;
-  border-bottom: 1px solid #40506a;
+  border-bottom: 1px solid var(--ink);
 }
 .map-toolbar > div {
   display: grid;
   gap: 0.25rem;
 }
 .map-kicker {
-  color: #a8b5c9;
+  color: var(--ink-soft);
   font: 0.62rem var(--font-mono);
   text-transform: uppercase;
   letter-spacing: 0.1em;
 }
 .map-live {
-  color: var(--mint);
+  color: var(--coral-deep);
   font: 0.58rem var(--font-mono);
 }
 .map-live span {
@@ -421,72 +423,64 @@ kbd {
   height: 6px;
   border-radius: 50%;
   margin-right: 0.35rem;
-  background: var(--mint);
+  background: var(--coral-deep);
 }
 .map-stage {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  min-height: 300px;
-  padding: 2.2rem 1.2rem;
-  background: #131f36;
+  padding: 1.1rem 1.2rem 1rem;
+  background: var(--white);
 }
-.map-column {
+.map-stage .red-black-circuit {
+  max-width: 640px;
+  margin-inline: auto;
+}
+.map-legend {
+  list-style: none;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.35rem;
-}
-.map-column > span {
-  color: #93a1b6;
+  flex-wrap: wrap;
+  gap: 0.7rem 1.4rem;
+  margin: -0.2rem 0 0;
+  padding: 0.75rem 0 0;
+  border-top: 1px solid var(--line);
+  color: var(--ink-soft);
   font: 0.62rem var(--font-mono);
-  text-transform: uppercase;
 }
-.map-node {
-  position: relative;
-  display: grid;
-  place-items: center;
-  width: 48px;
-  height: 48px;
-  border: 1px solid var(--mint);
+.map-legend li {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+.map-legend i {
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
-  background: var(--navy-raised);
-  font: 0.75rem var(--font-mono);
 }
-.map-node-state {
-  border-color: var(--coral);
-  background: var(--coral);
-  color: var(--navy);
-  font-weight: 800;
-  border-radius: 8px;
+.map-legend .legend-red {
+  background: var(--diagram-red);
 }
-.map-arrow {
-  position: absolute;
-  z-index: 1;
-  left: calc(100% + 20px);
-  color: var(--blue);
-  font-size: 1.4rem;
+.map-legend .legend-black {
+  background: var(--diagram-black);
 }
 .map-metrics {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  border-top: 1px solid #40506a;
-  border-bottom: 1px solid #40506a;
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
 }
 .map-metrics span {
   display: grid;
   padding: 0.85rem 1rem;
-  color: #a8b5c9;
+  color: var(--ink-soft);
   font-size: 0.64rem;
 }
 .map-metrics span + span {
-  border-left: 1px solid #40506a;
+  border-left: 1px solid var(--line);
 }
 .map-metrics b {
-  color: white;
+  color: var(--ink);
   font: 0.68rem var(--font-mono);
 }
 .circuit-map figcaption {
-  color: #9aa8bc;
+  color: var(--ink-soft);
   padding: 1rem 1.2rem;
   font-size: 0.7rem;
 }
@@ -821,34 +815,60 @@ kbd {
   margin: 2.5rem 0;
 }
 .model-figure-stage {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: clamp(0.45rem, 2vw, 1.2rem);
   min-height: 190px;
-  padding: 2rem;
-  background: var(--navy);
-  color: white;
+  padding: 1.5rem;
+  background: var(--white);
+  border: 1px solid var(--ink);
 }
-.figure-node {
-  width: 52px;
-  height: 52px;
-  display: grid;
-  place-items: center;
-  border: 1px solid var(--mint);
-  border-radius: 50%;
-  font: 0.75rem var(--font-mono);
+.red-black-circuit {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
 }
-.red-node {
-  border-color: var(--coral);
-  background: var(--coral);
-  color: var(--navy);
-  border-radius: 8px;
-  font-weight: 800;
+.diagram-edge {
+  fill: none;
+  stroke: var(--diagram-black);
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
 }
-.figure-edge {
-  color: var(--blue);
-  font-size: 1.4rem;
+.diagram-edge-critical {
+  stroke-width: 2.35;
+}
+.diagram-arrowhead,
+.diagram-junction,
+.diagram-vertex-black {
+  fill: var(--diagram-black);
+}
+.diagram-vertex {
+  stroke: var(--white);
+  stroke-width: 2;
+  vector-effect: non-scaling-stroke;
+}
+.diagram-vertex-red {
+  fill: var(--diagram-red);
+}
+.diagram-node-label,
+.diagram-arc-label {
+  fill: var(--diagram-black);
+  font: italic 17px var(--font-display);
+}
+.diagram-arc-label {
+  font-size: 13px;
+}
+.diagram-role-label,
+.diagram-path-label {
+  fill: var(--ink-soft);
+  font: 11px var(--font-mono);
+}
+.diagram-path-label {
+  letter-spacing: 0.03em;
+}
+.diagram-path-label.critical {
+  fill: var(--coral-deep);
+  font-weight: 750;
 }
 .model-figure figcaption {
   font-size: 0.78rem;
@@ -1045,30 +1065,27 @@ kbd {
   align-items: center;
 }
 .fixture-visual {
+  margin: 0;
   min-height: 420px;
-  display: grid;
-  place-content: center;
-  gap: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   position: relative;
+  padding: 3.6rem 1.2rem 1.2rem;
   background: var(--white);
   border: 1px solid var(--ink);
-  box-shadow: 14px 14px 0 var(--blue);
+  box-shadow: 14px 14px 0 var(--paper-deep);
 }
-.fixture-visual > div {
-  display: flex;
-  gap: 1.1rem;
-  align-items: center;
+.fixture-diagram {
+  max-width: 690px;
+  margin-inline: auto;
 }
-.fixture-visual i {
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  background: var(--navy);
-  border: 5px solid var(--paper-deep);
-}
-.fixture-visual .red-dot {
-  border-radius: 7px;
-  background: var(--coral);
+.fixture-visual figcaption {
+  margin-top: 0.4rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--line);
+  color: var(--ink-soft);
+  font-size: 0.72rem;
 }
 .fixture-label {
   position: absolute;
@@ -1395,13 +1412,10 @@ kbd {
     gap: 0.7rem;
   }
   .circuit-map {
-    box-shadow: 8px 8px 0 var(--mint);
+    box-shadow: 8px 8px 0 var(--paper-deep);
   }
   .map-stage {
     padding-inline: 0.4rem;
-  }
-  .map-arrow {
-    left: calc(100% + 10px);
   }
   .map-toolbar {
     gap: 0.7rem;
@@ -1459,12 +1473,7 @@ kbd {
     grid-template-columns: 1fr;
   }
   .model-figure-stage {
-    gap: 0.3rem;
-    padding-inline: 0.5rem;
-  }
-  .figure-node {
-    width: 42px;
-    height: 42px;
+    padding-inline: 0.35rem;
   }
   .research-row {
     grid-template-columns: 1fr;

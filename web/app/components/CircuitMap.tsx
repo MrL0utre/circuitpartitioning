@@ -1,8 +1,4 @@
-const columns = [
-  { label: "Inputs", nodes: ["a", "b", "c"] },
-  { label: "Logic", nodes: ["u₁", "u₂", "u₃"] },
-  { label: "State", nodes: ["r₁", "r₂"] },
-];
+import { RedBlackCircuitDiagram } from "./RedBlackCircuit";
 
 export function CircuitMap() {
   return (
@@ -10,31 +6,24 @@ export function CircuitMap() {
       <div className="map-toolbar">
         <div>
           <span className="map-kicker">Inspectable model</span>
-          <strong id="map-title">Signal-flow profile</strong>
+          <strong id="map-title">Red-to-red timing region</strong>
         </div>
         <span className="map-live">
           <span aria-hidden="true" /> contract v1 draft
         </span>
       </div>
       <div className="map-stage">
-        {columns.map((column, columnIndex) => (
-          <div className="map-column" key={column.label}>
-            <span>{column.label}</span>
-            {column.nodes.map((node, nodeIndex) => (
-              <div
-                className={`map-node ${columnIndex === 2 ? "map-node-state" : ""}`}
-                key={node}
-              >
-                {node}
-                {columnIndex < columns.length - 1 && nodeIndex < 2 ? (
-                  <span className="map-arrow" aria-hidden="true">
-                    →
-                  </span>
-                ) : null}
-              </div>
-            ))}
-          </div>
-        ))}
+        <RedBlackCircuitDiagram idPrefix="home-red-black" annotatePaths />
+        <ul className="map-legend" aria-label="Vertex color legend">
+          <li>
+            <i className="legend-red" aria-hidden="true" /> red · register or
+            I/O boundary
+          </li>
+          <li>
+            <i className="legend-black" aria-hidden="true" /> black ·
+            combinational resource
+          </li>
+        </ul>
       </div>
       <div
         className="map-metrics"
@@ -51,8 +40,10 @@ export function CircuitMap() {
         </span>
       </div>
       <figcaption id="map-caption">
-        A schematic teaching view. Published analyses will link every metric to
-        its model, input fingerprint, and engine version.
+        A schematic teaching view derived from the reference fixture. Both paths
+        start and end at red boundaries; their internal vertices are black.
+        Published analyses will link every metric to its model, input
+        fingerprint, and engine version.
       </figcaption>
     </figure>
   );

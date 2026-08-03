@@ -3,15 +3,15 @@
 The canonical website source lives under `web/app/`. English is the authoritative
 editorial language. Stable routes are organized by reader task:
 
-| Route | Purpose | Maintenance policy |
-| --- | --- | --- |
-| `/` | project orientation and current delivery status | reviewed each milestone |
-| `/learn` | course map and module status | course editors |
-| `/learn/foundations` | first controlled-MDX lesson | scientific and editorial review |
-| `/research` | taxonomy and literature-review protocol | reviewed before coverage claims |
-| `/benchmarks` | comparison contract and future results UI | benchmark maintainers |
-| `/circuits` | artifact publication and analysis contract | data and engine maintainers |
-| `/about` | scope, neutrality, and contribution policy | project maintainers |
+| Route                | Purpose                                         | Maintenance policy              |
+| -------------------- | ----------------------------------------------- | ------------------------------- |
+| `/`                  | project orientation and current delivery status | reviewed each milestone         |
+| `/learn`             | course map and module status                    | course editors                  |
+| `/learn/foundations` | first controlled-MDX lesson                     | scientific and editorial review |
+| `/research`          | taxonomy and literature-review protocol         | reviewed before coverage claims |
+| `/benchmarks`        | comparison contract and future results UI       | benchmark maintainers           |
+| `/circuits`          | artifact publication and analysis contract      | data and engine maintainers     |
+| `/about`             | scope, neutrality, and contribution policy      | project maintainers             |
 
 ## Add or revise a page
 
@@ -40,6 +40,20 @@ scientific components provide:
 Every figure must include a useful text alternative. Every table must use header
 cells. Color cannot be the only carrier of scientific meaning. Interactive charts
 added later must include a textual or tabular equivalent.
+
+## Scientific visual language
+
+Figures for the initial red-black profile use the dissertation's restrained
+diagram grammar as a starting point: thin directed connections, circular filled
+vertices, black for combinational resources, and red for register or I/O
+boundaries. Labels and captions must state the roles so that color is never the
+only distinction.
+
+Every illustrated combinational timing path must begin at a red source boundary,
+contain only black internal vertices, and end at the next red sink boundary. A
+red vertex encountered along a signal flow terminates the current path and starts
+a new combinational region. Other model profiles may adopt another visual
+language, but their semantics and legend must be explicit.
 
 ## Revision and ownership
 

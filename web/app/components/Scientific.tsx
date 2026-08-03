@@ -1,3 +1,5 @@
+import { RedBlackCircuitDiagram } from "./RedBlackCircuit";
+
 export function Note({
   title,
   children,
@@ -32,33 +34,14 @@ export function Pseudocode({ steps }: { steps: string[] }) {
 export function ModelProfileFigure() {
   return (
     <figure className="model-figure">
-      <div
-        className="model-figure-stage"
-        role="img"
-        aria-label="A directed hypergraph schematic with three black combinational vertices and two coral red state vertices connected from left to right."
-      >
-        <span className="figure-node black-node">v₁</span>
-        <span className="figure-edge" aria-hidden="true">
-          →
-        </span>
-        <span className="figure-node black-node">v₂</span>
-        <span className="figure-edge" aria-hidden="true">
-          →
-        </span>
-        <span className="figure-node red-node">r₁</span>
-        <span className="figure-edge" aria-hidden="true">
-          →
-        </span>
-        <span className="figure-node black-node">v₃</span>
-        <span className="figure-edge" aria-hidden="true">
-          →
-        </span>
-        <span className="figure-node red-node">r₂</span>
+      <div className="model-figure-stage">
+        <RedBlackCircuitDiagram idPrefix="foundation-red-black" />
       </div>
       <figcaption>
-        <b>Figure 1.</b> The initial red–black profile distinguishes
-        combinational vertices from state boundaries. Other model profiles may
-        encode these semantics differently.
+        <b>Figure 1.</b> Every combinational timing path in the initial profile
+        starts at a red register boundary, crosses only black internal vertices,
+        and ends at the next red register boundary. Other profiles may encode
+        these semantics differently.
       </figcaption>
     </figure>
   );

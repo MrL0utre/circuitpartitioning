@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PageHeader } from "../components/PageHeader";
+import { RedBlackCircuitDiagram } from "../components/RedBlackCircuit";
 import { StatusPill } from "../components/StatusPill";
 
 export const metadata: Metadata = {
@@ -42,27 +43,18 @@ export default function CircuitsPage() {
         className="shell section fixture"
         aria-labelledby="fixture-title"
       >
-        <div
-          className="fixture-visual"
-          role="img"
-          aria-label="Abstract reference circuit with five black nodes, two coral state nodes, and directed connections."
-        >
+        <figure className="fixture-visual">
           <span className="fixture-label">reference / minimal</span>
-          <div>
-            <i className="black-dot" />
-            <b>→</b>
-            <i className="black-dot" />
-            <b>→</b>
-            <i className="red-dot" />
-            <b>→</b>
-            <i className="black-dot" />
-          </div>
-          <div>
-            <i className="black-dot" />
-            <b>↗</b>
-            <i className="red-dot" />
-          </div>
-        </div>
+          <RedBlackCircuitDiagram
+            idPrefix="catalog-mini-pipeline"
+            annotatePaths
+            className="fixture-diagram"
+          />
+          <figcaption>
+            The canonical fixture contains two red-to-red paths. The 3 ns path
+            through <code>slow_a</code> and <code>slow_b</code> is critical.
+          </figcaption>
+        </figure>
         <div className="fixture-copy">
           <StatusPill tone="available">Schema fixture</StatusPill>
           <span className="eyebrow">Initial red–black profile</span>

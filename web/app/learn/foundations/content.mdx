@@ -41,6 +41,8 @@ A netlist, a graph, and a hypergraph may describe related connectivity, but they
 
 The repository’s first data contract represents combinational logic with black vertices and state boundaries with red vertices. Directed hyperarcs express one-to-many connectivity. This profile supports precise timing and partition analyses for the initial reference fixture.
 
+In this profile, a combinational timing path **always starts at a red source boundary and ends at the next red sink boundary**. Its internal vertices are black. Reaching another red vertex terminates the current path because that register captures state on a clock edge; a following combinational region begins after that boundary.
+
 <ModelProfileFigure />
 
 It is **not** a claim that all circuit partitioning research should use this representation. Additional profiles can be introduced when their semantics, conversion losses, provenance, and validation rules are explicit.
