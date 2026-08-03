@@ -1,0 +1,188 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://circuitpartitioning.org/schemas/v1/common.schema.json",
+  "title": "Circuit Partitioning common definitions",
+  "$defs": {
+    "schemaVersion": {
+      "const": "1.0.0-draft.1"
+    },
+    "resourceId": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "elementId": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]*$",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "semver": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-[0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*)?(?:\\+[0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*)?$"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "timeUnit": {
+      "enum": ["ps", "ns", "us"]
+    },
+    "nonNegativeNumber": {
+      "type": "number",
+      "minimum": 0
+    },
+    "resourceVector": {
+      "type": "object",
+      "propertyNames": {
+        "$ref": "#/$defs/resourceId"
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/nonNegativeNumber"
+      }
+    },
+    "location": {
+      "oneOf": [
+        {
+          "type": "object",
+          "required": ["kind", "path"],
+          "properties": {
+            "kind": { "const": "relative-path" },
+            "path": {
+              "type": "string",
+              "pattern": "^(?!/)(?![A-Za-z]:)(?!.*(?:^|/)\\.\\.(?:/|$))[A-Za-z0-9._/-]+$"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": ["kind", "url"],
+          "properties": {
+            "kind": { "const": "https-url" },
+            "url": { "type": "string", "format": "uri", "pattern": "^https://" }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "artifact": {
+      "type": "object",
+      "required": ["role", "format", "media_type", "location", "sha256", "byte_size"],
+      "properties": {
+        "role": { "$ref": "#/$defs/resourceId" },
+        "format": { "$ref": "#/$defs/resourceId" },
+        "media_type": { "type": "string", "pattern": "^[a-z0-9.+-]+/[a-zA-Z0-9.+-]+$" },
+        "location": { "$ref": "#/$defs/location" },
+        "sha256": { "$ref": "#/$defs/sha256" },
+        "byte_size": { "type": "integer", "minimum": 0 },
+        "compression": { "enum": ["none", "gzip", "zstd", "zip"] },
+        "description": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    },
+    "license": {
+      "type": "object",
+      "required": ["name", "redistribution"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "spdx_id": { "type": "string", "minLength": 1 },
+        "url": { "type": "string", "format": "uri", "pattern": "^https://" },
+        "redistribution": { "enum": ["allowed", "prohibited", "unknown"] },
+        "notes": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "source": {
+      "type": "object",
+      "required": ["name", "citation"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "citation": { "type": "string", "minLength": 1 },
+        "url": { "type": "string", "format": "uri", "pattern": "^https://" },
+        "retrieved_at": { "$ref": "#/$defs/timestamp" }
+      },
+      "additionalProperties": false
+    },
+    "transformation": {
+      "type": "object",
+      "required": ["tool", "version"],
+      "properties": {
+        "tool": { "type": "string", "minLength": 1 },
+        "version": { "type": "string", "minLength": 1 },
+        "command": { "type": "string" },
+        "parameters": { "type": "object", "additionalProperties": true }
+      },
+      "additionalProperties": false
+    },
+    "provenance": {
+      "type": "object",
+      "required": ["sources", "license"],
+      "properties": {
+        "sources": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/source" }
+        },
+        "license": { "$ref": "#/$defs/license" },
+        "transformations": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/transformation" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "resourceIdentity": {
+      "type": "object",
+      "required": ["id", "version"],
+      "properties": {
+        "id": { "$ref": "#/$defs/resourceId" },
+        "version": { "$ref": "#/$defs/semver" }
+      },
+      "additionalProperties": false
+    },
+    "resourceReference": {
+      "type": "object",
+      "required": ["id", "version", "sha256"],
+      "properties": {
+        "id": { "$ref": "#/$defs/resourceId" },
+        "version": { "$ref": "#/$defs/semver" },
+        "sha256": { "$ref": "#/$defs/sha256" }
+      },
+      "additionalProperties": false
+    },
+    "metric": {
+      "type": "object",
+      "required": ["metric_id", "value", "status", "conventions_version"],
+      "properties": {
+        "metric_id": { "$ref": "#/$defs/resourceId" },
+        "value": { "type": "number" },
+        "unit": { "type": "string", "minLength": 1 },
+        "status": { "enum": ["declared", "verified"] },
+        "conventions_version": { "$ref": "#/$defs/semver" },
+        "engine": {
+          "type": "object",
+          "required": ["name", "version"],
+          "properties": {
+            "name": { "type": "string", "minLength": 1 },
+            "version": { "type": "string", "minLength": 1 }
+          },
+          "additionalProperties": false
+        },
+        "computed_at": { "$ref": "#/$defs/timestamp" }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "status": { "const": "verified" } }, "required": ["status"] },
+          "then": { "required": ["engine", "computed_at"] }
+        }
+      ],
+      "additionalProperties": false
+    }
+  }
+}

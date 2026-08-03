@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://circuitpartitioning.org/schemas/v1/red-black-hypergraph.schema.json",
+  "title": "Canonical red-black directed hypergraph",
+  "type": "object",
+  "required": [
+    "schema_version", "type", "circuit", "timing_unit",
+    "resource_dimensions", "vertices", "hyperarcs"
+  ],
+  "properties": {
+    "$schema": { "const": "https://circuitpartitioning.org/schemas/v1/red-black-hypergraph.schema.json" },
+    "schema_version": { "$ref": "common.schema.json#/$defs/schemaVersion" },
+    "type": { "const": "red-black-hypergraph" },
+    "circuit": { "$ref": "common.schema.json#/$defs/resourceIdentity" },
+    "timing_unit": { "$ref": "common.schema.json#/$defs/timeUnit" },
+    "resource_dimensions": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "$ref": "common.schema.json#/$defs/resourceId" }
+    },
+    "vertices": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "type": "object",
+        "required": ["id", "color", "delay", "weights"],
+        "properties": {
+          "id": { "$ref": "common.schema.json#/$defs/elementId" },
+          "color": { "enum": ["red", "black"] },
+          "delay": { "$ref": "common.schema.json#/$defs/nonNegativeNumber" },
+          "criticality": { "$ref": "common.schema.json#/$defs/nonNegativeNumber" },
+          "weights": { "$ref": "common.schema.json#/$defs/resourceVector" },
+          "label": { "type": "string" },
+          "cell_type": { "type": "string", "minLength": 1 }
+        },
+        "additionalProperties": false
+      }
+    },
+    "hyperarcs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "source", "sinks"],
+        "properties": {
+          "id": { "$ref": "common.schema.json#/$defs/elementId" },
+          "source": { "$ref": "common.schema.json#/$defs/elementId" },
+          "sinks": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": { "$ref": "common.schema.json#/$defs/elementId" }
+          },
+          "weight": { "$ref": "common.schema.json#/$defs/nonNegativeNumber", "default": 1 },
+          "sink_delays": {
+            "type": "object",
+            "propertyNames": { "$ref": "common.schema.json#/$defs/elementId" },
+            "additionalProperties": { "$ref": "common.schema.json#/$defs/nonNegativeNumber" }
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

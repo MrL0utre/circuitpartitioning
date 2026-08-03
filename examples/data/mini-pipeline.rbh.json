@@ -1,0 +1,80 @@
+{
+  "$schema": "https://circuitpartitioning.org/schemas/v1/red-black-hypergraph.schema.json",
+  "schema_version": "1.0.0-draft.1",
+  "type": "red-black-hypergraph",
+  "circuit": {
+    "id": "mini-pipeline",
+    "version": "1.0.0"
+  },
+  "timing_unit": "ns",
+  "resource_dimensions": ["logic", "registers"],
+  "vertices": [
+    {
+      "id": "r-in",
+      "color": "red",
+      "delay": 0,
+      "criticality": 3,
+      "weights": { "logic": 0, "registers": 1 },
+      "cell_type": "input-register"
+    },
+    {
+      "id": "fast",
+      "color": "black",
+      "delay": 1,
+      "criticality": 1,
+      "weights": { "logic": 1, "registers": 0 },
+      "cell_type": "combinational"
+    },
+    {
+      "id": "slow-a",
+      "color": "black",
+      "delay": 1.5,
+      "criticality": 3,
+      "weights": { "logic": 1, "registers": 0 },
+      "cell_type": "combinational"
+    },
+    {
+      "id": "slow-b",
+      "color": "black",
+      "delay": 1.5,
+      "criticality": 3,
+      "weights": { "logic": 1, "registers": 0 },
+      "cell_type": "combinational"
+    },
+    {
+      "id": "r-out",
+      "color": "red",
+      "delay": 0,
+      "criticality": 3,
+      "weights": { "logic": 0, "registers": 1 },
+      "cell_type": "output-register"
+    }
+  ],
+  "hyperarcs": [
+    {
+      "id": "a-input",
+      "source": "r-in",
+      "sinks": ["fast", "slow-a"],
+      "weight": 1
+    },
+    {
+      "id": "a-fast-output",
+      "source": "fast",
+      "sinks": ["r-out"],
+      "weight": 1
+    },
+    {
+      "id": "a-slow-middle",
+      "source": "slow-a",
+      "sinks": ["slow-b"],
+      "weight": 1
+    },
+    {
+      "id": "a-slow-output",
+      "source": "slow-b",
+      "sinks": ["r-out"],
+      "weight": 1
+    }
+  ]
+}
+

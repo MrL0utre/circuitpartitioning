@@ -1,0 +1,84 @@
+{
+  "$schema": "https://circuitpartitioning.org/schemas/v1/partition.schema.json",
+  "schema_version": "1.0.0-draft.1",
+  "type": "partition",
+  "id": "mini-pipeline-split",
+  "version": "1.0.0",
+  "title": "Reference split of the mini pipeline",
+  "description": "Feasible two-way partition that cuts both red-red paths once.",
+  "conventions_version": "1.0.0-draft.1",
+  "circuit": {
+    "id": "mini-pipeline",
+    "version": "1.0.0",
+    "sha256": "37b200d9cb21185d53aa9120e3980ebc10dbf9aab4aeb3e5ed605a93c8964979"
+  },
+  "topology": {
+    "id": "two-fpga-link",
+    "version": "1.0.0",
+    "sha256": "263e6a599259a71165ade8cb70c3e4b299988b6847ac8e67894d4e3db129c62d"
+  },
+  "assignment": {
+    "mode": "inline",
+    "items": [
+      { "vertex_id": "r-in", "part_id": "fpga-0" },
+      { "vertex_id": "fast", "part_id": "fpga-0" },
+      { "vertex_id": "slow-a", "part_id": "fpga-0" },
+      { "vertex_id": "slow-b", "part_id": "fpga-1" },
+      { "vertex_id": "r-out", "part_id": "fpga-1" }
+    ]
+  },
+  "feasibility": "feasible",
+  "algorithm": {
+    "name": "hand-authored-reference",
+    "version": "1.0.0",
+    "parameters": {
+      "objective": "demonstrate-metrics"
+    },
+    "seed": 0
+  },
+  "metrics": [
+    {
+      "metric_id": "critical-path",
+      "value": 3,
+      "unit": "ns",
+      "status": "declared",
+      "conventions_version": "1.0.0-draft.1"
+    },
+    {
+      "metric_id": "partitioned-critical-path",
+      "value": 13,
+      "unit": "ns",
+      "status": "declared",
+      "conventions_version": "1.0.0-draft.1"
+    },
+    {
+      "metric_id": "cut-size",
+      "value": 2,
+      "status": "declared",
+      "conventions_version": "1.0.0-draft.1"
+    },
+    {
+      "metric_id": "connectivity-minus-one",
+      "value": 2,
+      "status": "declared",
+      "conventions_version": "1.0.0-draft.1"
+    }
+  ],
+  "provenance": {
+    "sources": [
+      {
+        "name": "Circuit Partitioning reference examples",
+        "citation": "Circuit Partitioning contributors. Reference split of the mini pipeline, version 1.0.0.",
+        "url": "https://github.com/MrL0utre/circuitpartitioning"
+      }
+    ],
+    "license": {
+      "name": "Creative Commons Zero v1.0 Universal",
+      "spdx_id": "CC0-1.0",
+      "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "redistribution": "allowed"
+    }
+  },
+  "created_at": "2026-08-03T00:00:00Z"
+}
+

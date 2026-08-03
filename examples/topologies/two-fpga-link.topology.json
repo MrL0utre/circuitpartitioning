@@ -1,0 +1,56 @@
+{
+  "$schema": "https://circuitpartitioning.org/schemas/v1/topology.schema.json",
+  "schema_version": "1.0.0-draft.1",
+  "type": "topology",
+  "id": "two-fpga-link",
+  "version": "1.0.0",
+  "title": "Symmetric two-FPGA reference topology",
+  "description": "Two identical FPGA parts connected with a 10 ns routing penalty.",
+  "timing_unit": "ns",
+  "symmetric": true,
+  "parts": [
+    {
+      "id": "fpga-0",
+      "label": "FPGA 0",
+      "capacity": { "logic": 3, "registers": 2 }
+    },
+    {
+      "id": "fpga-1",
+      "label": "FPGA 1",
+      "capacity": { "logic": 3, "registers": 2 }
+    }
+  ],
+  "routing_costs": {
+    "part_ids": ["fpga-0", "fpga-1"],
+    "matrix": [
+      [0, 10],
+      [10, 0]
+    ]
+  },
+  "links": [
+    {
+      "source": "fpga-0",
+      "target": "fpga-1",
+      "latency": 10,
+      "signal_capacity": 128
+    }
+  ],
+  "provenance": {
+    "sources": [
+      {
+        "name": "Circuit Partitioning reference examples",
+        "citation": "Circuit Partitioning contributors. Two-FPGA reference topology, version 1.0.0.",
+        "url": "https://github.com/MrL0utre/circuitpartitioning"
+      }
+    ],
+    "license": {
+      "name": "Creative Commons Zero v1.0 Universal",
+      "spdx_id": "CC0-1.0",
+      "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "redistribution": "allowed"
+    }
+  },
+  "created_at": "2026-08-03T00:00:00Z",
+  "updated_at": "2026-08-03T00:00:00Z"
+}
+
