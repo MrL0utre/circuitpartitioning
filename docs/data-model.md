@@ -17,6 +17,11 @@ Chaque ressource scientifique possède :
 Une référence scientifique complète est le triplet `(id, version, sha256)`. `id`
 seul est pratique pour les URL mais insuffisant pour reproduire une expérience.
 
+Pour éviter les références circulaires, `sha256` désigne l'artefact primaire de
+l'hypergraphe pour un circuit, et le manifeste JSON pour une topologie ou une
+partition. Un hypergraphe embarque seulement l'identité `(id, version)` du
+circuit dont il constitue l'artefact primaire.
+
 Les identifiants utilisent les minuscules ASCII, chiffres et tirets. Ils sont
 uniques dans leur type de ressource. Exemples : `itc99-b01`, `cycle-4`,
 `b01-k4-dkfm-seed-42`.
@@ -187,4 +192,3 @@ change rétroactivement le sens d'une expérience.
 | Résultat soumis | Exécution, statut `declared` |
 | Résultat publié comme vérifié | Sortie du moteur, statut `verified` |
 | Index et pages du site | Données dérivées et reconstructibles |
-

@@ -29,6 +29,7 @@ ambiguïté.
 | [Conventions scientifiques](docs/scientific-conventions.md) | Modèle rouge-noir, chemins, partitions et métriques |
 | [Modèle de données](docs/data-model.md) | Identifiants, versions, artefacts et relations |
 | [Feuille de route](docs/roadmap.md) | Jalons, dépendances et définition du MVP |
+| [Backlog](docs/backlog.md) | Lots de travail priorisés et critères d'acceptation |
 | [ADR](docs/adr/README.md) | Journal des décisions d'architecture |
 | [Schémas](schemas/README.md) | Contrats JSON Schema et format CSV |
 

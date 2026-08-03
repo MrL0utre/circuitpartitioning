@@ -1,0 +1,45 @@
+name: Fonctionnalité
+description: Proposer une évolution du site, du moteur ou du contenu pédagogique.
+title: "[Feature]: "
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Besoin
+      description: Quel utilisateur rencontre quel problème ?
+    validations:
+      required: true
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Résultat attendu
+      description: Décrire le comportement observable et non seulement une solution technique.
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Domaine
+      options:
+        - Cours et contenu
+        - Catalogue de circuits
+        - Partitions et benchmarks
+        - Visualisation
+        - Moteur scientifique
+        - Architecture et infrastructure
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Critères d'acceptation
+      description: Lister les conditions vérifiables de fin.
+    validations:
+      required: true
+  - type: textarea
+    id: references
+    attributes:
+      label: Sources ou exemples
+      description: Ajouter les références scientifiques ou interfaces comparables utiles.
+

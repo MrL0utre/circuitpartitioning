@@ -1,0 +1,64 @@
+name: Contribution de données
+description: Proposer un circuit, une topologie, une partition ou des résultats.
+title: "[Data]: "
+labels: [data]
+body:
+  - type: dropdown
+    id: data_type
+    attributes:
+      label: Type de donnée
+      options:
+        - Circuit
+        - Topologie
+        - Partition
+        - Résultats de benchmark
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Source primaire
+      placeholder: DOI, dépôt ou URL pérenne
+    validations:
+      required: true
+  - type: input
+    id: license
+    attributes:
+      label: Licence
+      placeholder: Identifiant SPDX ou lien vers les conditions
+    validations:
+      required: true
+  - type: dropdown
+    id: redistribution
+    attributes:
+      label: Redistribution
+      options:
+        - Autorisée explicitement
+        - Interdite, liens uniquement
+        - À vérifier
+    validations:
+      required: true
+  - type: textarea
+    id: transformations
+    attributes:
+      label: Transformations
+      description: Outils, versions, commandes et paramètres utilisés.
+    validations:
+      required: true
+  - type: textarea
+    id: artifacts
+    attributes:
+      label: Artefacts et empreintes
+      description: Lister les fichiers, tailles et SHA-256 sans joindre de donnée confidentielle.
+    validations:
+      required: true
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Vérifications
+      options:
+        - label: Je confirme que ces données ne sont ni confidentielles ni couvertes par un accord de non-divulgation.
+          required: true
+        - label: J'ai exécuté le validateur du dépôt sur les manifestes proposés.
+          required: true
+

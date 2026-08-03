@@ -67,7 +67,15 @@ Une modification de formule ou de sémantique doit :
 
 ## Validation locale
 
-Les commandes exactes sont ajoutées avec les schémas exécutables du jalon 0. À
-terme, une contribution doit au minimum valider les JSON/CSV, exécuter les tests
-du moteur concerné et vérifier les liens documentaires.
+Créer un environnement Python, installer les dépendances et exécuter :
 
+```text
+python -m pip install --requirement requirements-dev.txt
+python scripts/validate_data.py
+python -m unittest discover -s tests
+git diff --check
+```
+
+Le validateur contrôle les schémas, exemples, empreintes, références et métriques
+scientifiques. À terme, une contribution devra également exécuter les tests du
+moteur concerné et vérifier les liens documentaires.
