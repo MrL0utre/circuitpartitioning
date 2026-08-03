@@ -1,0 +1,105 @@
+import {
+  ModelProfileFigure,
+  Note,
+  Pseudocode,
+} from "../../components/Scientific";
+
+<span className="eyebrow">Circuit partitioning · Foundations</span>
+
+# Turn a circuit into a partitioning question
+
+Circuit partitioning assigns circuit elements to a finite set of parts while satisfying constraints and optimizing one or more objectives. That compact sentence hides the choices that make published results comparable—or incompatible.
+
+<div className="lesson-meta">
+  <span>Learning outcomes</span>
+  <ul>
+    <li>separate a physical circuit from its mathematical representation;</li>
+    <li>distinguish feasibility constraints from optimization objectives;</li>
+    <li>read three objective functions without assuming they are universal.</li>
+  </ul>
+</div>
+
+<section id="problem">
+
+## 1. The problem is a family of models
+
+A partitioning instance usually contains a representation of connectivity, a target set of parts or devices, resource demands, capacity limits, and a cost model. A solution maps every eligible element to exactly one part. Whether that solution is useful depends on the semantics attached to those objects.
+
+For a vertex set $V$ and a set of parts $K$, a partition can be written as a total assignment $P: V \rightarrow K$. The simplest feasibility condition requires each vertex to appear exactly once. Practical models also constrain resource load, legal placement, clocking, or timing.
+
+<Note title="Keep the physical and mathematical layers separate">
+
+A netlist, a graph, and a hypergraph may describe related connectivity, but they do not necessarily preserve the same fan-out, timing, or placement information. The model profile must travel with the result.
+
+</Note>
+
+</section>
+
+<section id="model">
+
+## 2. One initial profile: red–black directed hypergraphs
+
+The repository’s first data contract represents combinational logic with black vertices and state boundaries with red vertices. Directed hyperarcs express one-to-many connectivity. This profile supports precise timing and partition analyses for the initial reference fixture.
+
+<ModelProfileFigure />
+
+It is **not** a claim that all circuit partitioning research should use this representation. Additional profiles can be introduced when their semantics, conversion losses, provenance, and validation rules are explicit.
+
+</section>
+
+<section id="objectives">
+
+## 3. Feasibility first, objectives second
+
+For part $k$, let $u_k(P)$ be its resource use and $C_k$ its capacity. A candidate is feasible only when $u_k(P) \leq C_k$ for every constrained resource and part. Objective values should not hide an infeasible assignment.
+
+The initial scientific convention profile records three useful objective families:
+
+### Cut objective
+
+$$
+f_c(P) = \sum_{e \in E} w_e\, \mathbf{1}\!\left[\left|\{P(v): v \in e\}\right| > 1\right]
+$$
+
+$f_c$ charges a weighted hyperarc when its incident vertices span more than one part. Alternative cut definitions must use distinct metric identifiers.
+
+### Topology-aware communication objective
+
+$$
+f_{\lambda}(P, T) = \sum_{e \in E} w_e\, d_T\!\left(P(s_e), \{P(v):v\in e\}\right)
+$$
+
+$f_{\lambda}$ combines the partition with a target topology $T$. Its interpretation depends on the declared routing or distance rule; it is not interchangeable with an unweighted cut.
+
+### Timing or path objective
+
+$$
+f_p(P) = \max_{\pi \in \Pi} \sum_{v \in \pi} d_v + \sum_{(u,v) \in \pi} d_{uv}(P)
+$$
+
+$f_p$ evaluates the longest relevant path under declared vertex and connection delays. The path set $\Pi$ and the treatment of state boundaries belong to the model profile.
+
+<Pseudocode
+  steps={[
+    "Validate assignment coverage and uniqueness.",
+    "Check capacity and placement constraints.",
+    "Compute metrics from the canonical input, never from display fields.",
+    "Record the engine version, parameters, seed, and input fingerprints.",
+  ]}
+/>
+
+These objectives often conflict. A lower cut can worsen timing or overload a scarce resource. Reproducible comparisons therefore retain the vector of metrics and feasibility evidence instead of collapsing every result into an unexplained score.
+
+</section>
+
+<section id="references">
+
+## References and scope
+
+1. B. W. Kernighan and S. Lin, “An efficient heuristic procedure for partitioning graphs,” _Bell System Technical Journal_, 1970. DOI: [10.1002/j.1538-7305.1970.tb01770.x](https://doi.org/10.1002/j.1538-7305.1970.tb01770.x).
+2. C. M. Fiduccia and R. M. Mattheyses, “A linear-time heuristic for improving network partitions,” _19th Design Automation Conference_, 1982. DOI: [10.1145/800263.809204](https://doi.org/10.1145/800263.809204).
+3. J. Rodriguez, _Partitionnement de circuits pour architectures multi-FPGA_, doctoral thesis, 2024. Used as one source for the initial red–black profile; it does not define the project’s overall editorial scope.
+
+This lesson is a foundation-page prototype, not a complete literature review. The state-of-the-art section will use a documented search and inclusion protocol before making claims about current coverage.
+
+</section>
