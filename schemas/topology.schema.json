@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://circuitpartitioning.org/schemas/v1/topology.schema.json",
+  "title": "Multi-FPGA target topology",
+  "type": "object",
+  "required": [
+    "schema_version", "type", "id", "version", "title",
+    "timing_unit", "symmetric", "parts", "routing_costs",
+    "provenance", "created_at", "updated_at"
+  ],
+  "properties": {
+    "$schema": { "const": "https://circuitpartitioning.org/schemas/v1/topology.schema.json" },
+    "schema_version": { "$ref": "common.schema.json#/$defs/schemaVersion" },
+    "type": { "const": "topology" },
+    "id": { "$ref": "common.schema.json#/$defs/resourceId" },
+    "version": { "$ref": "common.schema.json#/$defs/semver" },
+    "title": { "type": "string", "minLength": 1 },
+    "description": { "type": "string" },
+    "timing_unit": { "$ref": "common.schema.json#/$defs/timeUnit" },
+    "symmetric": { "type": "boolean" },
+    "parts": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "type": "object",
+        "required": ["id", "capacity"],
+        "properties": {
+          "id": { "$ref": "common.schema.json#/$defs/resourceId" },
+          "label": { "type": "string" },
+          "capacity": { "$ref": "common.schema.json#/$defs/resourceVector" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "routing_costs": {
+      "type": "object",
+      "required": ["part_ids", "matrix"],
+      "properties": {
+        "part_ids": {
+          "type": "array",
+          "minItems": 2,
+          "uniqueItems": true,
+          "items": { "$ref": "common.schema.json#/$defs/resourceId" }
+        },
+        "matrix": {
+          "type": "array",
+          "minItems": 2,
+          "items": {
+            "type": "array",
+            "minItems": 2,
+            "items": { "$ref": "common.schema.json#/$defs/nonNegativeNumber" }
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "links": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["source", "target"],
+        "properties": {
+          "source": { "$ref": "common.schema.json#/$defs/resourceId" },
+          "target": { "$ref": "common.schema.json#/$defs/resourceId" },
+          "latency": { "$ref": "common.schema.json#/$defs/nonNegativeNumber" },
+          "signal_capacity": { "$ref": "common.schema.json#/$defs/nonNegativeNumber" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "provenance": { "$ref": "common.schema.json#/$defs/provenance" },
+    "created_at": { "$ref": "common.schema.json#/$defs/timestamp" },
+    "updated_at": { "$ref": "common.schema.json#/$defs/timestamp" }
+  },
+  "additionalProperties": false
+}

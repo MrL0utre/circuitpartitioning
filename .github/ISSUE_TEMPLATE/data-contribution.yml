@@ -1,0 +1,79 @@
+name: Data contribution
+description: Propose a circuit, topology, partition, or benchmark result.
+title: "[Data]: "
+labels: [data]
+body:
+  - type: dropdown
+    id: data_type
+    attributes:
+      label: Data type
+      options:
+        - Circuit
+        - Topology
+        - Partition
+        - Benchmark results
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Primary source
+      placeholder: DOI, repository, or persistent URL
+    validations:
+      required: true
+  - type: input
+    id: license
+    attributes:
+      label: License
+      placeholder: SPDX identifier or link to the license terms
+    validations:
+      required: true
+  - type: dropdown
+    id: redistribution
+    attributes:
+      label: Redistribution
+      options:
+        - Explicitly allowed
+        - Prohibited, links only
+        - Requires review
+    validations:
+      required: true
+  - type: input
+    id: model_profile
+    attributes:
+      label: Circuit or metric model
+      description: Identify the graph, hypergraph, netlist, timing, or resource model used.
+    validations:
+      required: true
+  - type: textarea
+    id: transformations
+    attributes:
+      label: Transformations
+      description: List tools, versions, commands, and parameters used.
+    validations:
+      required: true
+  - type: textarea
+    id: artifacts
+    attributes:
+      label: Artifacts and fingerprints
+      description: List files, byte sizes, and SHA-256 values without attaching confidential data.
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Research context
+      description: Explain the dataset's intended use, limitations, and related benchmark families.
+    validations:
+      required: true
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: I confirm that the data is not confidential and is not covered by a non-disclosure agreement.
+          required: true
+        - label: I ran the repository validator on the proposed manifests.
+          required: true
+        - label: I documented provenance and did not infer redistribution rights from public availability alone.
+          required: true

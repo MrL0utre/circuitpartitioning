@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://circuitpartitioning.org/schemas/v1/circuit.schema.json",
+  "title": "Circuit manifest",
+  "type": "object",
+  "required": [
+    "schema_version", "type", "id", "version", "title",
+    "conventions_version", "timing_unit", "resource_dimensions",
+    "counts", "provenance", "artifacts", "created_at", "updated_at"
+  ],
+  "properties": {
+    "$schema": { "const": "https://circuitpartitioning.org/schemas/v1/circuit.schema.json" },
+    "schema_version": { "$ref": "common.schema.json#/$defs/schemaVersion" },
+    "type": { "const": "circuit" },
+    "id": { "$ref": "common.schema.json#/$defs/resourceId" },
+    "version": { "$ref": "common.schema.json#/$defs/semver" },
+    "title": { "type": "string", "minLength": 1 },
+    "description": { "type": "string" },
+    "families": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "$ref": "common.schema.json#/$defs/resourceId" }
+    },
+    "conventions_version": { "$ref": "common.schema.json#/$defs/semver" },
+    "timing_unit": { "$ref": "common.schema.json#/$defs/timeUnit" },
+    "resource_dimensions": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "$ref": "common.schema.json#/$defs/resourceId" }
+    },
+    "counts": {
+      "type": "object",
+      "required": ["vertices", "red_vertices", "black_vertices", "hyperarcs"],
+      "properties": {
+        "vertices": { "type": "integer", "minimum": 2 },
+        "red_vertices": { "type": "integer", "minimum": 2 },
+        "black_vertices": { "type": "integer", "minimum": 0 },
+        "hyperarcs": { "type": "integer", "minimum": 1 }
+      },
+      "additionalProperties": false
+    },
+    "provenance": { "$ref": "common.schema.json#/$defs/provenance" },
+    "artifacts": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "common.schema.json#/$defs/artifact" }
+    },
+    "metrics": {
+      "type": "array",
+      "items": { "$ref": "common.schema.json#/$defs/metric" }
+    },
+    "created_at": { "$ref": "common.schema.json#/$defs/timestamp" },
+    "updated_at": { "$ref": "common.schema.json#/$defs/timestamp" }
+  },
+  "additionalProperties": false
+}

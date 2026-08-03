@@ -1,0 +1,49 @@
+name: Feature request
+description: Propose an improvement to the website, engine, or educational content.
+title: "[Feature]: "
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Need
+      description: Which user is experiencing which problem?
+    validations:
+      required: true
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Expected outcome
+      description: Describe observable behavior, not only a technical solution.
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Course and editorial content
+        - Circuit catalog
+        - Partitions and benchmarks
+        - Visualization
+        - Scientific engine
+        - Architecture and infrastructure
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      description: List verifiable completion conditions.
+    validations:
+      required: true
+  - type: textarea
+    id: references
+    attributes:
+      label: Sources or examples
+      description: Add relevant primary research sources or comparable interfaces.
+  - type: textarea
+    id: neutrality
+    attributes:
+      label: Scope and alternatives
+      description: For scientific content, state the intended scope and relevant alternative approaches.

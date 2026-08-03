@@ -1,0 +1,60 @@
+{
+  "$schema": "https://circuitpartitioning.org/schemas/v1/circuit.schema.json",
+  "schema_version": "1.0.0-draft.1",
+  "type": "circuit",
+  "id": "mini-pipeline",
+  "version": "1.0.0",
+  "title": "Mini pipeline with fast and slow paths",
+  "description": "Small reference circuit used to verify timing and cut metrics by hand.",
+  "families": ["reference"],
+  "conventions_version": "1.0.0-draft.1",
+  "timing_unit": "ns",
+  "resource_dimensions": ["logic", "registers"],
+  "counts": {
+    "vertices": 5,
+    "red_vertices": 2,
+    "black_vertices": 3,
+    "hyperarcs": 4
+  },
+  "provenance": {
+    "sources": [
+      {
+        "name": "Circuit Partitioning reference examples",
+        "citation": "Circuit Partitioning contributors. Mini pipeline reference circuit, version 1.0.0.",
+        "url": "https://github.com/MrL0utre/circuitpartitioning"
+      }
+    ],
+    "license": {
+      "name": "Creative Commons Zero v1.0 Universal",
+      "spdx_id": "CC0-1.0",
+      "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "redistribution": "allowed"
+    },
+    "transformations": []
+  },
+  "artifacts": [
+    {
+      "role": "red-black-hypergraph",
+      "format": "rbh-json",
+      "media_type": "application/json",
+      "location": {
+        "kind": "relative-path",
+        "path": "examples/data/mini-pipeline.rbh.json"
+      },
+      "sha256": "92737239568331c88f035f210b5d434949969923bbefeb96a55c4b745f54a975",
+      "byte_size": 1720,
+      "compression": "none"
+    }
+  ],
+  "metrics": [
+    {
+      "metric_id": "critical-path",
+      "value": 3,
+      "unit": "ns",
+      "status": "declared",
+      "conventions_version": "1.0.0-draft.1"
+    }
+  ],
+  "created_at": "2026-08-03T00:00:00Z",
+  "updated_at": "2026-08-03T00:00:00Z"
+}

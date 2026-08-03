@@ -1,0 +1,68 @@
+{
+  "$schema": "https://circuitpartitioning.org/schemas/v1/benchmark-run.schema.json",
+  "schema_version": "1.0.0-draft.1",
+  "type": "benchmark-run",
+  "id": "mini-pipeline-reference-run",
+  "circuit": {
+    "id": "mini-pipeline",
+    "version": "1.0.0",
+    "sha256": "92737239568331c88f035f210b5d434949969923bbefeb96a55c4b745f54a975"
+  },
+  "topology": {
+    "id": "two-fpga-link",
+    "version": "1.0.0",
+    "sha256": "50e93f224f69f444ac5c038983b27904659879fba86fe9615f7fa6c9b268f222"
+  },
+  "partition": {
+    "id": "mini-pipeline-split",
+    "version": "1.0.0",
+    "sha256": "82fb7853d83f2a2e2987e36ec6c8169341c35dd6a49a3f7ed05b2d166a15cb32"
+  },
+  "algorithm": {
+    "name": "hand-authored-reference",
+    "version": "1.0.0",
+    "parameters": {
+      "objective": "demonstrate-metrics"
+    },
+    "seed": 0
+  },
+  "status": "succeeded",
+  "started_at": "2026-08-03T00:00:00Z",
+  "duration_ms": 0,
+  "memory_peak_mb": 0,
+  "environment": {
+    "os": "platform-independent",
+    "architecture": "not-applicable",
+    "details": {
+      "method": "analytically-derived-reference"
+    }
+  },
+  "metrics": [
+    {
+      "metric_id": "critical-path",
+      "value": 3,
+      "unit": "ns",
+      "status": "declared",
+      "conventions_version": "1.0.0-draft.1"
+    },
+    {
+      "metric_id": "partitioned-critical-path",
+      "value": 13,
+      "unit": "ns",
+      "status": "declared",
+      "conventions_version": "1.0.0-draft.1"
+    },
+    {
+      "metric_id": "cut-size",
+      "value": 2,
+      "status": "declared",
+      "conventions_version": "1.0.0-draft.1"
+    },
+    {
+      "metric_id": "connectivity-minus-one",
+      "value": 2,
+      "status": "declared",
+      "conventions_version": "1.0.0-draft.1"
+    }
+  ]
+}
