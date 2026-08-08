@@ -15,9 +15,11 @@ The portal is designed to support five complementary activities:
 
 ## Project status
 
-The repository is at **Milestone 0 — Foundations**. The web application has not
-been implemented yet. This milestone defines the project scope, architecture,
-scientific conventions, and versioned data contracts required by later work.
+The repository contains the **Milestone 1 — Web foundation** release candidate.
+The English website now provides stable navigation, a controlled-MDX lesson with
+accessible mathematics, a small scientific search index, and honest status pages
+for research, benchmarks, and circuit data. Interactive analysis and published
+benchmark results remain later milestones.
 
 | Resource | Purpose |
 | --- | --- |
@@ -29,6 +31,7 @@ scientific conventions, and versioned data contracts required by later work.
 | [Backlog](docs/backlog.md) | Prioritized work packages and acceptance criteria |
 | [ADRs](docs/adr/README.md) | Architecture and governance decision log |
 | [Schemas](schemas/README.md) | JSON Schema contracts and benchmark CSV format |
+| [Web content guide](docs/web-content.md) | Routes, MDX, accessibility, and editorial workflow |
 
 ## Target repository layout
 
@@ -83,4 +86,7 @@ be considered later, but an English source remains authoritative.
 
 Changes are developed on dedicated branches and reviewed through pull requests
 into `main`. See [CONTRIBUTING.md](CONTRIBUTING.md) for the contribution workflow
-and validation commands.
+and validation commands. The website is run and reviewed on localhost; GitHub is
+used for source control and CI, not public hosting. Public releases are deployed
+only through the project owner's OVH account and through a separately approved
+deployment process.

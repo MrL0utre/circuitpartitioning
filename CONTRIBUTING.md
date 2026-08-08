@@ -98,5 +98,19 @@ git diff --check
 ```
 
 The validator checks schemas, examples, fingerprints, cross-references, and
-scientific metrics. Component-specific test suites and documentation link checks
-will be added as the repository grows.
+scientific metrics.
+
+For website changes, install Node.js 22.13 or newer and pnpm 11, then run:
+
+```text
+cd web
+pnpm install --frozen-lockfile
+pnpm format:check
+pnpm lint
+pnpm typecheck
+pnpm test
+```
+
+`pnpm test` performs a production build before checking the server-rendered HTML
+for every stable route. See [docs/web-content.md](docs/web-content.md) before
+adding scientific content or a public route.

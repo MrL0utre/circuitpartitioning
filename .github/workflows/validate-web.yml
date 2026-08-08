@@ -1,0 +1,54 @@
+name: Validate web application
+
+on:
+  pull_request:
+    paths:
+      - "web/**"
+      - "docs/adr/0004-vinext-sites-web-foundation.md"
+      - "docs/adr/0005-local-development-and-ovh-deployment.md"
+      - "docs/web-content.md"
+      - ".github/workflows/validate-web.yml"
+  push:
+    branches: [main]
+    paths:
+      - "web/**"
+      - "docs/adr/0004-vinext-sites-web-foundation.md"
+      - "docs/adr/0005-local-development-and-ovh-deployment.md"
+      - "docs/web-content.md"
+      - ".github/workflows/validate-web.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: "22.13"
+
+      - name: Enable pnpm
+        run: corepack enable && corepack prepare pnpm@11.7.0 --activate
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Check formatting
+        run: pnpm format:check
+
+      - name: Lint application
+        run: pnpm lint
+
+      - name: Check types
+        run: pnpm typecheck
+
+      - name: Build and test rendered routes
+        run: pnpm test

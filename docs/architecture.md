@@ -42,9 +42,10 @@ Responsibilities:
 - interactive visualizations;
 - requesting analyses without owning scientific computation logic.
 
-The likely Milestone 1 direction is TypeScript with a hybrid web framework that
-supports static content generation and data-driven server rendering. The exact
-framework is deliberately deferred to a Milestone 1 ADR.
+The Milestone 1 application uses TypeScript, React, and Vinext with a localhost
+development workflow. It supports static-first editorial pages, controlled MDX,
+and explicit client boundaries for search and future visualizations. ADR 0004
+records the framework comparison and ADR 0005 records the deployment boundary.
 
 ### 3. Scientific engine
 
@@ -146,14 +147,15 @@ used directly as the website database.
 
 ## Initial deployment direction
 
-The first deployment may colocate the web application and generated index on a
-managed web platform, with external storage for large artifacts. Heavy analysis
-can later move to separate workers. This avoids deploying compute infrastructure
-before static catalogs require it.
+Milestone development and review remain local. GitHub is limited to source
+control, pull requests, and CI; no GitHub Pages or other GitHub-hosted website is
+configured. Codex Sites is not a deployment target. A public release will be made
+only through the project owner's OVH account after its runtime, secrets, domain,
+and rollback procedure are documented and explicitly approved. Large artifacts
+remain external, and future scientific analysis runs in separate workers.
 
 ## Deferred decisions
 
-- exact web framework and hosting provider;
 - scientific engine implementation language;
 - database or search engine;
 - object storage provider;

@@ -1,0 +1,111 @@
+import {
+  ModelProfileFigure,
+  Note,
+  Pseudocode,
+} from "../../components/Scientific";
+
+<span className="eyebrow">Chapter 1 · Definitions and objective functions</span>
+
+# Definitions and objectives for circuit partitioning
+
+Circuit partitioning assigns the elements of a circuit to a finite set of parts. The assignment must satisfy the constraints of the selected problem formulation and is evaluated by one or more objective functions. This chapter defines the objects required for that formulation and identifies the assumptions under which the resulting quantities can be compared.
+
+<div className="lesson-meta">
+  <span>Learning outcomes</span>
+  <ul>
+    <li>
+      distinguish a physical circuit from its mathematical representation;
+    </li>
+    <li>define a partitioning instance and its feasibility conditions;</li>
+    <li>
+      interpret three objective functions within their declared model profile.
+    </li>
+  </ul>
+</div>
+
+<section id="problem">
+
+## 1. Partitioning instance
+
+A partitioning instance contains a representation of circuit connectivity, a finite target set of parts or devices, resource demands, capacity limits, and a cost model. A solution assigns every eligible circuit element to one part. The meaning of that assignment depends on the semantics of the selected representation.
+
+Let $V$ denote a finite vertex set and $K$ a finite set of parts. A partition is represented by a total assignment $P: V \rightarrow K$. At minimum, each vertex is assigned exactly once. Additional feasibility conditions may constrain resource utilization, legal placement, clock domains, timing, or replication.
+
+<Note title="Modeling convention">
+
+A netlist, a graph, and a hypergraph may represent related connectivity without preserving the same fan-out, timing, placement, or resource information. Every dataset and result must therefore identify its model profile.
+
+</Note>
+
+</section>
+
+<section id="model">
+
+## 2. Initial profile: directed red-black hypergraphs
+
+The first data contract represents a circuit by a directed red-black hypergraph. Black vertices represent combinational resources. Red vertices represent state boundaries, typically registers or input/output boundaries. A directed hyperarc has one source and one or more sinks and therefore preserves one-to-many connectivity.
+
+Within this profile, a combinational timing path **starts at a red source boundary and ends at the next red sink boundary**. Every internal vertex is black. Encountering a red vertex terminates the current path because the corresponding register captures state on a clock edge; the following combinational region begins after that boundary.
+
+<ModelProfileFigure />
+
+This profile is used for the initial reference instance and does not constitute a universal representation of circuit partitioning problems. Additional profiles may be introduced when their semantics, conversion losses, provenance, and validation rules are specified.
+
+</section>
+
+<section id="objectives">
+
+## 3. Feasibility and objective functions
+
+For each part $k$, let $u_k(P)$ denote the resource utilization induced by partition $P$, and let $C_k$ denote its capacity. The partition is feasible only if $u_k(P) \leq C_k$ for every constrained resource and every part. Objective values are reported separately from feasibility.
+
+The initial convention profile defines three objective families.
+
+### Cut objective
+
+$$
+f_c(P) = \sum_{e \in E} w_e\, \mathbf{1}\!\left[\left|\{P(v): v \in e\}\right| > 1\right]
+$$
+
+$f_c$ is the sum of the weights of hyperarcs whose incident vertices belong to more than one part. Alternative cut definitions require distinct metric identifiers.
+
+### Topology-aware communication objective
+
+$$
+f_{\lambda}(P, T) = \sum_{e \in E} w_e\, d_T\!\left(P(s_e), \{P(v):v\in e\}\right)
+$$
+
+$f_{\lambda}$ combines partition $P$ with a target topology $T$. Its interpretation depends on the declared routing or distance rule and is not interchangeable with an unweighted cut metric.
+
+### Timing or path objective
+
+$$
+f_p(P) = \max_{\pi \in \Pi} \sum_{v \in \pi} d_v + \sum_{(u,v) \in \pi} d_{uv}(P)
+$$
+
+$f_p$ is the maximum cost of a path in the declared path set $\Pi$, using the specified vertex and connection delays. The definition of $\Pi$ and the treatment of state boundaries are part of the model profile.
+
+<Pseudocode
+  steps={[
+    "Validate assignment coverage and uniqueness.",
+    "Check capacity and placement constraints.",
+    "Compute metrics from the canonical input, never from display fields.",
+    "Record the engine version, parameters, seed, and input fingerprints.",
+  ]}
+/>
+
+These objectives are not generally equivalent. A partition with a smaller cut may have a longer critical path or violate a resource capacity. Experimental records therefore retain feasibility information and the complete vector of reported metrics rather than replacing them with an undocumented aggregate score.
+
+</section>
+
+<section id="references">
+
+## 4. References and scope
+
+1. B. W. Kernighan and S. Lin, “An efficient heuristic procedure for partitioning graphs,” _Bell System Technical Journal_, 1970. DOI: [10.1002/j.1538-7305.1970.tb01770.x](https://doi.org/10.1002/j.1538-7305.1970.tb01770.x).
+2. C. M. Fiduccia and R. M. Mattheyses, “A linear-time heuristic for improving network partitions,” _19th Design Automation Conference_, 1982. DOI: [10.1145/800263.809204](https://doi.org/10.1145/800263.809204).
+3. J. Rodriguez, _Partitionnement de circuits pour architectures multi-FPGA_, doctoral thesis, 2024. Used as one source for the initial red–black profile; it does not define the project’s overall editorial scope.
+
+This chapter introduces the notation used by the current site foundation. It is not a complete literature review. Claims of research coverage require the documented search and inclusion protocol described in the research section.
+
+</section>
