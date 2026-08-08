@@ -25,6 +25,32 @@ editorial language. Stable routes are organized by reader task:
 7. Add or update a server-rendered route assertion under `web/tests/`.
 8. Run the web validation commands documented in `web/README.md`.
 
+## Academic prose
+
+The public site is written for researchers, engineers, and graduate students.
+Its editorial structure adapts conventions used in scientific dissertations and
+articles, including the initial 2024 source, while remaining independent of any
+single publication.
+
+- Begin a page or chapter by stating its subject, scope, and organization.
+- Introduce notation and definitions before algorithms, results, or comparisons.
+- Use descriptive section titles and number the principal sections of extended
+  scientific pages.
+- State the representation, assumptions, units, and feasibility conditions that
+  delimit a claim.
+- Separate established definitions, project decisions, available evidence, and
+  future work.
+- Prefer precise declarative sentences to promotional slogans, superlatives, or
+  unexplained calls to action.
+- Use complete, descriptive captions for figures and tables.
+- Identify review dates and avoid present-tense claims of completeness when the
+  literature or data review is unfinished.
+
+Web paragraphs remain shorter than dissertation paragraphs to preserve scanning
+and accessibility. The scientific meaning, qualification of claims, and order of
+exposition take precedence over reproducing the typography or sentence length of
+the source material.
+
 ## Controlled MDX
 
 Lessons may use `.mdx` files processed by the repository's fixed remark and

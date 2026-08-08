@@ -11,24 +11,24 @@ export const metadata: Metadata = {
 const pathways = [
   {
     index: "01",
-    title: "Learn the models",
-    body: "Build from graph and hypergraph basics to timing-aware, multi-device partitioning objectives.",
+    title: "Definitions and models",
+    body: "Introduce circuit representations, feasibility conditions, and objective functions before considering algorithms.",
     href: "/learn",
-    link: "Open the course map",
+    link: "Consult the course structure",
   },
   {
     index: "02",
-    title: "Inspect the evidence",
-    body: "Trace definitions, modeling choices, sources, and the scope of every scientific claim.",
+    title: "Literature and methods",
+    body: "Classify contributions by representation, problem formulation, objective, method, and experimental evidence.",
     href: "/research",
-    link: "View the research map",
+    link: "Consult the research map",
   },
   {
     index: "03",
-    title: "Compare reproducibly",
-    body: "Use versioned contracts for circuits, partitions, targets, and algorithm runs.",
+    title: "Experimental evaluation",
+    body: "Compare runs only when their inputs, conventions, parameters, and computational conditions are identified.",
     href: "/benchmarks",
-    link: "See the benchmark design",
+    link: "Consult the benchmark protocol",
   },
 ];
 
@@ -38,35 +38,38 @@ export default function Home() {
       <section className="hero shell" aria-labelledby="hero-title">
         <div className="hero-copy">
           <div className="eyebrow-row">
-            <span className="eyebrow">Open research infrastructure</span>
+            <span className="eyebrow">Scientific information system</span>
             <StatusPill tone="available">Foundation available</StatusPill>
           </div>
-          <h1 id="hero-title">Circuit partitioning, made inspectable.</h1>
+          <h1 id="hero-title">
+            Circuit partitioning: models, methods, and evidence.
+          </h1>
           <p className="hero-lede">
-            A community-oriented knowledge base connecting theory, models,
-            datasets, algorithms, and reproducible evidence—without treating one
-            representation or publication as the whole field.
+            Circuit partitioning assigns the elements of a circuit to a finite
+            set of parts under structural, capacity, and timing constraints.
+            This portal presents the definitions, research methods, datasets,
+            and reproducible results required to study that family of problems.
           </p>
           <div className="button-row">
             <Link className="button button-primary" href="/learn/foundations">
-              Start with the foundations <span aria-hidden="true">→</span>
+              Read the introductory chapter <span aria-hidden="true">→</span>
             </Link>
             <Link className="button button-secondary" href="/about">
-              Read the project principles
+              Scope and editorial policy
             </Link>
           </div>
           <dl className="hero-facts" aria-label="Current foundation">
             <div>
               <dt>4</dt>
-              <dd>versioned data contracts</dd>
+              <dd>formal data contracts</dd>
             </div>
             <div>
               <dt>1</dt>
-              <dd>initial model profile</dd>
+              <dd>implemented model profile</dd>
             </div>
             <div>
               <dt>Open</dt>
-              <dd>review and contribution</dd>
+              <dd>review and contribution process</dd>
             </div>
           </dl>
         </div>
@@ -78,11 +81,13 @@ export default function Home() {
         aria-labelledby="pathway-title"
       >
         <div className="section-heading">
-          <span className="eyebrow">One field, connected views</span>
-          <h2 id="pathway-title">Move from concepts to evidence.</h2>
+          <span className="eyebrow">1 · Scope and organization</span>
+          <h2 id="pathway-title">Three coordinated parts of the portal.</h2>
           <p>
-            The platform is organized around research tasks—not around the
-            chapter order of any single source.
+            The organization follows the principal activities of scientific
+            study: definition of the problem, examination of the literature, and
+            evaluation of experimental results. It does not reproduce the
+            structure of a single publication.
           </p>
         </div>
         <div className="pathway-list">
@@ -104,22 +109,27 @@ export default function Home() {
       <section className="model-band section" aria-labelledby="model-title">
         <div className="shell model-band-grid">
           <div>
-            <span className="eyebrow eyebrow-light">Model awareness</span>
-            <h2 id="model-title">The representation is part of the result.</h2>
+            <span className="eyebrow eyebrow-light">
+              2 · Model-dependent interpretation
+            </span>
+            <h2 id="model-title">
+              A result is meaningful only with its representation.
+            </h2>
           </div>
           <div className="model-copy">
             <p>
-              Graph, hypergraph, netlist, timing, placement, and resource models
-              expose different structure. We label the active model profile and
-              separate model-specific claims from general ones.
+              Graphs, hypergraphs, netlists, timing models, and placement models
+              do not preserve the same information. Every definition and result
+              must therefore identify the representation to which it applies.
             </p>
             <p>
-              The red–black directed hypergraph profile is the first implemented
-              contract. It is a starting point for interoperability work, not an
-              editorial boundary.
+              The red-black directed hypergraph is the first implemented
+              profile. It provides a concrete model for timing-aware examples,
+              but it is neither a universal circuit model nor a criterion for
+              selecting contributions.
             </p>
             <Link className="text-link text-link-light" href="/research">
-              See how evidence is classified <span aria-hidden="true">→</span>
+              Review the classification method <span aria-hidden="true">→</span>
             </Link>
           </div>
         </div>
@@ -130,43 +140,45 @@ export default function Home() {
         aria-labelledby="readiness-title"
       >
         <div className="section-heading compact-heading">
-          <span className="eyebrow">Delivery status</span>
-          <h2 id="readiness-title">A useful foundation, with honest edges.</h2>
+          <span className="eyebrow">3 · Present state</span>
+          <h2 id="readiness-title">
+            Implemented, in preparation, and deferred work.
+          </h2>
         </div>
         <div className="readiness-grid">
           <article>
             <StatusPill tone="available">Available now</StatusPill>
-            <h3>Shared vocabulary and contracts</h3>
+            <h3>Conventions and data contracts</h3>
             <p>
-              Scientific conventions, schemas, a hand-verifiable fixture, and
-              automated semantic validation are ready for review.
+              The initial convention profile, versioned schemas, reference
+              instance, and semantic validation procedure are available for
+              inspection.
             </p>
             <Link className="text-link" href="/circuits">
-              Inspect the circuit foundation <span aria-hidden="true">→</span>
+              Inspect the reference instance <span aria-hidden="true">→</span>
             </Link>
           </article>
           <article>
             <StatusPill tone="progress">In progress</StatusPill>
-            <h3>Pedagogy and literature protocol</h3>
+            <h3>Course and literature protocol</h3>
             <p>
-              The first lesson demonstrates the publishing system. A broader
-              course and systematic literature review follow in later
-              milestones.
+              The introductory chapter is available. The remaining course and
+              the systematic literature-review protocol are being prepared.
             </p>
             <Link className="text-link" href="/learn">
-              Review the learning path <span aria-hidden="true">→</span>
+              Review the course structure <span aria-hidden="true">→</span>
             </Link>
           </article>
           <article>
             <StatusPill tone="planned">Planned</StatusPill>
-            <h3>Interactive analysis and benchmarks</h3>
+            <h3>Catalog analysis and benchmark results</h3>
             <p>
-              Catalog downloads, critical-path inspection, partition metrics,
-              and algorithm comparisons require audited datasets and engines.
+              Circuit downloads, independent metric computation, and algorithm
+              comparisons remain deferred until datasets and analysis engines
+              have been audited.
             </p>
             <Link className="text-link" href="/benchmarks">
-              Understand the comparison contract{" "}
-              <span aria-hidden="true">→</span>
+              Review the comparison protocol <span aria-hidden="true">→</span>
             </Link>
           </article>
         </div>
@@ -177,19 +189,18 @@ export default function Home() {
         aria-labelledby="community-title"
       >
         <div>
-          <span className="eyebrow">Built in the open</span>
-          <h2 id="community-title">
-            Bring another model, dataset, or objection.
-          </h2>
+          <span className="eyebrow">4 · Scientific contributions</span>
+          <h2 id="community-title">Contributions are evaluated by method.</h2>
         </div>
         <div>
           <p>
-            Contributions are reviewed for reproducibility, provenance,
-            licensing, accessibility, and the limits of their claims.
-            Disagreement is useful when its assumptions remain visible.
+            A proposed model, dataset, correction, or experimental result must
+            state its scope and provenance. Review considers reproducibility,
+            licensing, accessibility, and compatibility with the declared
+            scientific conventions.
           </p>
           <Link className="button button-primary" href="/about#contribute">
-            How to contribute <span aria-hidden="true">→</span>
+            Contribution procedure <span aria-hidden="true">→</span>
           </Link>
         </div>
       </section>

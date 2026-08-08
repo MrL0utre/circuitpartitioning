@@ -34,9 +34,9 @@ export default function CircuitsPage() {
   return (
     <>
       <PageHeader
-        eyebrow="Circuit catalog"
-        title="Inspect before you download. Verify after you do."
-        intro="Each future catalog entry will pair a downloadable artifact with provenance, model semantics, verified statistics, and analysis limits."
+        eyebrow="Circuit data"
+        title="Circuits, representations, and derived analyses"
+        intro="Each catalog entry identifies the source circuit, the representation used by the project, the permitted distribution mode, the artifact fingerprint, and the analyses that can be independently recomputed."
         status={{ label: "Reference fixture available", tone: "progress" }}
       />
       <section
@@ -57,14 +57,13 @@ export default function CircuitsPage() {
         </figure>
         <div className="fixture-copy">
           <StatusPill tone="available">Schema fixture</StatusPill>
-          <span className="eyebrow">Initial red–black profile</span>
-          <h2 id="fixture-title">
-            A small circuit whose answers fit on paper.
-          </h2>
+          <span className="eyebrow">1 · Initial red-black profile</span>
+          <h2 id="fixture-title">Reference instance and expected values</h2>
           <p>
-            The Milestone 0 fixture exists to test contracts and semantic
-            validation. It is intentionally small enough for a contributor to
-            verify counts, assignments, cut behavior, and paths independently.
+            The reference instance is used to test the data contracts and the
+            semantic validation procedure. Its size permits independent manual
+            verification of vertex counts, assignments, cut metrics, and
+            red-to-red path costs.
           </p>
           <dl>
             <div>
@@ -94,10 +93,8 @@ export default function CircuitsPage() {
       >
         <div className="shell">
           <div className="section-heading compact-heading">
-            <span className="eyebrow eyebrow-light">Analysis surface</span>
-            <h2 id="analysis-title">
-              Every visualization needs a textual answer.
-            </h2>
+            <span className="eyebrow eyebrow-light">2 · Analysis contract</span>
+            <h2 id="analysis-title">Quantities associated with a circuit</h2>
           </div>
           <div className="analysis-list">
             {analyses.map(([title, text], index) => (
@@ -115,8 +112,8 @@ export default function CircuitsPage() {
         aria-labelledby="catalog-title"
       >
         <div>
-          <span className="eyebrow">Publication pipeline</span>
-          <h2 id="catalog-title">From candidate artifact to citable entry.</h2>
+          <span className="eyebrow">3 · Publication procedure</span>
+          <h2 id="catalog-title">From source artifact to catalog entry</h2>
         </div>
         <ol>
           <li>
@@ -136,9 +133,12 @@ export default function CircuitsPage() {
             <span>stable metadata, download, and engine version</span>
           </li>
         </ol>
-        <p>Dataset import and the interactive catalog begin in Milestone 3.</p>
+        <p>
+          Dataset import and the interactive catalog are scheduled for Milestone
+          3.
+        </p>
         <Link className="text-link" href="/about#contribute">
-          Propose a dataset source <span aria-hidden="true">→</span>
+          Submit a candidate dataset source <span aria-hidden="true">→</span>
         </Link>
       </section>
     </>

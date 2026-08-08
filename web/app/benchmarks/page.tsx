@@ -23,9 +23,9 @@ export default function BenchmarksPage() {
   return (
     <>
       <PageHeader
-        eyebrow="Benchmarks"
-        title="A result is more than one number."
-        intro="Future comparisons will preserve inputs, parameters, feasibility, metric definitions, runtime context, and uncertainty—not just a winning score."
+        eyebrow="Experimental evaluation"
+        title="Protocol for reproducible algorithm comparison"
+        intro="A benchmark result is interpreted from its circuit, model, target topology, parameters, feasibility status, metric definitions, and computational environment. These elements are retained with every published run."
         status={{ label: "Data UI planned", tone: "planned" }}
       />
       <section
@@ -33,40 +33,40 @@ export default function BenchmarksPage() {
         aria-labelledby="benchmark-title"
       >
         <div>
-          <span className="eyebrow">Comparison contract</span>
-          <h2 id="benchmark-title">
-            Comparable only where assumptions overlap.
-          </h2>
+          <span className="eyebrow">1 · Comparability conditions</span>
+          <h2 id="benchmark-title">Conditions applied before comparison</h2>
           <p>
-            Filtering happens before ranking. Runs with different model
-            profiles, objective definitions, resource limits, or hardware
-            contexts are never silently placed on one leaderboard.
+            Runs are grouped only when their model profiles, objective
+            definitions, resource constraints, and computational contexts permit
+            direct comparison. Incompatible runs remain available but are not
+            combined in an unqualified ranking.
           </p>
         </div>
         <ol>
           <li>
             <b>01</b>
             <span>
-              <strong>Identify</strong>Input fingerprints and dataset provenance
+              <strong>Identify</strong> input fingerprints and dataset
+              provenance
             </span>
           </li>
           <li>
             <b>02</b>
             <span>
-              <strong>Validate</strong>Feasibility and metric semantics
+              <strong>Validate</strong> feasibility and metric semantics
             </span>
           </li>
           <li>
             <b>03</b>
             <span>
-              <strong>Contextualize</strong>Parameters, seed, budget, and
+              <strong>Contextualize</strong> parameters, seed, budget, and
               machine
             </span>
           </li>
           <li>
             <b>04</b>
             <span>
-              <strong>Compare</strong>Distributions, trade-offs, and baselines
+              <strong>Compare</strong> distributions, trade-offs, and baselines
             </span>
           </li>
         </ol>
@@ -78,10 +78,8 @@ export default function BenchmarksPage() {
         <div className="shell">
           <div className="section-heading compact-heading">
             <div>
-              <span className="eyebrow eyebrow-light">Interface preview</span>
-              <h2 id="preview-title">
-                The table shape is ready; results are not fabricated.
-              </h2>
+              <span className="eyebrow eyebrow-light">2 · Results table</span>
+              <h2 id="preview-title">Current publication state</h2>
             </div>
             <StatusPill tone="planned">Awaiting audited runs</StatusPill>
           </div>
@@ -106,8 +104,9 @@ export default function BenchmarksPage() {
                   <td colSpan={columns.length}>
                     <strong>No published runs yet.</strong>
                     <span>
-                      Milestone 6 will ingest validated CSV rows into canonical
-                      benchmark-run records.
+                      Validated CSV rows will be converted into canonical
+                      benchmark-run records when the benchmark pipeline is
+                      implemented.
                     </span>
                   </td>
                 </tr>
@@ -121,8 +120,8 @@ export default function BenchmarksPage() {
         aria-labelledby="metric-title"
       >
         <div className="section-heading compact-heading">
-          <span className="eyebrow">Reported dimensions</span>
-          <h2 id="metric-title">Keep the trade-off surface visible.</h2>
+          <span className="eyebrow">3 · Reported quantities</span>
+          <h2 id="metric-title">Metrics retained for each run</h2>
         </div>
         <div>
           <article>

@@ -10,20 +10,20 @@ export const metadata: Metadata = {
 
 const principles = [
   [
-    "Plural by design",
-    "No thesis, algorithm family, data source, institution, or model profile defines the whole field.",
+    "Scope is explicit",
+    "No thesis, algorithm family, dataset, institution, or model profile is treated as a definition of the complete field.",
   ],
   [
-    "Inspectability over spectacle",
-    "Published numbers retain definitions, inputs, parameters, fingerprints, and verification state.",
+    "Results are traceable",
+    "Published quantities retain their definitions, inputs, parameters, fingerprints, and verification state.",
   ],
   [
-    "Claims have boundaries",
-    "General statements, model-specific results, and editorial interpretation remain distinguishable.",
+    "Claims are qualified",
+    "General statements, model-specific results, and editorial interpretations are presented separately.",
   ],
   [
-    "Access is scientific quality",
-    "Keyboard use, readable mathematics, textual chart alternatives, and stable URLs are requirements.",
+    "Access supports verification",
+    "Keyboard navigation, readable mathematics, textual figure alternatives, and stable URLs are treated as scientific requirements.",
   ],
 ];
 
@@ -31,9 +31,9 @@ export default function AboutPage() {
   return (
     <>
       <PageHeader
-        eyebrow="About the project"
-        title="Infrastructure for a field, not a monument to one result."
-        intro="Circuit Partitioning is an open project for teaching the problem, mapping its research, and publishing inspectable datasets and comparisons."
+        eyebrow="Project statement"
+        title="Scope, governance, and contribution policy"
+        intro="Circuit Partitioning is an open scientific project for presenting definitions, maintaining a structured literature map, and publishing traceable datasets, partitions, and experimental comparisons."
       />
       <section
         id="editorial-policy"
@@ -41,12 +41,15 @@ export default function AboutPage() {
         aria-labelledby="principles-title"
       >
         <div className="section-heading">
-          <span className="eyebrow">Editorial principles</span>
-          <h2 id="principles-title">Neutrality comes from visible method.</h2>
+          <span className="eyebrow">1 · Editorial method</span>
+          <h2 id="principles-title">
+            Principles applied to scientific content
+          </h2>
           <p>
-            Complete neutrality is not asserted. Instead, source selection,
-            definitions, model boundaries, review dates, and conflicts are made
-            inspectable.
+            The project does not claim an absence of editorial judgment. It
+            records source-selection methods, definitions, model boundaries,
+            review dates, and conflicts of interest so that these judgments can
+            be examined.
           </p>
         </div>
         <div className="principle-grid">
@@ -62,22 +65,23 @@ export default function AboutPage() {
       <section className="origin-band section" aria-labelledby="origin-title">
         <div className="shell origin-grid">
           <div>
-            <span className="eyebrow eyebrow-light">Starting context</span>
-            <h2 id="origin-title">
-              One useful source among a larger evidence base.
-            </h2>
+            <span className="eyebrow eyebrow-light">
+              2 · Initial scientific context
+            </span>
+            <h2 id="origin-title">Relation to the initial source material</h2>
           </div>
           <div>
             <p>
-              Julien Rodriguez’s 2024 doctoral thesis supplied terminology and a
-              concrete red–black directed hypergraph profile for the initial
-              foundation. The project treats that work as a citable source and
-              implementation starting point.
+              Julien Rodriguez&apos;s 2024 doctoral thesis supplied terminology
+              and a concrete red-black directed hypergraph profile for the
+              initial foundation. The project treats that work as a cited source
+              and an implementation starting point.
             </p>
             <p>
-              The literature map, dataset policy, and future model profiles are
-              deliberately broader. Community review is expected to challenge
-              blind spots and add independent lineages.
+              The literature map, dataset policy, and future profiles extend
+              beyond that source. Independent model lineages and contradictory
+              evidence are included when they satisfy the documented review
+              criteria.
             </p>
           </div>
         </div>
@@ -88,14 +92,12 @@ export default function AboutPage() {
         aria-labelledby="contribute-title"
       >
         <div>
-          <span className="eyebrow">Contribute</span>
-          <h2 id="contribute-title">
-            A precise correction is a first-class contribution.
-          </h2>
+          <span className="eyebrow">3 · Contribution procedure</span>
+          <h2 id="contribute-title">Forms of scientific contribution</h2>
           <p>
-            You can propose a source, identify a modeling ambiguity, add a
-            fixture, improve accessibility, review a definition, or implement a
-            scoped backlog item.
+            Contributions may propose a primary source, identify a modeling
+            ambiguity, add a validated instance, review a definition, improve
+            accessibility, or implement a bounded work package.
           </p>
           <a
             className="button button-primary"
@@ -105,7 +107,7 @@ export default function AboutPage() {
           </a>
         </div>
         <div className="contribution-checklist">
-          <h3>A strong contribution includes</h3>
+          <h3>Required information</h3>
           <ul>
             <li>the claim or artifact being changed;</li>
             <li>the applicable model profile and scope;</li>

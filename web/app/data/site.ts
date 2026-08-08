@@ -16,8 +16,9 @@ export type SearchEntry = {
 
 export const searchEntries: SearchEntry[] = [
   {
-    title: "Circuit partitioning foundations",
-    description: "Models, objectives, feasibility, cut, timing, and placement.",
+    title: "Definitions and objectives for circuit partitioning",
+    description:
+      "Partitioning instances, model profiles, feasibility, cut, communication, and timing objectives.",
     href: "/learn/foundations",
     section: "Learn",
     terms: [
@@ -30,16 +31,17 @@ export const searchEntries: SearchEntry[] = [
     ],
   },
   {
-    title: "Learning path",
+    title: "Course structure",
     description:
-      "The planned progression from prerequisites to reproducible analysis.",
+      "The progression from mathematical definitions to experimental methodology.",
     href: "/learn",
     section: "Learn",
     terms: ["tutorial", "lesson", "curriculum", "education"],
   },
   {
-    title: "Research map",
-    description: "Model families, algorithm families, and evidence policy.",
+    title: "Research classification",
+    description:
+      "Representations, problem formulations, objectives, methods, and review methodology.",
     href: "/research",
     section: "Research",
     terms: [
@@ -52,16 +54,17 @@ export const searchEntries: SearchEntry[] = [
     ],
   },
   {
-    title: "Benchmark design",
-    description: "Comparable runs, metrics, provenance, and CSV ingestion.",
+    title: "Benchmark protocol",
+    description:
+      "Comparability conditions, reported metrics, provenance, and CSV ingestion.",
     href: "/benchmarks",
     section: "Benchmarks",
     terms: ["results", "algorithm", "pareto", "runtime", "quality", "csv"],
   },
   {
-    title: "Circuit catalog foundation",
+    title: "Circuit data and analyses",
     description:
-      "Circuit contracts, analysis dimensions, and publication states.",
+      "Circuit representations, reference artifacts, derived analyses, and publication procedure.",
     href: "/circuits",
     section: "Circuits",
     terms: [
@@ -75,9 +78,9 @@ export const searchEntries: SearchEntry[] = [
     ],
   },
   {
-    title: "Project principles",
+    title: "Project scope and governance",
     description:
-      "Neutrality, reproducibility, provenance, accessibility, and contribution.",
+      "Editorial method, traceability, accessibility, maintenance, and contribution procedure.",
     href: "/about",
     section: "About",
     terms: ["charter", "governance", "contribute", "community", "license"],

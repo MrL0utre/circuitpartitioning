@@ -13,44 +13,44 @@ export const metadata: Metadata = {
 const modules = [
   {
     number: "01",
-    title: "Foundations",
-    text: "From circuits to partitioning instances, feasibility, and objective families.",
+    title: "Definitions and objectives",
+    text: "Circuit representations, partitioning instances, feasibility conditions, and objective functions.",
     status: "Available",
     tone: "available" as const,
     href: "/learn/foundations",
   },
   {
     number: "02",
-    title: "Graphs, hypergraphs & netlists",
-    text: "Compare what each representation preserves and hides.",
+    title: "Graphs, hypergraphs, and netlists",
+    text: "Definitions, directed connectivity, incidence, and information preserved by each representation.",
     status: "Planned",
     tone: "planned" as const,
   },
   {
     number: "03",
-    title: "Synchronous timing",
-    text: "Follow paths through combinational regions and state boundaries.",
+    title: "Synchronous circuits and timing",
+    text: "Registers, combinational regions, red-to-red paths, delays, and critical-path computation.",
     status: "Planned",
     tone: "planned" as const,
   },
   {
     number: "04",
-    title: "Objectives & constraints",
-    text: "Cut, balance, timing, capacity, placement, and multi-objective trade-offs.",
+    title: "Partitions, mappings, and metrics",
+    text: "Capacity constraints, cut, connectivity, balance, timing, placement, and multi-objective formulations.",
     status: "Planned",
     tone: "planned" as const,
   },
   {
     number: "05",
-    title: "Algorithm families",
-    text: "Constructive, iterative, multilevel, evolutionary, and exact approaches.",
+    title: "Partitioning algorithms",
+    text: "Initial partitioning, local refinement, multilevel schemes, metaheuristics, and exact methods.",
     status: "Planned",
     tone: "planned" as const,
   },
   {
     number: "06",
-    title: "Reproducible evaluation",
-    text: "Turn an algorithm run into inspectable scientific evidence.",
+    title: "Experimental methodology",
+    text: "Instances, parameters, computational budgets, repeated runs, metrics, and reproducibility records.",
     status: "Planned",
     tone: "planned" as const,
   },
@@ -60,9 +60,9 @@ export default function LearnPage() {
   return (
     <>
       <PageHeader
-        eyebrow="Course"
-        title="Learn the problem before comparing solutions."
-        intro="A progressive, model-aware course for students, engineers, and researchers entering circuit partitioning from different backgrounds."
+        eyebrow="Course structure"
+        title="Course on circuit partitioning"
+        intro="This course introduces the mathematical representations, constraints, objective functions, algorithms, and experimental methods used in circuit partitioning. Each chapter states the model to which its definitions apply."
         status={{ label: "First lesson available", tone: "progress" }}
       />
       <section
@@ -70,21 +70,19 @@ export default function LearnPage() {
         aria-labelledby="course-design-title"
       >
         <div>
-          <span className="eyebrow">Course design</span>
-          <h2 id="course-design-title">
-            Definitions stay close to their assumptions.
-          </h2>
+          <span className="eyebrow">1 · Scope and method</span>
+          <h2 id="course-design-title">Notation precedes interpretation.</h2>
         </div>
         <div className="prose-summary">
           <p>
-            Every module states prerequisites, learning outcomes, model scope,
-            and sources. Exercises and interactive diagrams will be added only
-            when their answers can be independently checked.
+            Each chapter states its purpose, prerequisites, notation, learning
+            objectives, model assumptions, and primary sources. Definitions are
+            introduced before algorithms or comparative statements.
           </p>
           <p>
-            The course begins with general partitioning concepts, then
-            introduces the red–black directed hypergraph profile as one concrete
-            lens.
+            The course begins with general partitioning concepts. The red-black
+            directed hypergraph is then used as one explicit profile for timing
+            examples and is compared with alternative circuit representations.
           </p>
         </div>
       </section>
@@ -113,8 +111,8 @@ export default function LearnPage() {
       </section>
       <section className="shell section prerequisite-band">
         <div>
-          <span className="eyebrow eyebrow-light">Suggested prerequisites</span>
-          <h2>Enough graph theory to ask precise questions.</h2>
+          <span className="eyebrow eyebrow-light">2 · Prerequisites</span>
+          <h2>Recommended preliminary knowledge</h2>
         </div>
         <ul>
           <li>directed graphs and hypergraphs</li>

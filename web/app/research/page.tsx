@@ -42,9 +42,9 @@ export default function ResearchPage() {
   return (
     <>
       <PageHeader
-        eyebrow="Research map"
-        title="Organize the literature by questions, not allegiance."
-        intro="The research area spans several model lineages and evaluation traditions. This map exposes the dimensions needed to compare them responsibly."
+        eyebrow="Literature classification"
+        title="Classification of circuit-partitioning research"
+        intro="Contributions to circuit partitioning differ in their representations, feasibility constraints, objective functions, algorithms, and experimental protocols. The literature map records these dimensions before attempting comparison."
         status={{ label: "Protocol in preparation", tone: "progress" }}
       />
       <section
@@ -52,8 +52,8 @@ export default function ResearchPage() {
         aria-labelledby="map-heading"
       >
         <div className="section-heading compact-heading">
-          <span className="eyebrow">Classification frame</span>
-          <h2 id="map-heading">Five questions for every contribution.</h2>
+          <span className="eyebrow">1 · Classification dimensions</span>
+          <h2 id="map-heading">Information recorded for each contribution</h2>
         </div>
         <div
           className="research-table"
@@ -75,30 +75,30 @@ export default function ResearchPage() {
       >
         <div className="shell evidence-grid">
           <div>
-            <span className="eyebrow eyebrow-light">Evidence policy</span>
-            <h2 id="evidence-title">
-              “State of the art” is a maintained claim.
-            </h2>
+            <span className="eyebrow eyebrow-light">
+              2 · Review methodology
+            </span>
+            <h2 id="evidence-title">Procedure for maintaining the review</h2>
           </div>
           <div>
             <p>
-              Before publishing broad coverage claims, the project will record
-              databases, search strings, dates, inclusion criteria, exclusion
-              reasons, and review intervals. Each synthesis page will show its
-              last review date.
+              A claim of literature coverage requires a reproducible search
+              protocol. The project will record the databases, queries, search
+              dates, inclusion criteria, exclusion reasons, and review interval.
+              Every synthesis page will identify its last review date.
             </p>
             <ol>
               <li>
-                <span>01</span> Search protocol before selection
+                <span>01</span> Define the search protocol
               </li>
               <li>
-                <span>02</span> Structured records before interpretation
+                <span>02</span> Record sources before interpretation
               </li>
               <li>
-                <span>03</span> Independent review for contested claims
+                <span>03</span> Review contested claims independently
               </li>
               <li>
-                <span>04</span> Visible gaps and conflicts of interest
+                <span>04</span> Report coverage gaps and conflicts of interest
               </li>
             </ol>
           </div>
@@ -109,33 +109,33 @@ export default function ResearchPage() {
         aria-labelledby="research-status-title"
       >
         <div className="section-heading compact-heading">
-          <span className="eyebrow">Current coverage</span>
+          <span className="eyebrow">3 · Present limits</span>
           <h2 id="research-status-title">
-            What this foundation can—and cannot—say.
+            Current scope of the literature map
           </h2>
         </div>
         <div className="two-column-text">
           <article>
             <StatusPill tone="available">Available</StatusPill>
-            <h3>Stable orientation points</h3>
+            <h3>Initial classification</h3>
             <p>
-              The learning prototype cites foundational graph-partitioning
-              heuristics and names common representation, objective, and method
-              families.
+              The current material identifies foundational partitioning
+              heuristics and the principal dimensions used to classify models,
+              objectives, methods, and evidence.
             </p>
           </article>
           <article>
-            <StatusPill tone="planned">Not yet claimed</StatusPill>
-            <h3>Comprehensive current coverage</h3>
+            <StatusPill tone="planned">Not established</StatusPill>
+            <h3>Comprehensive coverage</h3>
             <p>
-              A systematic update beyond the initial source set belongs to
-              Milestone 7. Until then, this site does not label its bibliography
-              exhaustive or current.
+              The systematic review has not yet been completed. Consequently,
+              the present bibliography must not be interpreted as exhaustive or
+              as a complete account of current research.
             </p>
           </article>
         </div>
         <Link className="button button-secondary" href="/learn/foundations">
-          Read the model-aware introduction <span aria-hidden="true">→</span>
+          Read the introductory definitions <span aria-hidden="true">→</span>
         </Link>
       </section>
     </>

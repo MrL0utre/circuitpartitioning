@@ -3,9 +3,9 @@ import Link from "next/link";
 import Content from "./content.mdx";
 
 export const metadata: Metadata = {
-  title: "Circuit partitioning foundations",
+  title: "Definitions and objectives for circuit partitioning",
   description:
-    "An accessible introduction to circuit partitioning models, feasibility, and objective functions.",
+    "Definitions of circuit partitioning instances, the initial red-black model profile, feasibility, and objective functions.",
   alternates: { canonical: "/learn/foundations" },
 };
 
@@ -15,7 +15,7 @@ export default function FoundationsPage() {
       <aside className="lesson-sidebar" aria-label="Lesson information">
         <Link href="/learn">← Course map</Link>
         <span className="eyebrow">Module 01</span>
-        <strong>Foundations</strong>
+        <strong>Definitions and objectives</strong>
         <dl>
           <div>
             <dt>Level</dt>
@@ -27,14 +27,14 @@ export default function FoundationsPage() {
           </div>
           <div>
             <dt>Reviewed</dt>
-            <dd>2026-08-03</dd>
+            <dd>2026-08-08</dd>
           </div>
         </dl>
         <nav aria-label="On this page">
-          <a href="#problem">The problem</a>
-          <a href="#model">Model boundary</a>
-          <a href="#objectives">Objectives</a>
-          <a href="#references">References</a>
+          <a href="#problem">Partitioning instance</a>
+          <a href="#model">Initial model profile</a>
+          <a href="#objectives">Feasibility and objectives</a>
+          <a href="#references">References and scope</a>
         </nav>
       </aside>
       <article className="lesson prose">

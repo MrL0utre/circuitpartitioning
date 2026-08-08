@@ -2,13 +2,16 @@ import assert from "node:assert/strict";
 import test from "node:test";
 
 const routes = [
-  ["/", /Circuit partitioning, made inspectable\./i],
-  ["/learn", /Learn the problem before comparing solutions\./i],
-  ["/learn/foundations", /Turn a circuit into a partitioning question/i],
-  ["/research", /Organize the literature by questions, not allegiance\./i],
-  ["/benchmarks", /A result is more than one number\./i],
-  ["/circuits", /Inspect before you download\. Verify after you do\./i],
-  ["/about", /Infrastructure for a field, not a monument to one result\./i],
+  ["/", /Circuit partitioning: models, methods, and evidence\./i],
+  ["/learn", /Course on circuit partitioning/i],
+  [
+    "/learn/foundations",
+    /Definitions and objectives for circuit partitioning/i,
+  ],
+  ["/research", /Classification of circuit-partitioning research/i],
+  ["/benchmarks", /Protocol for reproducible algorithm comparison/i],
+  ["/circuits", /Circuits, representations, and derived analyses/i],
+  ["/about", /Scope, governance, and contribution policy/i],
 ];
 
 async function render(pathname) {
@@ -48,9 +51,9 @@ test("foundation lesson includes accessible mathematical output", async () => {
   assert.match(html, /class="katex-mathml"/i);
   assert.match(html, /f_c/i);
   assert.match(html, /f_/i);
-  assert.match(html, /Model boundary/i);
+  assert.match(html, /Initial model profile/i);
   assert.match(html, /References and scope/i);
-  assert.match(html, /always starts at a red source boundary/i);
+  assert.match(html, /starts at a red source boundary/i);
   assert.match(html, /data-path-boundary="source"/i);
   assert.match(html, /data-path-boundary="sink"/i);
 });
